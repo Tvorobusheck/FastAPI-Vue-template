@@ -1,0 +1,39 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "docker-build",
+			"label": "docker-build",
+			"platform": "python",
+			"dockerBuild": {
+				"tag": "debug_echochat:latest",
+				"dockerfile": "${workspaceFolder}/backend/Dockerfile",
+				"context": "${workspaceFolder}/backend",
+				"pull": true
+			}
+		},
+		{
+			"type": "docker-run",
+			"label": "docker-run: debug",
+			"dependsOn": [
+				"docker-build"
+			],
+			"python": {
+				"file": "core/main.py"
+			}
+		},
+		{
+			"type": "docker-compose",
+			"label": "run-compose",
+			"dockerCompose": {
+				"up": {
+					"detached": true,
+					"build": true
+				},
+				"files": [
+					"${workspaceFolder}/docker-compose.yml"
+				],
+			}
+		}
+	]
+}

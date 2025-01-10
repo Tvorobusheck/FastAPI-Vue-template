@@ -1,0 +1,11 @@
+fastapi
+uvicorn[gunicorn]
+databases
+asyncpg
+sqlalchemy
+python-dotenv
+pytest
+pytest-cov
+psycopg2-binary
+strawberry-graphql
+Alembic
