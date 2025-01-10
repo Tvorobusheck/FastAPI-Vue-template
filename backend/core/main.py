@@ -27,22 +27,16 @@ class Query:
 
     @strawberry.field
     async def items(self, info) -> List[ItemType]:
-        db: AsyncSession = await anext(get_async_session())
-        query = select(Item)
-        res = list((await db.execute(query)).scalars().all())
-        return res
+        return all_items
 
 
 @strawberry.type
 class Mutation:
     @strawberry.mutation
     async def add_item(self, name: str, description: str) -> ItemType:
-        async with get_async_session() as db:
-            db_item = Item(name=name, description=description)
-            db.add(db_item)
-            await db.commit()
-            await db.refresh(db_item)
-            return db_item
+        item = ItemType(name=name, description=description)
+        all_items.append(item)
+        return item
 
 
 schema = strawberry.Schema(query=Query, mutation=Mutation)

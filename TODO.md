@@ -1,14 +1,29 @@
 # TODO List
 
 ## Tasks
+
+### Backend
 - [ ] [FastAPI Users](https://github.com/fastapi-users/fastapi-users) for authorization, registration, and more.
+- [ ] Authorization for new project.
+- [ ] Registration for new project.
 - [ ] [FastCRUD](https://github.com/igorbenav/fastcrud) for reducing boilerplate code.
+- [ ] Items create, read, update and delete with permissions control for new project.
+
+### Frontend
 - [ ] Generation of API client based on the OpenAPI specification from the backend.
 - [ ] Composition API.
 - [ ] Vite.
 - [ ] PWA Plugin / CLI PWA for cross-platform support.
 - [ ] Vuexy, CoreUI, or Vue Element Admin for pre-built themes.
 - [ ] Vuetify or Element UI.
+- [ ] Authorization for new project.
+- [ ] Registration for new project.
+- [ ] Items create, read, update and delete with permissions control for new project.
+
+### DevOps
+- [ ] Fixtures for tests.
+- [ ] Check pytest is correct.
+- [ ] Check e2e and unit tests for frontend.
 - [ ] Check new ideas for docker-compose.prod.yml. Traefick, for example.
 - [ ] The `docker-compose.prod.yml` for deploying all services, including the database, on a VPS
 - [ ] Add auto reload for backend and frontend.
@@ -16,12 +31,11 @@
 - [ ] Add auto credentials from .env.
 - [ ] Improve run options in vscode.
 - [ ] A simple script to initialize a new project based on this template. It will set up the necessary folder structure, configuration files, and install dependencies for both frontend and backend.
+
+### Example project
 - [ ] Remove old project.
-- [ ] Authorization for new project.
-- [ ] Registration for new project.
 - [ ] Registration conformation via email for new project.
 - [ ] Password recovery for new project.
-- [ ] Items create, read, update and delete with permissions control for new project.
 
 ## Completed
 - [x] Pytest for unit testing
