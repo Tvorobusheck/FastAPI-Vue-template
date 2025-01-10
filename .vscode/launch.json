@@ -1,9 +1,5 @@
 {
     "configurations": [
-
-
-    
-        
         {
             "name": "Docker: Python - Fastapi",
             "type": "docker",

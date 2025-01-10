@@ -28,9 +28,12 @@ The frontend is built using Vue.js, a progressive JavaScript framework. It inclu
 
 ### Docker Support
 The project provides full Docker support for both backend and frontend. It includes:
-- [x] A `docker-compose` configuration for easy management of containers
-- [ ] The `docker-compose.prod.yml` for deploying all services, including the database, on a VPS
+- [x] A `docker-compose` configuration for easy management of containers. TODO: add auto reload for backend and frontend
+- [ ] The `docker-compose.prod.yml` for deploying all services, including the database, on a VPS. TODO: add auto restart
+- [ ] Certbot service
 - [x] Separate `Dockerfile` for backend and frontend, optimized for production and development environments
+- [x] PostgreSQL service in docker-compose for database
+- [x] Adminer in docker-compose for PostgreSQL. TODO: add auto credentials from .env
 
 ### VS Code Support
 - [x] Docker-compose launch option. Extension required: [Docker](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker)
@@ -40,10 +43,24 @@ The project provides full Docker support for both backend and frontend. It inclu
 ### Project Initialization Script
 - [ ] A simple script to initialize a new project based on this template. It will set up the necessary folder structure, configuration files, and install dependencies for both frontend and backend.
 
+
+### Small project inside
+This simple item application includes:
+- [ ] Authorization
+- [ ] Registration
+- [ ] Registration conformation via email
+- [ ] Password recovery
+- [ ] Items create, read, update and delete with permissions control
+
 ## Getting Started
 
-### 1. Clone the repository
+### Installation
 
 ```bash
-git clone https://github.com/your-username/fastapi-vue-template.git
+git clone https://github.com/Tvorobusheck/fastapi-vue-template.git
 cd fastapi-vue-template
+sudo apt-get install virtualenv
+virtualenv venv
+source venv/bin/activate
+pip install -r backend/requirements.txt
+npm install frontend/
