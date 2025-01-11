@@ -3,11 +3,9 @@
 ## Tasks
 
 ### Backend
-- [ ] [FastAPI Users](https://github.com/fastapi-users/fastapi-users) for authorization, registration, and more.
-- [ ] Authorization for new project.
-- [ ] Registration for new project.
-- [ ] [FastCRUD](https://github.com/igorbenav/fastcrud) for reducing boilerplate code.
-- [ ] Items create, read, update and delete with permissions control for new project.
+- [ ] Tests
+- [ ] Permissions
+- [ ] Permission control and business logic for BusinessItem
 
 ### Frontend
 - [ ] Generation of API client based on the OpenAPI specification from the backend.
@@ -38,6 +36,11 @@
 - [ ] Password recovery for new project.
 
 ## Completed
+- [x] [FastCRUD](https://github.com/igorbenav/fastcrud) for reducing boilerplate code.
+- [x] Items create, read, update and delete for new project.
+- [x] [FastAPI Users](https://github.com/fastapi-users/fastapi-users) for authorization, registration, and more.
+- [x] Authorization for new project.
+- [x] Registration for new project.
 - [x] Pytest for unit testing
 - [x] SQLAlchemy for ORM and database interaction
 - [x] Alembic for database migrations

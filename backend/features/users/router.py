@@ -1,3 +1,5 @@
+# Important!
+# Add routers to core/router.py
 from fastapi import Depends, APIRouter
 
 from .schemas import UserCreate, UserRead, UserUpdate

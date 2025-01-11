@@ -1,6 +1,10 @@
+# Important!
+# Add models files as import to migrations/env.py before target_metadata = Base.metadata
+# it is neccessary for migrations control
+
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship, Mapped, mapped_column
-from .db import Base
+from core.db import Base
 
 class Item(Base):
     __tablename__ = "items"

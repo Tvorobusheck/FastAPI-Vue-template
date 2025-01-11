@@ -1,3 +1,7 @@
+# Important!
+# Add models files as import to migrations/env.py before target_metadata = Base.metadata
+# it is neccessary for migrations control
+
 import uuid
 from typing import Optional
 

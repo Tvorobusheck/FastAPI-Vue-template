@@ -6,7 +6,7 @@ from strawberry.fastapi import GraphQLRouter
 from typing import Annotated, List
 
 from core.db import get_async_session
-from core.models import Item
+from features.items.models import Item
 from core.schemas import ItemCreate
 from core.router import app
 
@@ -39,18 +39,6 @@ class Mutation:
 
 schema = strawberry.Schema(query=Query, mutation=Mutation)
 graphql_app = GraphQLRouter(schema)
-
-@app.get("/")
-async def read_root():
-    return {"message": "Hello, World!"}
-
-@app.post("/items/")
-async def create_item(item: ItemCreate, db: AsyncSession = Depends(get_async_session)):
-    db_item = Item(name=item.name, description=item.description)
-    db.add(db_item)
-    db.commit()
-    db.refresh(db_item)
-    return db_item
 
 app.include_router(graphql_app, prefix="/graphql")
 
