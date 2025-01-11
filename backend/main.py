@@ -1,16 +1,14 @@
-from fastapi import FastAPI, Depends
+from fastapi import Depends
 from sqlalchemy import Integer, String, select
 from sqlalchemy.ext.asyncio import AsyncSession
 import strawberry
 from strawberry.fastapi import GraphQLRouter
 from typing import Annotated, List
-from config import RELOAD
 
-from db import get_async_session
-from models import Item
-from schemas import ItemCreate
-
-app = FastAPI()
+from core.db import get_async_session
+from core.models import Item
+from core.schemas import ItemCreate
+from core.router import app
 
 @strawberry.type
 class ItemType:

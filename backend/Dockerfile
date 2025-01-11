@@ -18,10 +18,12 @@ WORKDIR /app
 COPY env/.dev.env /app/.env
 
 # copy migrations
+COPY main.py /app/main.py
+COPY core /app/core/
 COPY alembic.ini /app/alembic.ini
 COPY migrations/ /app/migrations/
+COPY features/ /app/features/
 
-COPY core /app/core/
 
 # During debugging, this entry point will be overridden. For more information, please refer to https://aka.ms/vscode-docker-python-debug
-ENTRYPOINT ["python", "core/main.py"]
+ENTRYPOINT ["python", "main.py"]
