@@ -1,74 +1,43 @@
-# got fixtures from here https://gist.github.com/e-kondr01/969ae24f2e2f31bd52a81fa5a1fe0f96
 import pytest
+import uuid
 from httpx import ASGITransport, AsyncClient
 from typing import AsyncGenerator
 from main import app
-from .db import DATABASE_URL, get_async_session
-from sqlalchemy.ext.asyncio import AsyncConnection, AsyncSession, AsyncTransaction, create_async_engine
+from .db import Base, get_async_session
+from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine, async_sessionmaker
 
-test_engine = create_async_engine(DATABASE_URL)
+temp_db_url = f"sqlite+aiosqlite:///:memory:"  # Temporary SQLite DB file
 
+# Create engine for the temporary database
+engine = create_async_engine(temp_db_url, echo=True)
+AsyncSessionLocal = async_sessionmaker(bind=engine, expire_on_commit=False)
+
+async def init_db():
+    # Create the tables before each test
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+
+async def clean_db():
+    # Optionally drop tables after the test (for cleanup)
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.drop_all)
+
+# Override the dependency to provide a session that commits changes
+async def override_get_async_session() -> AsyncGenerator[AsyncSession, None]:
+    async with AsyncSessionLocal() as session:
+        yield session
+
+# Fixture for dynamically creating a temporary SQLite database
 @pytest.fixture(scope="session")
-def anyio_backend():
-    return "asyncio"
+async def client() -> AsyncGenerator[AsyncClient, None]:
+    await init_db()
 
-
-@pytest.fixture(scope="session")
-async def connection(anyio_backend) -> AsyncGenerator[AsyncConnection, None]:
-    async with test_engine.connect() as connection:
-        yield connection
-
-        
-@pytest.fixture()
-async def transaction(
-    connection: AsyncConnection,
-) -> AsyncGenerator[AsyncTransaction, None]:
-    async with connection.begin() as transaction:
-        yield transaction
-
-
-@pytest.fixture()
-async def session(
-    connection: AsyncConnection, transaction: AsyncTransaction
-) -> AsyncGenerator[AsyncSession, None]:
-    async_session = AsyncSession(
-        bind=connection,
-        join_transaction_mode="create_savepoint",
-    )
-
-    yield async_session
-
-    await transaction.rollback()
-
-
-# Use this fixture to get HTTPX's client to test API.
-# All changes that occur in a test function are rolled back
-# after function exits, even if session.commit() is called
-# in FastAPI's application endpoints
-@pytest.fixture()
-async def client(
-    connection: AsyncConnection, transaction: AsyncTransaction
-) -> AsyncGenerator[AsyncClient, None]:
-    async def override_get_async_session() -> AsyncGenerator[AsyncSession, None]:
-        async_session = AsyncSession(
-            bind=connection,
-            join_transaction_mode="create_savepoint",
-        )
-        async with async_session:
-            yield async_session
-    
-    # Here you have to override the dependency that is used in FastAPI's
-    # endpoints to get SQLAlchemy's AsyncSession. In my case, it is
-    # get_async_session
+    # Override the dependency in the app
     app.dependency_overrides[get_async_session] = override_get_async_session
-    yield AsyncClient(transport=ASGITransport(app=app), base_url="http://test")
+
+    # Create the test client
+    async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as ac:
+        yield ac
+    await clean_db()
+    # Clean up: remove the override
     del app.dependency_overrides[get_async_session]
-
-    await transaction.rollback()
-
-@pytest.fixture()
-def test_async_client():
-    ac = AsyncClient(
-        transport=ASGITransport(app=app), base_url="http://test"
-    )
-    return ac

@@ -3,11 +3,6 @@ from core.fixtures import *
 def test_one_plus_one():
     assert 1 + 1 == 2
 
-
-def test_session_fixture(session: AsyncSession):
-    assert session is not None and type(session) is AsyncSession
-
-
 def test_client_fixture(client: AsyncClient):
     assert client is not None and type(client) is AsyncClient
 
