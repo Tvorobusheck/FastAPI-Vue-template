@@ -3,7 +3,8 @@
 ## Tasks
 
 ### Backend
-- [ ] Tests
+- [ ] BusinessItem
+- [ ] DB tests for BusinessItem
 - [ ] Permissions
 - [ ] Permission control and business logic for BusinessItem
 
@@ -19,8 +20,6 @@
 - [ ] Items create, read, update and delete with permissions control for new project.
 
 ### DevOps
-- [ ] Fixtures for tests.
-- [ ] Check pytest is correct.
 - [ ] Check e2e and unit tests for frontend.
 - [ ] Check new ideas for docker-compose.prod.yml. Traefick, for example.
 - [ ] The `docker-compose.prod.yml` for deploying all services, including the database, on a VPS
@@ -36,6 +35,9 @@
 - [ ] Password recovery for new project.
 
 ## Completed
+- [x] Tests
+- [x] Fixtures for tests.
+- [x] Check pytest is correct.
 - [x] [FastCRUD](https://github.com/igorbenav/fastcrud) for reducing boilerplate code.
 - [x] Items create, read, update and delete for new project.
 - [x] [FastAPI Users](https://github.com/fastapi-users/fastapi-users) for authorization, registration, and more.
