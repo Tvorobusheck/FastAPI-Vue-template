@@ -15,6 +15,7 @@ RUN python -m pip install -r requirements.txt
 WORKDIR /app
 
 # Copy the .env file
+COPY pytest.ini /app/
 COPY env/.dev.env /app/.env
 
 # copy migrations

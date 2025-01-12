@@ -13,3 +13,4 @@ httpx
 fastapi-users
 fastcrud
 fastapi_users_db_sqlalchemy
+pytest-asyncio
