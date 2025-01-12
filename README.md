@@ -64,3 +64,12 @@ virtualenv venv
 source venv/bin/activate
 pip install -r backend/requirements.txt
 npm install frontend/
+```
+### Generate client code for frontend
+Run the generation script:
+```bash
+cd frontend/
+sh scripts/generate.sh
+```
+
+Api will be in api/ directory

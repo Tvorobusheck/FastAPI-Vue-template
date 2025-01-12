@@ -18,6 +18,7 @@
   "devDependencies": {
     "@babel/core": "^7.12.16",
     "@babel/eslint-parser": "^7.12.16",
+    "@openapitools/openapi-generator-cli": "^2.15.3",
     "@testing-library/vue": "^8.1.0",
     "@vitejs/plugin-vue": "^5.2.1",
     "@vue/cli-plugin-babel": "~5.0.0",

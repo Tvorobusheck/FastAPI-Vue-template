@@ -2,14 +2,8 @@
 
 ## Tasks
 
-### Backend
-- [ ] BusinessItem
-- [ ] DB tests for BusinessItem
-- [ ] Permissions
-- [ ] Permission control and business logic for BusinessItem
-
 ### Frontend
-- [ ] Generation of API client based on the OpenAPI specification from the backend.
+- [ ] Fix permission or owner for generated api
 - [ ] Composition API.
 - [ ] Vite.
 - [ ] PWA Plugin / CLI PWA for cross-platform support.
@@ -18,6 +12,12 @@
 - [ ] Authorization for new project.
 - [ ] Registration for new project.
 - [ ] Items create, read, update and delete with permissions control for new project.
+
+### Backend
+- [ ] BusinessItem
+- [ ] DB tests for BusinessItem
+- [ ] Permissions
+- [ ] Permission control and business logic for BusinessItem
 
 ### DevOps
 - [ ] Check e2e and unit tests for frontend.
@@ -35,6 +35,7 @@
 - [ ] Password recovery for new project.
 
 ## Completed
+- [x] Generation of API client based on the OpenAPI specification from the backend.
 - [x] Tests
 - [x] Fixtures for tests.
 - [x] Check pytest is correct.
