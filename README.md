@@ -13,8 +13,8 @@ The backend is built using FastAPI, a modern and fast web framework for building
 - [x] SQLAlchemy for ORM and database interaction
 - [x] Alembic for database migrations
 - [x] OpenAPI.json specification
-- [ ] [FastAPI Users](https://github.com/fastapi-users/fastapi-users) for authorization, registration, and more
-- [ ] [FastCRUD](https://github.com/igorbenav/fastcrud) for reducing boilerplate code
+- [x] [FastAPI Users](https://github.com/fastapi-users/fastapi-users) for authorization, registration, and more
+- [x] [FastCRUD](https://github.com/igorbenav/fastcrud) for reducing boilerplate code
 
 ### Frontend with Vue
 The frontend is built using Vue.js, a progressive JavaScript framework. It includes:
@@ -23,7 +23,6 @@ The frontend is built using Vue.js, a progressive JavaScript framework. It inclu
 - [ ] PWA Plugin / CLI PWA for cross-platform support
 - [ ] Vuexy, CoreUI, or Vue Element Admin for pre-built themes
 - [ ] Vuetify or Element UI
-- [ ] Composition API
 - [x] Generation of API client based on the OpenAPI specification from the backend
 
 ### Docker Support
