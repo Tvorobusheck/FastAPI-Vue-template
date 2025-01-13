@@ -1,16 +1,12 @@
 {
-    "compilerOptions": {
-      "module": "commonjs",
-      "noImplicitAny": true,
-      "removeComments": true,
-      "preserveConstEnums": true,
-      "sourceMap": true
-    },
+  "compilerOptions": {
+    "baseUrl": ".",
     "paths": {
       "@/*": [
-        "src/*",
-        "api/*"
+          "./src/*",
+          "./api/*"
       ]
     },
-  }
+  },
+}
   
