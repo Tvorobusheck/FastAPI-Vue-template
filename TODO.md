@@ -3,7 +3,6 @@
 ## Tasks
 
 ### Frontend
-- [ ] Composition API.
 - [ ] Vite.
 - [ ] PWA Plugin / CLI PWA for cross-platform support.
 - [ ] Vuexy, CoreUI, or Vue Element Admin for pre-built themes.
@@ -34,6 +33,7 @@
 - [ ] Password recovery for new project.
 
 ## Completed
+- [-] Composition API.
 - [x] Fix permission or owner for generated api
 - [x] Generation of API client based on the OpenAPI specification from the backend.
 - [x] Tests

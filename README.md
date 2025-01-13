@@ -24,7 +24,7 @@ The frontend is built using Vue.js, a progressive JavaScript framework. It inclu
 - [ ] Vuexy, CoreUI, or Vue Element Admin for pre-built themes
 - [ ] Vuetify or Element UI
 - [ ] Composition API
-- [ ] Generation of API client based on the OpenAPI specification from the backend
+- [x] Generation of API client based on the OpenAPI specification from the backend
 
 ### Docker Support
 The project provides full Docker support for both backend and frontend. It includes:
