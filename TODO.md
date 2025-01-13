@@ -3,7 +3,6 @@
 ## Tasks
 
 ### Frontend
-- [ ] Fix permission or owner for generated api
 - [ ] Composition API.
 - [ ] Vite.
 - [ ] PWA Plugin / CLI PWA for cross-platform support.
@@ -35,6 +34,7 @@
 - [ ] Password recovery for new project.
 
 ## Completed
+- [x] Fix permission or owner for generated api
 - [x] Generation of API client based on the OpenAPI specification from the backend.
 - [x] Tests
 - [x] Fixtures for tests.
