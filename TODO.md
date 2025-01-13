@@ -26,6 +26,7 @@
 - [ ] Add auto credentials from .env.
 - [ ] Improve run options in vscode.
 - [ ] A simple script to initialize a new project based on this template. It will set up the necessary folder structure, configuration files, and install dependencies for both frontend and backend.
+- [ ] Lint support
 
 ### Example project
 - [ ] Remove old project.
