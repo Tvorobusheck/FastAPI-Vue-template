@@ -40,4 +40,6 @@ async def client() -> AsyncGenerator[AsyncClient, None]:
         yield ac
     await clean_db()
     # Clean up: remove the override
-    del app.dependency_overrides[get_async_session]
+    # TODO: KeyError happens withouth the if statement. Need to investigate
+    if get_async_session in app.dependency_overrides:
+        del app.dependency_overrides[get_async_session]

@@ -7,7 +7,6 @@ python-dotenv
 pytest
 pytest-cov
 psycopg2-binary
-strawberry-graphql
 Alembic
 httpx
 fastapi-users

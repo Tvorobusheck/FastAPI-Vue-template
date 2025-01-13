@@ -28,11 +28,11 @@
 - [ ] Lint support
 
 ### Example project
-- [ ] Remove old project.
 - [ ] Registration conformation via email for new project.
 - [ ] Password recovery for new project.
 
 ## Completed
+- [x] Remove old graphql-project.
 - [x] Vite.
 - [x] Vite-PWA for cross-platform support.
 - [-] Composition API.
