@@ -3,13 +3,12 @@
 ## Tasks
 
 ### Frontend
-- [ ] Vite.
-- [ ] PWA Plugin / CLI PWA for cross-platform support.
 - [ ] Vuexy, CoreUI, or Vue Element Admin for pre-built themes.
 - [ ] Vuetify or Element UI.
 - [ ] Authorization for new project.
 - [ ] Registration for new project.
 - [ ] Items create, read, update and delete with permissions control for new project.
+- [ ] Improve manifest for PWA
 
 ### Backend
 - [ ] BusinessItem
@@ -34,6 +33,8 @@
 - [ ] Password recovery for new project.
 
 ## Completed
+- [x] Vite.
+- [x] Vite-PWA for cross-platform support.
 - [-] Composition API.
 - [x] Fix permission or owner for generated api
 - [x] Generation of API client based on the OpenAPI specification from the backend.

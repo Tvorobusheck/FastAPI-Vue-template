@@ -18,9 +18,9 @@ The backend is built using FastAPI, a modern and fast web framework for building
 
 ### Frontend with Vue
 The frontend is built using Vue.js, a progressive JavaScript framework. It includes:
-- [ ] Vite
+- [x] Vite
 - [x] Vitest for unit testing
-- [ ] PWA Plugin / CLI PWA for cross-platform support
+- [x] Vite-PWA for cross-platform support
 - [ ] Vuexy, CoreUI, or Vue Element Admin for pre-built themes
 - [ ] Vuetify or Element UI
 - [x] Generation of API client based on the OpenAPI specification from the backend
