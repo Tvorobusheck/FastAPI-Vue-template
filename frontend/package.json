@@ -10,11 +10,13 @@
     "test": "vitest"
   },
   "dependencies": {
+    "@vitejs/plugin-vue": "^5.2.1",
     "@vitejs/plugin-vue-jsx": "^4.1.1",
     "@vitest/coverage-v8": "^2.1.8",
     "core-js": "^3.8.3",
     "element-plus": "^2.9.3",
     "typescript": "^5.7.3",
+    "vite-plugin-pwa": "^0.21.1",
     "vue": "^3.2.13"
   },
   "devDependencies": {
@@ -22,7 +24,6 @@
     "@babel/eslint-parser": "^7.12.16",
     "@openapitools/openapi-generator-cli": "^2.15.3",
     "@testing-library/vue": "^8.1.0",
-    "@vitejs/plugin-vue": "^5.2.1",
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-eslint": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
@@ -31,7 +32,6 @@
     "jsdom": "^25.0.1",
     "unplugin-auto-import": "^19.0.0",
     "unplugin-vue-components": "^28.0.0",
-    "vite-plugin-pwa": "^0.21.1",
     "vitest": "^2.1.8"
   },
   "eslintConfig": {
