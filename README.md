@@ -22,14 +22,13 @@ The frontend is built using Vue.js, a progressive JavaScript framework. It inclu
 - [x] Vitest for unit testing
 - [x] Vite-PWA for cross-platform support
 - [ ] Vuexy, CoreUI, or Vue Element Admin for pre-built themes
-- [ ] Vuetify or Element UI
+- [x] Element Plus support
 - [x] Generation of API client based on the OpenAPI specification from the backend
 
 ### Docker Support
 The project provides full Docker support for both backend and frontend. It includes:
-- [x] A `docker-compose` configuration for easy management of containers. TODO: add auto reload for backend and frontend
-- [ ] The `docker-compose.prod.yml` for deploying all services, including the database, on a VPS. TODO: add auto restart
-- [ ] Certbot service
+- [x] A `docker-compose` configuration for easy management of containers. With auto reload for backend and frontend.
+- [ ] The `docker-compose.prod.yml` for deploying all services, including the database, on a VPS. TODO: add auto restart, Certbot service
 - [x] Separate `Dockerfile` for backend and frontend, optimized for production and development environments
 - [x] PostgreSQL service in docker-compose for database
 - [x] Adminer in docker-compose for PostgreSQL. TODO: add auto credentials from .env

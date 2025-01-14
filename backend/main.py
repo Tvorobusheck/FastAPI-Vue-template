@@ -1,5 +1,5 @@
-from core.router import app
+from core.config import RELOAD
 
 if __name__ == '__main__':
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run("core.router:app", host="0.0.0.0", port=8000, reload=RELOAD)

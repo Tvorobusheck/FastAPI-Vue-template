@@ -3,9 +3,11 @@ services:
   backend:
     build:
       context: ./backend
-      dockerfile: Dockerfile
+      dockerfile: dev.Dockerfile
     volumes:
       - ./backend/migrations/versions/:/app/migrations/versions/
+      - ./backend/core/:/app/core
+      - ./backend/features/:/app/features
     ports:
       - "8000:8000"
     depends_on:

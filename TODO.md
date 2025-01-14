@@ -2,6 +2,13 @@
 
 ## Tasks
 
+### Backend
+- [ ] Tests for auth and registration
+- [ ] BusinessItem
+- [ ] DB tests for BusinessItem
+- [ ] Permissions
+- [ ] Permission control and business logic for BusinessItem
+
 ### Frontend
 - [ ] Authorization for new project.
 - [ ] Registration for new project.
@@ -9,13 +16,6 @@
 - [ ] Admin Panel ([template from git](https://github.com/PanJiaChen/vue-element-admin), [templates from vuejs website](https://vuejs.org/ecosystem/themes))
 - [ ] Improve manifest for PWA
 - [ ] Localization support
-
-### Backend
-- [ ] Make auto reload
-- [ ] BusinessItem
-- [ ] DB tests for BusinessItem
-- [ ] Permissions
-- [ ] Permission control and business logic for BusinessItem
 
 ### DevOps
 - [ ] Check e2e and unit tests for frontend.
@@ -33,6 +33,7 @@
 - [ ] Password recovery for new project.
 
 ## Completed
+- [x] Make auto reload (Backend)
 - [x] Make auto reload (Frontend)
 - [x] ElementPlus support.
 - [x] Remove old graphql-project.

@@ -2,7 +2,7 @@ import pytest
 import uuid
 from httpx import ASGITransport, AsyncClient
 from typing import AsyncGenerator
-from main import app
+from .router import app
 from .db import Base, get_async_session
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine, async_sessionmaker
 

@@ -10,6 +10,6 @@ DB = os.environ.get("POSTGRES_DB")
 DB_USER = os.environ.get("POSTGRES_USER")
 DB_PASSWORD = os.environ.get("POSTGRES_PASSWORD")
 DEBUG = os.environ.get("DEBUG", False)
-RELOAD = str(os.environ.get("RELOAD", False))
+RELOAD = bool(os.environ.get("RELOAD", False))
 
 ROUTER_DATETIME_FORMAT = "%Y-%m-%d %H:%M:%S"
