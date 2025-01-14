@@ -37,19 +37,11 @@ export default defineConfig({
         short_name: 'VitePWA',
         description: 'A PWA built with Vite',
         theme_color: '#ffffff',
-        icons: [
-          {
-            src: '/icons/icon-192x192.png',
-            sizes: '192x192',
-            type: 'image/png',
-          },
-          {
-            src: '/icons/icon-512x512.png',
-            sizes: '512x512',
-            type: 'image/png',
-          },
-        ],
       },
+      workbox: {
+        globPatterns: ["**/*"],
+      },
+      includeAssets: ["**/*"],
     }),
   ],
 })
