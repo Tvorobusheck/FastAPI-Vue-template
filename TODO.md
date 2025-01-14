@@ -3,7 +3,6 @@
 ## Tasks
 
 ### Frontend
-- [ ] Make auto reload
 - [ ] Authorization for new project.
 - [ ] Registration for new project.
 - [ ] Items create, read, update and delete with permissions control for new project.
@@ -34,6 +33,7 @@
 - [ ] Password recovery for new project.
 
 ## Completed
+- [x] Make auto reload (Frontend)
 - [x] ElementPlus support.
 - [x] Remove old graphql-project.
 - [x] Vite.

@@ -3,7 +3,7 @@
     <v-row justify="center">
       <v-col cols="12" class="text-center">
         <el-button type="danger" @click="decrement">Minus</el-button>
-        <el-button type="success" @click="increment">Plus2</el-button>
+        <el-button type="success" @click="increment">Plus</el-button>
       </v-col>
     </v-row>
     <v-row justify="center">

@@ -17,7 +17,9 @@ services:
       context: ./frontend
       dockerfile: dev.Dockerfile
     volumes:
-      - ./frontend/api:/app/api
+      - type: bind
+        source: ./frontend/src
+        target: /app/src
     ports:
       - "8080:8080"
     networks:
