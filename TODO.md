@@ -3,14 +3,16 @@
 ## Tasks
 
 ### Frontend
-- [ ] Vuexy, CoreUI, or Vue Element Admin for pre-built themes.
-- [ ] Vuetify or Element UI.
+- [ ] Make auto reload
 - [ ] Authorization for new project.
 - [ ] Registration for new project.
 - [ ] Items create, read, update and delete with permissions control for new project.
+- [ ] Admin Panel ([template from git](https://github.com/PanJiaChen/vue-element-admin), [templates from vuejs website](https://vuejs.org/ecosystem/themes))
 - [ ] Improve manifest for PWA
+- [ ] Localization support
 
 ### Backend
+- [ ] Make auto reload
 - [ ] BusinessItem
 - [ ] DB tests for BusinessItem
 - [ ] Permissions
@@ -32,6 +34,7 @@
 - [ ] Password recovery for new project.
 
 ## Completed
+- [x] ElementPlus support.
 - [x] Remove old graphql-project.
 - [x] Vite.
 - [x] Vite-PWA for cross-platform support.

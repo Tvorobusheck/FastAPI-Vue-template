@@ -18,7 +18,7 @@ services:
   frontend:
     build:
       context: ./frontend
-      dockerfile: Dockerfile
+      dockerfile: prod.Dockerfile
     #volumes:
     #  - ./frontend/src:/app/src
     ports:

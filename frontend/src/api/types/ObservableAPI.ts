@@ -306,64 +306,6 @@ export class ObservableDefaultApi {
         return this.authenticatedRouteUsersAuthenticatedRouteGetWithHttpInfo(_options).pipe(map((apiResponse: HttpInfo<any>) => apiResponse.data));
     }
 
-    /**
-     * Handle Http Get
-     */
-    public handleHttpGetGraphqlGetWithHttpInfo(_options?: Configuration): Observable<HttpInfo<any>> {
-        const requestContextPromise = this.requestFactory.handleHttpGetGraphqlGet(_options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (const middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (const middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.handleHttpGetGraphqlGetWithHttpInfo(rsp)));
-            }));
-    }
-
-    /**
-     * Handle Http Get
-     */
-    public handleHttpGetGraphqlGet(_options?: Configuration): Observable<any> {
-        return this.handleHttpGetGraphqlGetWithHttpInfo(_options).pipe(map((apiResponse: HttpInfo<any>) => apiResponse.data));
-    }
-
-    /**
-     * Handle Http Post
-     */
-    public handleHttpPostGraphqlPostWithHttpInfo(_options?: Configuration): Observable<HttpInfo<any>> {
-        const requestContextPromise = this.requestFactory.handleHttpPostGraphqlPost(_options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (const middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (const middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.handleHttpPostGraphqlPostWithHttpInfo(rsp)));
-            }));
-    }
-
-    /**
-     * Handle Http Post
-     */
-    public handleHttpPostGraphqlPost(_options?: Configuration): Observable<any> {
-        return this.handleHttpPostGraphqlPostWithHttpInfo(_options).pipe(map((apiResponse: HttpInfo<any>) => apiResponse.data));
-    }
-
 }
 
 import { ItemsApiRequestFactory, ItemsApiResponseProcessor} from "../apis/ItemsApi";

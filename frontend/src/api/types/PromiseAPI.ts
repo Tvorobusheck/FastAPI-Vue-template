@@ -199,38 +199,6 @@ export class PromiseDefaultApi {
         return result.toPromise();
     }
 
-    /**
-     * Handle Http Get
-     */
-    public handleHttpGetGraphqlGetWithHttpInfo(_options?: Configuration): Promise<HttpInfo<any>> {
-        const result = this.api.handleHttpGetGraphqlGetWithHttpInfo(_options);
-        return result.toPromise();
-    }
-
-    /**
-     * Handle Http Get
-     */
-    public handleHttpGetGraphqlGet(_options?: Configuration): Promise<any> {
-        const result = this.api.handleHttpGetGraphqlGet(_options);
-        return result.toPromise();
-    }
-
-    /**
-     * Handle Http Post
-     */
-    public handleHttpPostGraphqlPostWithHttpInfo(_options?: Configuration): Promise<HttpInfo<any>> {
-        const result = this.api.handleHttpPostGraphqlPostWithHttpInfo(_options);
-        return result.toPromise();
-    }
-
-    /**
-     * Handle Http Post
-     */
-    public handleHttpPostGraphqlPost(_options?: Configuration): Promise<any> {
-        const result = this.api.handleHttpPostGraphqlPost(_options);
-        return result.toPromise();
-    }
-
 
 }
 

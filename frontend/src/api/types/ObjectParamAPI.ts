@@ -240,12 +240,6 @@ import { DefaultApiRequestFactory, DefaultApiResponseProcessor} from "../apis/De
 export interface DefaultApiAuthenticatedRouteUsersAuthenticatedRouteGetRequest {
 }
 
-export interface DefaultApiHandleHttpGetGraphqlGetRequest {
-}
-
-export interface DefaultApiHandleHttpPostGraphqlPostRequest {
-}
-
 export class ObjectDefaultApi {
     private api: ObservableDefaultApi
 
@@ -267,38 +261,6 @@ export class ObjectDefaultApi {
      */
     public authenticatedRouteUsersAuthenticatedRouteGet(param: DefaultApiAuthenticatedRouteUsersAuthenticatedRouteGetRequest = {}, options?: Configuration): Promise<any> {
         return this.api.authenticatedRouteUsersAuthenticatedRouteGet( options).toPromise();
-    }
-
-    /**
-     * Handle Http Get
-     * @param param the request object
-     */
-    public handleHttpGetGraphqlGetWithHttpInfo(param: DefaultApiHandleHttpGetGraphqlGetRequest = {}, options?: Configuration): Promise<HttpInfo<any>> {
-        return this.api.handleHttpGetGraphqlGetWithHttpInfo( options).toPromise();
-    }
-
-    /**
-     * Handle Http Get
-     * @param param the request object
-     */
-    public handleHttpGetGraphqlGet(param: DefaultApiHandleHttpGetGraphqlGetRequest = {}, options?: Configuration): Promise<any> {
-        return this.api.handleHttpGetGraphqlGet( options).toPromise();
-    }
-
-    /**
-     * Handle Http Post
-     * @param param the request object
-     */
-    public handleHttpPostGraphqlPostWithHttpInfo(param: DefaultApiHandleHttpPostGraphqlPostRequest = {}, options?: Configuration): Promise<HttpInfo<any>> {
-        return this.api.handleHttpPostGraphqlPostWithHttpInfo( options).toPromise();
-    }
-
-    /**
-     * Handle Http Post
-     * @param param the request object
-     */
-    public handleHttpPostGraphqlPost(param: DefaultApiHandleHttpPostGraphqlPostRequest = {}, options?: Configuration): Promise<any> {
-        return this.api.handleHttpPostGraphqlPost( options).toPromise();
     }
 
 }

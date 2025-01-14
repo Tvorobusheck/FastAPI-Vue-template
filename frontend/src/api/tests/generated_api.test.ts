@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest'
-import * as backend_api from '../../../api/'
+import * as backend_api from '../'
 
 test('test 1 + 1', async () => {     
   expect(1).toBe(1)
