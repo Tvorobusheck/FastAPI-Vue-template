@@ -3,8 +3,9 @@
     "baseUrl": ".",
     "paths": {
       "@/*": [
-          "./src/*"
-      ]
+          "./src/*",
+          "./frontend/src/*"
+      ],
     },
   },
   "include": ["src/**/*"]

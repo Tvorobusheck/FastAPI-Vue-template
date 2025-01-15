@@ -17,7 +17,7 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
     // Automatically resolve index.vue
-    extensions: ['.js', '.vue', '.json'],
+    extensions: ['.ts', '.js', '.vue', '.json'],
   },
   plugins: [
     vue(),
