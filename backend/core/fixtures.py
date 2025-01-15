@@ -9,7 +9,7 @@ from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine, async_sess
 temp_db_url = f"sqlite+aiosqlite:///:memory:"  # Temporary SQLite DB file
 
 # Create engine for the temporary database
-engine = create_async_engine(temp_db_url, echo=True)
+engine = create_async_engine(temp_db_url)
 AsyncSessionLocal = async_sessionmaker(bind=engine, expire_on_commit=False)
 
 async def init_db():

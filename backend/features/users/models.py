@@ -15,9 +15,10 @@ from fastapi_users.authentication import (
 from fastapi_users.db import SQLAlchemyBaseUserTableUUID, SQLAlchemyUserDatabase
 
 from sqlalchemy.ext.asyncio import AsyncSession
+from core.utils import random_str
 from core.db import Base, get_async_session
 
-SECRET = "SECRET"
+SECRET = random_str()
 
 class User(SQLAlchemyBaseUserTableUUID, Base):
     pass
