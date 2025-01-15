@@ -2,20 +2,19 @@
 
 ## Tasks
 
+### Frontend
+- [ ] Authorization for new project.
+- [ ] Registration for new project.
+- [ ] BusinessItem create, read, update and delete with permissions control for new project.
+- [ ] Admin Panel ([template from git](https://github.com/PanJiaChen/vue-element-admin), [templates from vuejs website](https://vuejs.org/ecosystem/themes))
+- [ ] Improve manifest for PWA
+- [ ] Localization support
+
 ### Backend
-- [ ] Tests for auth and registration
 - [ ] BusinessItem
 - [ ] DB tests for BusinessItem
 - [ ] Permissions
 - [ ] Permission control and business logic for BusinessItem
-
-### Frontend
-- [ ] Authorization for new project.
-- [ ] Registration for new project.
-- [ ] Items create, read, update and delete with permissions control for new project.
-- [ ] Admin Panel ([template from git](https://github.com/PanJiaChen/vue-element-admin), [templates from vuejs website](https://vuejs.org/ecosystem/themes))
-- [ ] Improve manifest for PWA
-- [ ] Localization support
 
 ### DevOps
 - [ ] Check e2e and unit tests for frontend.
@@ -33,6 +32,7 @@
 - [ ] Password recovery for new project.
 
 ## Completed
+- [x] Tests for auth and registration
 - [x] Make auto reload (Backend)
 - [x] Make auto reload (Frontend)
 - [x] ElementPlus support.

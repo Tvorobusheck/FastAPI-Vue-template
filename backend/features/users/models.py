@@ -17,7 +17,7 @@ from fastapi_users.db import SQLAlchemyBaseUserTableUUID, SQLAlchemyUserDatabase
 from sqlalchemy.ext.asyncio import AsyncSession
 from core.utils import random_str
 from core.db import Base, get_async_session
-
+from core.config import JWT_EXPIRATION_TIME
 SECRET = random_str()
 
 class User(SQLAlchemyBaseUserTableUUID, Base):
@@ -53,7 +53,7 @@ bearer_transport = BearerTransport(tokenUrl="users/jwt/login")
 
 
 def get_jwt_strategy() -> JWTStrategy[models.UP, models.ID]:
-    return JWTStrategy(secret=SECRET, lifetime_seconds=3600)
+    return JWTStrategy(secret=SECRET, lifetime_seconds=JWT_EXPIRATION_TIME)
 
 
 auth_backend = AuthenticationBackend(
