@@ -261,53 +261,6 @@ export class ObservableAuthApi {
 
 }
 
-import { DefaultApiRequestFactory, DefaultApiResponseProcessor} from "../apis/DefaultApi";
-export class ObservableDefaultApi {
-    private requestFactory: DefaultApiRequestFactory;
-    private responseProcessor: DefaultApiResponseProcessor;
-    private configuration: Configuration;
-
-    public constructor(
-        configuration: Configuration,
-        requestFactory?: DefaultApiRequestFactory,
-        responseProcessor?: DefaultApiResponseProcessor
-    ) {
-        this.configuration = configuration;
-        this.requestFactory = requestFactory || new DefaultApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new DefaultApiResponseProcessor();
-    }
-
-    /**
-     * Authenticated Route
-     */
-    public authenticatedRouteUsersAuthenticatedRouteGetWithHttpInfo(_options?: Configuration): Observable<HttpInfo<any>> {
-        const requestContextPromise = this.requestFactory.authenticatedRouteUsersAuthenticatedRouteGet(_options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (const middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (const middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.authenticatedRouteUsersAuthenticatedRouteGetWithHttpInfo(rsp)));
-            }));
-    }
-
-    /**
-     * Authenticated Route
-     */
-    public authenticatedRouteUsersAuthenticatedRouteGet(_options?: Configuration): Observable<any> {
-        return this.authenticatedRouteUsersAuthenticatedRouteGetWithHttpInfo(_options).pipe(map((apiResponse: HttpInfo<any>) => apiResponse.data));
-    }
-
-}
-
 import { ItemsApiRequestFactory, ItemsApiResponseProcessor} from "../apis/ItemsApi";
 export class ObservableItemsApi {
     private requestFactory: ItemsApiRequestFactory;
@@ -518,8 +471,8 @@ export class ObservableUsersApi {
     /**
      * Users:Current User
      */
-    public usersCurrentUserUsersUsersMeGetWithHttpInfo(_options?: Configuration): Observable<HttpInfo<UserRead>> {
-        const requestContextPromise = this.requestFactory.usersCurrentUserUsersUsersMeGet(_options);
+    public usersCurrentUserUsersAuthMeGetWithHttpInfo(_options?: Configuration): Observable<HttpInfo<UserRead>> {
+        const requestContextPromise = this.requestFactory.usersCurrentUserUsersAuthMeGet(_options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -533,23 +486,23 @@ export class ObservableUsersApi {
                 for (const middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.usersCurrentUserUsersUsersMeGetWithHttpInfo(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.usersCurrentUserUsersAuthMeGetWithHttpInfo(rsp)));
             }));
     }
 
     /**
      * Users:Current User
      */
-    public usersCurrentUserUsersUsersMeGet(_options?: Configuration): Observable<UserRead> {
-        return this.usersCurrentUserUsersUsersMeGetWithHttpInfo(_options).pipe(map((apiResponse: HttpInfo<UserRead>) => apiResponse.data));
+    public usersCurrentUserUsersAuthMeGet(_options?: Configuration): Observable<UserRead> {
+        return this.usersCurrentUserUsersAuthMeGetWithHttpInfo(_options).pipe(map((apiResponse: HttpInfo<UserRead>) => apiResponse.data));
     }
 
     /**
      * Users:Delete User
      * @param id
      */
-    public usersDeleteUserUsersUsersIdDeleteWithHttpInfo(id: string, _options?: Configuration): Observable<HttpInfo<void>> {
-        const requestContextPromise = this.requestFactory.usersDeleteUserUsersUsersIdDelete(id, _options);
+    public usersDeleteUserUsersAuthIdDeleteWithHttpInfo(id: string, _options?: Configuration): Observable<HttpInfo<void>> {
+        const requestContextPromise = this.requestFactory.usersDeleteUserUsersAuthIdDelete(id, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -563,7 +516,7 @@ export class ObservableUsersApi {
                 for (const middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.usersDeleteUserUsersUsersIdDeleteWithHttpInfo(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.usersDeleteUserUsersAuthIdDeleteWithHttpInfo(rsp)));
             }));
     }
 
@@ -571,16 +524,16 @@ export class ObservableUsersApi {
      * Users:Delete User
      * @param id
      */
-    public usersDeleteUserUsersUsersIdDelete(id: string, _options?: Configuration): Observable<void> {
-        return this.usersDeleteUserUsersUsersIdDeleteWithHttpInfo(id, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
+    public usersDeleteUserUsersAuthIdDelete(id: string, _options?: Configuration): Observable<void> {
+        return this.usersDeleteUserUsersAuthIdDeleteWithHttpInfo(id, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
     }
 
     /**
      * Users:Patch Current User
      * @param userUpdate
      */
-    public usersPatchCurrentUserUsersUsersMePatchWithHttpInfo(userUpdate: UserUpdate, _options?: Configuration): Observable<HttpInfo<UserRead>> {
-        const requestContextPromise = this.requestFactory.usersPatchCurrentUserUsersUsersMePatch(userUpdate, _options);
+    public usersPatchCurrentUserUsersAuthMePatchWithHttpInfo(userUpdate: UserUpdate, _options?: Configuration): Observable<HttpInfo<UserRead>> {
+        const requestContextPromise = this.requestFactory.usersPatchCurrentUserUsersAuthMePatch(userUpdate, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -594,7 +547,7 @@ export class ObservableUsersApi {
                 for (const middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.usersPatchCurrentUserUsersUsersMePatchWithHttpInfo(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.usersPatchCurrentUserUsersAuthMePatchWithHttpInfo(rsp)));
             }));
     }
 
@@ -602,8 +555,8 @@ export class ObservableUsersApi {
      * Users:Patch Current User
      * @param userUpdate
      */
-    public usersPatchCurrentUserUsersUsersMePatch(userUpdate: UserUpdate, _options?: Configuration): Observable<UserRead> {
-        return this.usersPatchCurrentUserUsersUsersMePatchWithHttpInfo(userUpdate, _options).pipe(map((apiResponse: HttpInfo<UserRead>) => apiResponse.data));
+    public usersPatchCurrentUserUsersAuthMePatch(userUpdate: UserUpdate, _options?: Configuration): Observable<UserRead> {
+        return this.usersPatchCurrentUserUsersAuthMePatchWithHttpInfo(userUpdate, _options).pipe(map((apiResponse: HttpInfo<UserRead>) => apiResponse.data));
     }
 
     /**
@@ -611,8 +564,8 @@ export class ObservableUsersApi {
      * @param id
      * @param userUpdate
      */
-    public usersPatchUserUsersUsersIdPatchWithHttpInfo(id: string, userUpdate: UserUpdate, _options?: Configuration): Observable<HttpInfo<UserRead>> {
-        const requestContextPromise = this.requestFactory.usersPatchUserUsersUsersIdPatch(id, userUpdate, _options);
+    public usersPatchUserUsersAuthIdPatchWithHttpInfo(id: string, userUpdate: UserUpdate, _options?: Configuration): Observable<HttpInfo<UserRead>> {
+        const requestContextPromise = this.requestFactory.usersPatchUserUsersAuthIdPatch(id, userUpdate, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -626,7 +579,7 @@ export class ObservableUsersApi {
                 for (const middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.usersPatchUserUsersUsersIdPatchWithHttpInfo(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.usersPatchUserUsersAuthIdPatchWithHttpInfo(rsp)));
             }));
     }
 
@@ -635,16 +588,16 @@ export class ObservableUsersApi {
      * @param id
      * @param userUpdate
      */
-    public usersPatchUserUsersUsersIdPatch(id: string, userUpdate: UserUpdate, _options?: Configuration): Observable<UserRead> {
-        return this.usersPatchUserUsersUsersIdPatchWithHttpInfo(id, userUpdate, _options).pipe(map((apiResponse: HttpInfo<UserRead>) => apiResponse.data));
+    public usersPatchUserUsersAuthIdPatch(id: string, userUpdate: UserUpdate, _options?: Configuration): Observable<UserRead> {
+        return this.usersPatchUserUsersAuthIdPatchWithHttpInfo(id, userUpdate, _options).pipe(map((apiResponse: HttpInfo<UserRead>) => apiResponse.data));
     }
 
     /**
      * Users:User
      * @param id
      */
-    public usersUserUsersUsersIdGetWithHttpInfo(id: string, _options?: Configuration): Observable<HttpInfo<UserRead>> {
-        const requestContextPromise = this.requestFactory.usersUserUsersUsersIdGet(id, _options);
+    public usersUserUsersAuthIdGetWithHttpInfo(id: string, _options?: Configuration): Observable<HttpInfo<UserRead>> {
+        const requestContextPromise = this.requestFactory.usersUserUsersAuthIdGet(id, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -658,7 +611,7 @@ export class ObservableUsersApi {
                 for (const middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.usersUserUsersUsersIdGetWithHttpInfo(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.usersUserUsersAuthIdGetWithHttpInfo(rsp)));
             }));
     }
 
@@ -666,8 +619,8 @@ export class ObservableUsersApi {
      * Users:User
      * @param id
      */
-    public usersUserUsersUsersIdGet(id: string, _options?: Configuration): Observable<UserRead> {
-        return this.usersUserUsersUsersIdGetWithHttpInfo(id, _options).pipe(map((apiResponse: HttpInfo<UserRead>) => apiResponse.data));
+    public usersUserUsersAuthIdGet(id: string, _options?: Configuration): Observable<UserRead> {
+        return this.usersUserUsersAuthIdGetWithHttpInfo(id, _options).pipe(map((apiResponse: HttpInfo<UserRead>) => apiResponse.data));
     }
 
 }

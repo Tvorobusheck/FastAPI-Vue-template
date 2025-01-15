@@ -234,37 +234,6 @@ export class ObjectAuthApi {
 
 }
 
-import { ObservableDefaultApi } from "./ObservableAPI";
-import { DefaultApiRequestFactory, DefaultApiResponseProcessor} from "../apis/DefaultApi";
-
-export interface DefaultApiAuthenticatedRouteUsersAuthenticatedRouteGetRequest {
-}
-
-export class ObjectDefaultApi {
-    private api: ObservableDefaultApi
-
-    public constructor(configuration: Configuration, requestFactory?: DefaultApiRequestFactory, responseProcessor?: DefaultApiResponseProcessor) {
-        this.api = new ObservableDefaultApi(configuration, requestFactory, responseProcessor);
-    }
-
-    /**
-     * Authenticated Route
-     * @param param the request object
-     */
-    public authenticatedRouteUsersAuthenticatedRouteGetWithHttpInfo(param: DefaultApiAuthenticatedRouteUsersAuthenticatedRouteGetRequest = {}, options?: Configuration): Promise<HttpInfo<any>> {
-        return this.api.authenticatedRouteUsersAuthenticatedRouteGetWithHttpInfo( options).toPromise();
-    }
-
-    /**
-     * Authenticated Route
-     * @param param the request object
-     */
-    public authenticatedRouteUsersAuthenticatedRouteGet(param: DefaultApiAuthenticatedRouteUsersAuthenticatedRouteGetRequest = {}, options?: Configuration): Promise<any> {
-        return this.api.authenticatedRouteUsersAuthenticatedRouteGet( options).toPromise();
-    }
-
-}
-
 import { ObservableItemsApi } from "./ObservableAPI";
 import { ItemsApiRequestFactory, ItemsApiResponseProcessor} from "../apis/ItemsApi";
 
@@ -446,50 +415,50 @@ export class ObjectItemsApi {
 import { ObservableUsersApi } from "./ObservableAPI";
 import { UsersApiRequestFactory, UsersApiResponseProcessor} from "../apis/UsersApi";
 
-export interface UsersApiUsersCurrentUserUsersUsersMeGetRequest {
+export interface UsersApiUsersCurrentUserUsersAuthMeGetRequest {
 }
 
-export interface UsersApiUsersDeleteUserUsersUsersIdDeleteRequest {
+export interface UsersApiUsersDeleteUserUsersAuthIdDeleteRequest {
     /**
      * 
      * Defaults to: undefined
      * @type string
-     * @memberof UsersApiusersDeleteUserUsersUsersIdDelete
+     * @memberof UsersApiusersDeleteUserUsersAuthIdDelete
      */
     id: string
 }
 
-export interface UsersApiUsersPatchCurrentUserUsersUsersMePatchRequest {
+export interface UsersApiUsersPatchCurrentUserUsersAuthMePatchRequest {
     /**
      * 
      * @type UserUpdate
-     * @memberof UsersApiusersPatchCurrentUserUsersUsersMePatch
+     * @memberof UsersApiusersPatchCurrentUserUsersAuthMePatch
      */
     userUpdate: UserUpdate
 }
 
-export interface UsersApiUsersPatchUserUsersUsersIdPatchRequest {
+export interface UsersApiUsersPatchUserUsersAuthIdPatchRequest {
     /**
      * 
      * Defaults to: undefined
      * @type string
-     * @memberof UsersApiusersPatchUserUsersUsersIdPatch
+     * @memberof UsersApiusersPatchUserUsersAuthIdPatch
      */
     id: string
     /**
      * 
      * @type UserUpdate
-     * @memberof UsersApiusersPatchUserUsersUsersIdPatch
+     * @memberof UsersApiusersPatchUserUsersAuthIdPatch
      */
     userUpdate: UserUpdate
 }
 
-export interface UsersApiUsersUserUsersUsersIdGetRequest {
+export interface UsersApiUsersUserUsersAuthIdGetRequest {
     /**
      * 
      * Defaults to: undefined
      * @type string
-     * @memberof UsersApiusersUserUsersUsersIdGet
+     * @memberof UsersApiusersUserUsersAuthIdGet
      */
     id: string
 }
@@ -505,80 +474,80 @@ export class ObjectUsersApi {
      * Users:Current User
      * @param param the request object
      */
-    public usersCurrentUserUsersUsersMeGetWithHttpInfo(param: UsersApiUsersCurrentUserUsersUsersMeGetRequest = {}, options?: Configuration): Promise<HttpInfo<UserRead>> {
-        return this.api.usersCurrentUserUsersUsersMeGetWithHttpInfo( options).toPromise();
+    public usersCurrentUserUsersAuthMeGetWithHttpInfo(param: UsersApiUsersCurrentUserUsersAuthMeGetRequest = {}, options?: Configuration): Promise<HttpInfo<UserRead>> {
+        return this.api.usersCurrentUserUsersAuthMeGetWithHttpInfo( options).toPromise();
     }
 
     /**
      * Users:Current User
      * @param param the request object
      */
-    public usersCurrentUserUsersUsersMeGet(param: UsersApiUsersCurrentUserUsersUsersMeGetRequest = {}, options?: Configuration): Promise<UserRead> {
-        return this.api.usersCurrentUserUsersUsersMeGet( options).toPromise();
+    public usersCurrentUserUsersAuthMeGet(param: UsersApiUsersCurrentUserUsersAuthMeGetRequest = {}, options?: Configuration): Promise<UserRead> {
+        return this.api.usersCurrentUserUsersAuthMeGet( options).toPromise();
     }
 
     /**
      * Users:Delete User
      * @param param the request object
      */
-    public usersDeleteUserUsersUsersIdDeleteWithHttpInfo(param: UsersApiUsersDeleteUserUsersUsersIdDeleteRequest, options?: Configuration): Promise<HttpInfo<void>> {
-        return this.api.usersDeleteUserUsersUsersIdDeleteWithHttpInfo(param.id,  options).toPromise();
+    public usersDeleteUserUsersAuthIdDeleteWithHttpInfo(param: UsersApiUsersDeleteUserUsersAuthIdDeleteRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.usersDeleteUserUsersAuthIdDeleteWithHttpInfo(param.id,  options).toPromise();
     }
 
     /**
      * Users:Delete User
      * @param param the request object
      */
-    public usersDeleteUserUsersUsersIdDelete(param: UsersApiUsersDeleteUserUsersUsersIdDeleteRequest, options?: Configuration): Promise<void> {
-        return this.api.usersDeleteUserUsersUsersIdDelete(param.id,  options).toPromise();
+    public usersDeleteUserUsersAuthIdDelete(param: UsersApiUsersDeleteUserUsersAuthIdDeleteRequest, options?: Configuration): Promise<void> {
+        return this.api.usersDeleteUserUsersAuthIdDelete(param.id,  options).toPromise();
     }
 
     /**
      * Users:Patch Current User
      * @param param the request object
      */
-    public usersPatchCurrentUserUsersUsersMePatchWithHttpInfo(param: UsersApiUsersPatchCurrentUserUsersUsersMePatchRequest, options?: Configuration): Promise<HttpInfo<UserRead>> {
-        return this.api.usersPatchCurrentUserUsersUsersMePatchWithHttpInfo(param.userUpdate,  options).toPromise();
+    public usersPatchCurrentUserUsersAuthMePatchWithHttpInfo(param: UsersApiUsersPatchCurrentUserUsersAuthMePatchRequest, options?: Configuration): Promise<HttpInfo<UserRead>> {
+        return this.api.usersPatchCurrentUserUsersAuthMePatchWithHttpInfo(param.userUpdate,  options).toPromise();
     }
 
     /**
      * Users:Patch Current User
      * @param param the request object
      */
-    public usersPatchCurrentUserUsersUsersMePatch(param: UsersApiUsersPatchCurrentUserUsersUsersMePatchRequest, options?: Configuration): Promise<UserRead> {
-        return this.api.usersPatchCurrentUserUsersUsersMePatch(param.userUpdate,  options).toPromise();
+    public usersPatchCurrentUserUsersAuthMePatch(param: UsersApiUsersPatchCurrentUserUsersAuthMePatchRequest, options?: Configuration): Promise<UserRead> {
+        return this.api.usersPatchCurrentUserUsersAuthMePatch(param.userUpdate,  options).toPromise();
     }
 
     /**
      * Users:Patch User
      * @param param the request object
      */
-    public usersPatchUserUsersUsersIdPatchWithHttpInfo(param: UsersApiUsersPatchUserUsersUsersIdPatchRequest, options?: Configuration): Promise<HttpInfo<UserRead>> {
-        return this.api.usersPatchUserUsersUsersIdPatchWithHttpInfo(param.id, param.userUpdate,  options).toPromise();
+    public usersPatchUserUsersAuthIdPatchWithHttpInfo(param: UsersApiUsersPatchUserUsersAuthIdPatchRequest, options?: Configuration): Promise<HttpInfo<UserRead>> {
+        return this.api.usersPatchUserUsersAuthIdPatchWithHttpInfo(param.id, param.userUpdate,  options).toPromise();
     }
 
     /**
      * Users:Patch User
      * @param param the request object
      */
-    public usersPatchUserUsersUsersIdPatch(param: UsersApiUsersPatchUserUsersUsersIdPatchRequest, options?: Configuration): Promise<UserRead> {
-        return this.api.usersPatchUserUsersUsersIdPatch(param.id, param.userUpdate,  options).toPromise();
+    public usersPatchUserUsersAuthIdPatch(param: UsersApiUsersPatchUserUsersAuthIdPatchRequest, options?: Configuration): Promise<UserRead> {
+        return this.api.usersPatchUserUsersAuthIdPatch(param.id, param.userUpdate,  options).toPromise();
     }
 
     /**
      * Users:User
      * @param param the request object
      */
-    public usersUserUsersUsersIdGetWithHttpInfo(param: UsersApiUsersUserUsersUsersIdGetRequest, options?: Configuration): Promise<HttpInfo<UserRead>> {
-        return this.api.usersUserUsersUsersIdGetWithHttpInfo(param.id,  options).toPromise();
+    public usersUserUsersAuthIdGetWithHttpInfo(param: UsersApiUsersUserUsersAuthIdGetRequest, options?: Configuration): Promise<HttpInfo<UserRead>> {
+        return this.api.usersUserUsersAuthIdGetWithHttpInfo(param.id,  options).toPromise();
     }
 
     /**
      * Users:User
      * @param param the request object
      */
-    public usersUserUsersUsersIdGet(param: UsersApiUsersUserUsersUsersIdGetRequest, options?: Configuration): Promise<UserRead> {
-        return this.api.usersUserUsersUsersIdGet(param.id,  options).toPromise();
+    public usersUserUsersAuthIdGet(param: UsersApiUsersUserUsersAuthIdGetRequest, options?: Configuration): Promise<UserRead> {
+        return this.api.usersUserUsersAuthIdGet(param.id,  options).toPromise();
     }
 
 }

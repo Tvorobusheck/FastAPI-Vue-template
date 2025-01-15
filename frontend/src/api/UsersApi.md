@@ -4,15 +4,15 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**usersCurrentUserUsersUsersMeGet**](UsersApi.md#usersCurrentUserUsersUsersMeGet) | **GET** /users/users/me | Users:Current User
-[**usersDeleteUserUsersUsersIdDelete**](UsersApi.md#usersDeleteUserUsersUsersIdDelete) | **DELETE** /users/users/{id} | Users:Delete User
-[**usersPatchCurrentUserUsersUsersMePatch**](UsersApi.md#usersPatchCurrentUserUsersUsersMePatch) | **PATCH** /users/users/me | Users:Patch Current User
-[**usersPatchUserUsersUsersIdPatch**](UsersApi.md#usersPatchUserUsersUsersIdPatch) | **PATCH** /users/users/{id} | Users:Patch User
-[**usersUserUsersUsersIdGet**](UsersApi.md#usersUserUsersUsersIdGet) | **GET** /users/users/{id} | Users:User
+[**usersCurrentUserUsersAuthMeGet**](UsersApi.md#usersCurrentUserUsersAuthMeGet) | **GET** /users/auth/me | Users:Current User
+[**usersDeleteUserUsersAuthIdDelete**](UsersApi.md#usersDeleteUserUsersAuthIdDelete) | **DELETE** /users/auth/{id} | Users:Delete User
+[**usersPatchCurrentUserUsersAuthMePatch**](UsersApi.md#usersPatchCurrentUserUsersAuthMePatch) | **PATCH** /users/auth/me | Users:Patch Current User
+[**usersPatchUserUsersAuthIdPatch**](UsersApi.md#usersPatchUserUsersAuthIdPatch) | **PATCH** /users/auth/{id} | Users:Patch User
+[**usersUserUsersAuthIdGet**](UsersApi.md#usersUserUsersAuthIdGet) | **GET** /users/auth/{id} | Users:User
 
 
-# **usersCurrentUserUsersUsersMeGet**
-> UserRead usersCurrentUserUsersUsersMeGet()
+# **usersCurrentUserUsersAuthMeGet**
+> UserRead usersCurrentUserUsersAuthMeGet()
 
 
 ### Example
@@ -26,7 +26,7 @@ const apiInstance = new UsersApi(configuration);
 
 const request = {};
 
-const data = await apiInstance.usersCurrentUserUsersUsersMeGet(request);
+const data = await apiInstance.usersCurrentUserUsersAuthMeGet(request);
 console.log('API called successfully. Returned data:', data);
 ```
 
@@ -57,8 +57,8 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-# **usersDeleteUserUsersUsersIdDelete**
-> void usersDeleteUserUsersUsersIdDelete()
+# **usersDeleteUserUsersAuthIdDelete**
+> void usersDeleteUserUsersAuthIdDelete()
 
 
 ### Example
@@ -66,17 +66,17 @@ This endpoint does not need any parameter.
 
 ```typescript
 import { createConfiguration, UsersApi } from '';
-import type { UsersApiUsersDeleteUserUsersUsersIdDeleteRequest } from '';
+import type { UsersApiUsersDeleteUserUsersAuthIdDeleteRequest } from '';
 
 const configuration = createConfiguration();
 const apiInstance = new UsersApi(configuration);
 
-const request: UsersApiUsersDeleteUserUsersUsersIdDeleteRequest = {
+const request: UsersApiUsersDeleteUserUsersAuthIdDeleteRequest = {
   
   id: "id_example",
 };
 
-const data = await apiInstance.usersDeleteUserUsersUsersIdDelete(request);
+const data = await apiInstance.usersDeleteUserUsersAuthIdDelete(request);
 console.log('API called successfully. Returned data:', data);
 ```
 
@@ -113,8 +113,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-# **usersPatchCurrentUserUsersUsersMePatch**
-> UserRead usersPatchCurrentUserUsersUsersMePatch(userUpdate)
+# **usersPatchCurrentUserUsersAuthMePatch**
+> UserRead usersPatchCurrentUserUsersAuthMePatch(userUpdate)
 
 
 ### Example
@@ -122,12 +122,12 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createConfiguration, UsersApi } from '';
-import type { UsersApiUsersPatchCurrentUserUsersUsersMePatchRequest } from '';
+import type { UsersApiUsersPatchCurrentUserUsersAuthMePatchRequest } from '';
 
 const configuration = createConfiguration();
 const apiInstance = new UsersApi(configuration);
 
-const request: UsersApiUsersPatchCurrentUserUsersUsersMePatchRequest = {
+const request: UsersApiUsersPatchCurrentUserUsersAuthMePatchRequest = {
   
   userUpdate: {
     password: "password_example",
@@ -138,7 +138,7 @@ const request: UsersApiUsersPatchCurrentUserUsersUsersMePatchRequest = {
   },
 };
 
-const data = await apiInstance.usersPatchCurrentUserUsersUsersMePatch(request);
+const data = await apiInstance.usersPatchCurrentUserUsersAuthMePatch(request);
 console.log('API called successfully. Returned data:', data);
 ```
 
@@ -174,8 +174,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-# **usersPatchUserUsersUsersIdPatch**
-> UserRead usersPatchUserUsersUsersIdPatch(userUpdate)
+# **usersPatchUserUsersAuthIdPatch**
+> UserRead usersPatchUserUsersAuthIdPatch(userUpdate)
 
 
 ### Example
@@ -183,12 +183,12 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createConfiguration, UsersApi } from '';
-import type { UsersApiUsersPatchUserUsersUsersIdPatchRequest } from '';
+import type { UsersApiUsersPatchUserUsersAuthIdPatchRequest } from '';
 
 const configuration = createConfiguration();
 const apiInstance = new UsersApi(configuration);
 
-const request: UsersApiUsersPatchUserUsersUsersIdPatchRequest = {
+const request: UsersApiUsersPatchUserUsersAuthIdPatchRequest = {
   
   id: "id_example",
   
@@ -201,7 +201,7 @@ const request: UsersApiUsersPatchUserUsersUsersIdPatchRequest = {
   },
 };
 
-const data = await apiInstance.usersPatchUserUsersUsersIdPatch(request);
+const data = await apiInstance.usersPatchUserUsersAuthIdPatch(request);
 console.log('API called successfully. Returned data:', data);
 ```
 
@@ -240,8 +240,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-# **usersUserUsersUsersIdGet**
-> UserRead usersUserUsersUsersIdGet()
+# **usersUserUsersAuthIdGet**
+> UserRead usersUserUsersAuthIdGet()
 
 
 ### Example
@@ -249,17 +249,17 @@ Name | Type | Description  | Notes
 
 ```typescript
 import { createConfiguration, UsersApi } from '';
-import type { UsersApiUsersUserUsersUsersIdGetRequest } from '';
+import type { UsersApiUsersUserUsersAuthIdGetRequest } from '';
 
 const configuration = createConfiguration();
 const apiInstance = new UsersApi(configuration);
 
-const request: UsersApiUsersUserUsersUsersIdGetRequest = {
+const request: UsersApiUsersUserUsersAuthIdGetRequest = {
   
   id: "id_example",
 };
 
-const data = await apiInstance.usersUserUsersUsersIdGet(request);
+const data = await apiInstance.usersUserUsersAuthIdGet(request);
 console.log('API called successfully. Returned data:', data);
 ```
 

@@ -1,13 +1,10 @@
 .gitattributes
 .gitignore
-.openapi-generator-ignore
 AuthApi.md
-DefaultApi.md
 ItemsApi.md
 README.md
 UsersApi.md
 apis/AuthApi.ts
-apis/DefaultApi.ts
 apis/ItemsApi.ts
 apis/UsersApi.ts
 apis/baseapi.ts

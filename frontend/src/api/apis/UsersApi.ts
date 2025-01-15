@@ -21,11 +21,11 @@ export class UsersApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Users:Current User
      */
-    public async usersCurrentUserUsersUsersMeGet(_options?: Configuration): Promise<RequestContext> {
+    public async usersCurrentUserUsersAuthMeGet(_options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // Path Params
-        const localVarPath = '/users/users/me';
+        const localVarPath = '/users/auth/me';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
@@ -51,17 +51,17 @@ export class UsersApiRequestFactory extends BaseAPIRequestFactory {
      * Users:Delete User
      * @param id 
      */
-    public async usersDeleteUserUsersUsersIdDelete(id: string, _options?: Configuration): Promise<RequestContext> {
+    public async usersDeleteUserUsersAuthIdDelete(id: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
-            throw new RequiredError("UsersApi", "usersDeleteUserUsersUsersIdDelete", "id");
+            throw new RequiredError("UsersApi", "usersDeleteUserUsersAuthIdDelete", "id");
         }
 
 
         // Path Params
-        const localVarPath = '/users/users/{id}'
+        const localVarPath = '/users/auth/{id}'
             .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
 
         // Make Request Context
@@ -88,17 +88,17 @@ export class UsersApiRequestFactory extends BaseAPIRequestFactory {
      * Users:Patch Current User
      * @param userUpdate 
      */
-    public async usersPatchCurrentUserUsersUsersMePatch(userUpdate: UserUpdate, _options?: Configuration): Promise<RequestContext> {
+    public async usersPatchCurrentUserUsersAuthMePatch(userUpdate: UserUpdate, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'userUpdate' is not null or undefined
         if (userUpdate === null || userUpdate === undefined) {
-            throw new RequiredError("UsersApi", "usersPatchCurrentUserUsersUsersMePatch", "userUpdate");
+            throw new RequiredError("UsersApi", "usersPatchCurrentUserUsersAuthMePatch", "userUpdate");
         }
 
 
         // Path Params
-        const localVarPath = '/users/users/me';
+        const localVarPath = '/users/auth/me';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.PATCH);
@@ -136,23 +136,23 @@ export class UsersApiRequestFactory extends BaseAPIRequestFactory {
      * @param id 
      * @param userUpdate 
      */
-    public async usersPatchUserUsersUsersIdPatch(id: string, userUpdate: UserUpdate, _options?: Configuration): Promise<RequestContext> {
+    public async usersPatchUserUsersAuthIdPatch(id: string, userUpdate: UserUpdate, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
-            throw new RequiredError("UsersApi", "usersPatchUserUsersUsersIdPatch", "id");
+            throw new RequiredError("UsersApi", "usersPatchUserUsersAuthIdPatch", "id");
         }
 
 
         // verify required parameter 'userUpdate' is not null or undefined
         if (userUpdate === null || userUpdate === undefined) {
-            throw new RequiredError("UsersApi", "usersPatchUserUsersUsersIdPatch", "userUpdate");
+            throw new RequiredError("UsersApi", "usersPatchUserUsersAuthIdPatch", "userUpdate");
         }
 
 
         // Path Params
-        const localVarPath = '/users/users/{id}'
+        const localVarPath = '/users/auth/{id}'
             .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
 
         // Make Request Context
@@ -190,17 +190,17 @@ export class UsersApiRequestFactory extends BaseAPIRequestFactory {
      * Users:User
      * @param id 
      */
-    public async usersUserUsersUsersIdGet(id: string, _options?: Configuration): Promise<RequestContext> {
+    public async usersUserUsersAuthIdGet(id: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
-            throw new RequiredError("UsersApi", "usersUserUsersUsersIdGet", "id");
+            throw new RequiredError("UsersApi", "usersUserUsersAuthIdGet", "id");
         }
 
 
         // Path Params
-        const localVarPath = '/users/users/{id}'
+        const localVarPath = '/users/auth/{id}'
             .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
 
         // Make Request Context
@@ -231,10 +231,10 @@ export class UsersApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to usersCurrentUserUsersUsersMeGet
+     * @params response Response returned by the server for a request to usersCurrentUserUsersAuthMeGet
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async usersCurrentUserUsersUsersMeGetWithHttpInfo(response: ResponseContext): Promise<HttpInfo<UserRead >> {
+     public async usersCurrentUserUsersAuthMeGetWithHttpInfo(response: ResponseContext): Promise<HttpInfo<UserRead >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: UserRead = ObjectSerializer.deserialize(
@@ -263,10 +263,10 @@ export class UsersApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to usersDeleteUserUsersUsersIdDelete
+     * @params response Response returned by the server for a request to usersDeleteUserUsersAuthIdDelete
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async usersDeleteUserUsersUsersIdDeleteWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
+     public async usersDeleteUserUsersAuthIdDeleteWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
             return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
@@ -304,10 +304,10 @@ export class UsersApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to usersPatchCurrentUserUsersUsersMePatch
+     * @params response Response returned by the server for a request to usersPatchCurrentUserUsersAuthMePatch
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async usersPatchCurrentUserUsersUsersMePatchWithHttpInfo(response: ResponseContext): Promise<HttpInfo<UserRead >> {
+     public async usersPatchCurrentUserUsersAuthMePatchWithHttpInfo(response: ResponseContext): Promise<HttpInfo<UserRead >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: UserRead = ObjectSerializer.deserialize(
@@ -350,10 +350,10 @@ export class UsersApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to usersPatchUserUsersUsersIdPatch
+     * @params response Response returned by the server for a request to usersPatchUserUsersAuthIdPatch
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async usersPatchUserUsersUsersIdPatchWithHttpInfo(response: ResponseContext): Promise<HttpInfo<UserRead >> {
+     public async usersPatchUserUsersAuthIdPatchWithHttpInfo(response: ResponseContext): Promise<HttpInfo<UserRead >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: UserRead = ObjectSerializer.deserialize(
@@ -402,10 +402,10 @@ export class UsersApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to usersUserUsersUsersIdGet
+     * @params response Response returned by the server for a request to usersUserUsersAuthIdGet
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async usersUserUsersUsersIdGetWithHttpInfo(response: ResponseContext): Promise<HttpInfo<UserRead >> {
+     public async usersUserUsersAuthIdGetWithHttpInfo(response: ResponseContext): Promise<HttpInfo<UserRead >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: UserRead = ObjectSerializer.deserialize(

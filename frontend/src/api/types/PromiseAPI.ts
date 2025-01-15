@@ -169,41 +169,6 @@ export class PromiseAuthApi {
 
 
 
-import { ObservableDefaultApi } from './ObservableAPI';
-
-import { DefaultApiRequestFactory, DefaultApiResponseProcessor} from "../apis/DefaultApi";
-export class PromiseDefaultApi {
-    private api: ObservableDefaultApi
-
-    public constructor(
-        configuration: Configuration,
-        requestFactory?: DefaultApiRequestFactory,
-        responseProcessor?: DefaultApiResponseProcessor
-    ) {
-        this.api = new ObservableDefaultApi(configuration, requestFactory, responseProcessor);
-    }
-
-    /**
-     * Authenticated Route
-     */
-    public authenticatedRouteUsersAuthenticatedRouteGetWithHttpInfo(_options?: Configuration): Promise<HttpInfo<any>> {
-        const result = this.api.authenticatedRouteUsersAuthenticatedRouteGetWithHttpInfo(_options);
-        return result.toPromise();
-    }
-
-    /**
-     * Authenticated Route
-     */
-    public authenticatedRouteUsersAuthenticatedRouteGet(_options?: Configuration): Promise<any> {
-        const result = this.api.authenticatedRouteUsersAuthenticatedRouteGet(_options);
-        return result.toPromise();
-    }
-
-
-}
-
-
-
 import { ObservableItemsApi } from './ObservableAPI';
 
 import { ItemsApiRequestFactory, ItemsApiResponseProcessor} from "../apis/ItemsApi";
@@ -348,16 +313,16 @@ export class PromiseUsersApi {
     /**
      * Users:Current User
      */
-    public usersCurrentUserUsersUsersMeGetWithHttpInfo(_options?: Configuration): Promise<HttpInfo<UserRead>> {
-        const result = this.api.usersCurrentUserUsersUsersMeGetWithHttpInfo(_options);
+    public usersCurrentUserUsersAuthMeGetWithHttpInfo(_options?: Configuration): Promise<HttpInfo<UserRead>> {
+        const result = this.api.usersCurrentUserUsersAuthMeGetWithHttpInfo(_options);
         return result.toPromise();
     }
 
     /**
      * Users:Current User
      */
-    public usersCurrentUserUsersUsersMeGet(_options?: Configuration): Promise<UserRead> {
-        const result = this.api.usersCurrentUserUsersUsersMeGet(_options);
+    public usersCurrentUserUsersAuthMeGet(_options?: Configuration): Promise<UserRead> {
+        const result = this.api.usersCurrentUserUsersAuthMeGet(_options);
         return result.toPromise();
     }
 
@@ -365,8 +330,8 @@ export class PromiseUsersApi {
      * Users:Delete User
      * @param id
      */
-    public usersDeleteUserUsersUsersIdDeleteWithHttpInfo(id: string, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.usersDeleteUserUsersUsersIdDeleteWithHttpInfo(id, _options);
+    public usersDeleteUserUsersAuthIdDeleteWithHttpInfo(id: string, _options?: Configuration): Promise<HttpInfo<void>> {
+        const result = this.api.usersDeleteUserUsersAuthIdDeleteWithHttpInfo(id, _options);
         return result.toPromise();
     }
 
@@ -374,8 +339,8 @@ export class PromiseUsersApi {
      * Users:Delete User
      * @param id
      */
-    public usersDeleteUserUsersUsersIdDelete(id: string, _options?: Configuration): Promise<void> {
-        const result = this.api.usersDeleteUserUsersUsersIdDelete(id, _options);
+    public usersDeleteUserUsersAuthIdDelete(id: string, _options?: Configuration): Promise<void> {
+        const result = this.api.usersDeleteUserUsersAuthIdDelete(id, _options);
         return result.toPromise();
     }
 
@@ -383,8 +348,8 @@ export class PromiseUsersApi {
      * Users:Patch Current User
      * @param userUpdate
      */
-    public usersPatchCurrentUserUsersUsersMePatchWithHttpInfo(userUpdate: UserUpdate, _options?: Configuration): Promise<HttpInfo<UserRead>> {
-        const result = this.api.usersPatchCurrentUserUsersUsersMePatchWithHttpInfo(userUpdate, _options);
+    public usersPatchCurrentUserUsersAuthMePatchWithHttpInfo(userUpdate: UserUpdate, _options?: Configuration): Promise<HttpInfo<UserRead>> {
+        const result = this.api.usersPatchCurrentUserUsersAuthMePatchWithHttpInfo(userUpdate, _options);
         return result.toPromise();
     }
 
@@ -392,8 +357,8 @@ export class PromiseUsersApi {
      * Users:Patch Current User
      * @param userUpdate
      */
-    public usersPatchCurrentUserUsersUsersMePatch(userUpdate: UserUpdate, _options?: Configuration): Promise<UserRead> {
-        const result = this.api.usersPatchCurrentUserUsersUsersMePatch(userUpdate, _options);
+    public usersPatchCurrentUserUsersAuthMePatch(userUpdate: UserUpdate, _options?: Configuration): Promise<UserRead> {
+        const result = this.api.usersPatchCurrentUserUsersAuthMePatch(userUpdate, _options);
         return result.toPromise();
     }
 
@@ -402,8 +367,8 @@ export class PromiseUsersApi {
      * @param id
      * @param userUpdate
      */
-    public usersPatchUserUsersUsersIdPatchWithHttpInfo(id: string, userUpdate: UserUpdate, _options?: Configuration): Promise<HttpInfo<UserRead>> {
-        const result = this.api.usersPatchUserUsersUsersIdPatchWithHttpInfo(id, userUpdate, _options);
+    public usersPatchUserUsersAuthIdPatchWithHttpInfo(id: string, userUpdate: UserUpdate, _options?: Configuration): Promise<HttpInfo<UserRead>> {
+        const result = this.api.usersPatchUserUsersAuthIdPatchWithHttpInfo(id, userUpdate, _options);
         return result.toPromise();
     }
 
@@ -412,8 +377,8 @@ export class PromiseUsersApi {
      * @param id
      * @param userUpdate
      */
-    public usersPatchUserUsersUsersIdPatch(id: string, userUpdate: UserUpdate, _options?: Configuration): Promise<UserRead> {
-        const result = this.api.usersPatchUserUsersUsersIdPatch(id, userUpdate, _options);
+    public usersPatchUserUsersAuthIdPatch(id: string, userUpdate: UserUpdate, _options?: Configuration): Promise<UserRead> {
+        const result = this.api.usersPatchUserUsersAuthIdPatch(id, userUpdate, _options);
         return result.toPromise();
     }
 
@@ -421,8 +386,8 @@ export class PromiseUsersApi {
      * Users:User
      * @param id
      */
-    public usersUserUsersUsersIdGetWithHttpInfo(id: string, _options?: Configuration): Promise<HttpInfo<UserRead>> {
-        const result = this.api.usersUserUsersUsersIdGetWithHttpInfo(id, _options);
+    public usersUserUsersAuthIdGetWithHttpInfo(id: string, _options?: Configuration): Promise<HttpInfo<UserRead>> {
+        const result = this.api.usersUserUsersAuthIdGetWithHttpInfo(id, _options);
         return result.toPromise();
     }
 
@@ -430,8 +395,8 @@ export class PromiseUsersApi {
      * Users:User
      * @param id
      */
-    public usersUserUsersUsersIdGet(id: string, _options?: Configuration): Promise<UserRead> {
-        const result = this.api.usersUserUsersUsersIdGet(id, _options);
+    public usersUserUsersAuthIdGet(id: string, _options?: Configuration): Promise<UserRead> {
+        const result = this.api.usersUserUsersAuthIdGet(id, _options);
         return result.toPromise();
     }
 
