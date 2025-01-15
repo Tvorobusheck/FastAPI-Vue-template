@@ -18,9 +18,9 @@
   </template>
   
   <script lang="ts">
-  import { defineComponent, ref } from 'vue';
-  import * as api from '@/api/';
-
+  import { defineComponent } from 'vue';
+  import * as api from '@/api'; // Import the generated API client
+  import { ref } from 'vue'
   export default defineComponent({
     name: 'DynamicForm',
     data() {
@@ -33,6 +33,14 @@
       submitForm() {
         console.log('Form submitted:', this.formData);
         // Handle form submission logic here
+        // Create configuration parameter object
+        const configurationParameters = {
+            baseServer: new api.ServerConfiguration('http://localhost:8000', {}), // First server is default
+        }
+        
+        const configuration = api.createConfiguration(configurationParameters);
+        const apiInstance = new api.ItemsApi(configuration);
+        apiInstance.endpointItemsPost(this.formData)
       },
     },
   });

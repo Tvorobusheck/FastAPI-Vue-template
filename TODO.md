@@ -3,6 +3,8 @@
 ## Tasks
 
 ### Frontend
+- [ ] Crud tests for Item
+- [ ] Fixture for backend server
 - [ ] Authorization for new project.
 - [ ] Registration for new project.
 - [ ] BusinessItem create, read, update and delete with permissions control for new project.

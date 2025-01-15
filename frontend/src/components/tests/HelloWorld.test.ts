@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest'
 import { mount } from '@vue/test-utils'
-import HelloWorld from '../HelloWorld.vue'
+import HelloWorld from '@/components/HelloWorld.vue'
 
 test('write text in input', async () => {
   const wrapper = mount(HelloWorld)
