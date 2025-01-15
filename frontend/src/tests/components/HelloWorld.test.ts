@@ -1,5 +1,6 @@
 import { expect, test } from 'vitest'
 import { mount } from '@vue/test-utils'
+import { apiConfiguration } from '@/utils/config'
 import HelloWorld from '@/components/HelloWorld.vue'
 
 test('write text in input', async () => {
