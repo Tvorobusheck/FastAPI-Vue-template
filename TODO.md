@@ -4,7 +4,7 @@
 
 ### Frontend
 - [ ] Crud tests for Item
-- [ ] Fixture for backend server
+- [ ] Fixture for backend server in frontend
 - [ ] Authorization for new project.
 - [ ] Registration for new project.
 - [ ] BusinessItem create, read, update and delete with permissions control for new project.
@@ -34,6 +34,7 @@
 - [ ] Password recovery for new project.
 
 ## Completed
+- [x] Fix assets paths
 - [x] Tests for auth and registration
 - [x] Make auto reload (Backend)
 - [x] Make auto reload (Frontend)
