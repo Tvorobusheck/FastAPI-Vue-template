@@ -2,26 +2,23 @@
 
 ## Tasks
 
+### Frontend
+- [ ] Registration for new project.
+- [ ] Authorization for new project.
+- [ ] BusinessItem create, read, update and delete with permissions control for new project.
+- [ ] Admin Panel ([template from git](https://github.com/PanJiaChen/vue-element-admin), [templates from vuejs website](https://vuejs.org/ecosystem/themes))
+- [ ] Improve manifest for PWA
+- [ ] Localization support
+
 ### Backend
-- [ ] Test Server (with Dockerfile)
 - [ ] alembic upgrade head on startup (fix)
 - [ ] BusinessItem
 - [ ] DB tests for BusinessItem
 - [ ] Permissions
 - [ ] Permission control and business logic for BusinessItem
 
-
-### Frontend
-- [ ] Fixture for backend test server in frontend
-- [ ] Authorization for new project.
-- [ ] Registration for new project.
-- [ ] BusinessItem create, read, update and delete with permissions control for new project.
-- [ ] Admin Panel ([template from git](https://github.com/PanJiaChen/vue-element-admin), [templates from vuejs website](https://vuejs.org/ecosystem/themes))
-- [ ] Improve manifest for PWA
-- [ ] Localization support
-
-
 ### DevOps
+- [ ] Fix debug
 - [ ] Check e2e and unit tests for frontend.
 - [ ] Check new ideas for docker-compose.prod.yml. Traefick, for example.
 - [ ] The `docker-compose.prod.yml` for deploying all services, including the database, on a VPS
@@ -37,6 +34,8 @@
 - [ ] Password recovery for new project.
 
 ## Completed
+- [x] Fixture for backend test server in frontend
+- [x] Test Server (with Dockerfile)
 - [x] Crud tests for Item (Frontend)
 - [x] Fix assets paths
 - [x] Tests for auth and registration
