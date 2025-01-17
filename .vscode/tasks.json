@@ -3,11 +3,11 @@
 	"tasks": [
 		{
 			"type": "docker-build",
-			"label": "build-test-backend",
+			"label": "build-debug-backend",
 			"platform": "python",
 			"dockerBuild": {
-				"tag": "test_backend:latest",
-				"dockerfile": "${workspaceFolder}/backend/test.Dockerfile",
+				"tag": "debug_backend:latest",
+				"dockerfile": "${workspaceFolder}/backend/debug.Dockerfile",
 				"context": "${workspaceFolder}/backend",
 				"pull": true,
 			}
@@ -16,7 +16,7 @@
 			"type": "docker-run",
 			"label": "docker-run: debug",
 			"dependsOn": [
-				"build-test-backend"
+				"build-debug-backend"
 			],
 			"python": {
 				"file": "main.py"
@@ -24,14 +24,27 @@
 		},
 		{
 			"type": "docker-compose",
-			"label": "run-compose",
+			"label": "run-compose: dev",
 			"dockerCompose": {
 				"up": {
 					"detached": true,
 					"build": true
 				},
 				"files": [
-					"${workspaceFolder}/docker-compose.yml"
+					"${workspaceFolder}/docker-compose.dev.yml"
+				],
+			}
+		},
+		{
+			"type": "docker-compose",
+			"label": "run-compose: test",
+			"dockerCompose": {
+				"up": {
+					"detached": true,
+					"build": true
+				},
+				"files": [
+					"${workspaceFolder}/docker-compose.test.yml"
 				],
 			}
 		}

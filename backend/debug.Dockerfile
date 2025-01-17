@@ -1,6 +1,6 @@
 FROM python:3.12-slim
 # Mock server
-
+EXPOSE 8000
 # Keeps Python from generating .pyc files in the container
 ENV PYTHONDONTWRITEBYTECODE=1
 
@@ -15,7 +15,7 @@ WORKDIR /app
 
 # Copy the .env file
 COPY pytest.ini /app/
-COPY env/.test.env /app/.env
+COPY env/.debug.env /app/.env
 
 # copy migrations
 COPY main.py /app/main.py

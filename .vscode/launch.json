@@ -1,10 +1,18 @@
 {
     "configurations": [
         {
-            "name": "Debug Backend Test Server",
-            "type": "docker",
+            "name": "Run Dev Compose",
+            "type": "chrome",
             "request": "launch",
-            "preLaunchTask": "docker-run: debug",
+            "preLaunchTask": "run-compose: dev",
+            "url": "http://localhost:8080"
+        },
+        {
+            "name": "Run test backend server",
+            "type": "chrome",
+            "request": "launch",
+            "preLaunchTask": "run-compose: test",
+            "url": "http://localhost:8001/docs"
         },
         {
             "name": "Debug Backend Test Server",
@@ -20,13 +28,6 @@
                 ],
                 "projectType": "fastapi"
             }
-        },
-        {
-            "name": "Run Compose",
-            "type": "chrome",
-            "request": "launch",
-            "preLaunchTask": "run-compose",
-            "url": "http://localhost:8080"
         }
     ]
 }
