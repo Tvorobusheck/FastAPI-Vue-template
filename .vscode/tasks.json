@@ -3,23 +3,23 @@
 	"tasks": [
 		{
 			"type": "docker-build",
-			"label": "docker-build",
+			"label": "build-test-backend",
 			"platform": "python",
 			"dockerBuild": {
-				"tag": "debug_echochat:latest",
-				"dockerfile": "${workspaceFolder}/backend/Dockerfile",
+				"tag": "test_backend:latest",
+				"dockerfile": "${workspaceFolder}/backend/test.Dockerfile",
 				"context": "${workspaceFolder}/backend",
-				"pull": true
+				"pull": true,
 			}
 		},
 		{
 			"type": "docker-run",
 			"label": "docker-run: debug",
 			"dependsOn": [
-				"docker-build"
+				"build-test-backend"
 			],
 			"python": {
-				"file": "core/main.py"
+				"file": "main.py"
 			}
 		},
 		{

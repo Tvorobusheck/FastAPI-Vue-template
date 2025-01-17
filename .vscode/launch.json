@@ -1,7 +1,7 @@
 {
     "configurations": [
         {
-            "name": "Docker: Python - Fastapi",
+            "name": "Debug Backend Test Server",
             "type": "docker",
             "request": "launch",
             "preLaunchTask": "docker-run: debug",
@@ -18,7 +18,7 @@
         {
             "name": "Run Compose",
             "type": "chrome",
-            "request": "launch",
+            "request": "attach",
             "preLaunchTask": "run-compose",
             "url": "http://localhost:8080"
         }

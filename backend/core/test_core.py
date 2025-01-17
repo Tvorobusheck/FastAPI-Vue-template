@@ -8,7 +8,8 @@ def test_client_fixture(client: AsyncClient):
 
 
 def test_db_env():
-    from .config import DB_HOST, DB
-    assert DB_HOST == 'localhost' or DB_HOST == '127.0.0.1'
-    assert type(DB_HOST) is str and len(DB_HOST) > 0
-    assert type(DB) is str and len(DB) > 0
+    from .config import DATABASE_URL, MOCKDATABASE_URL, MOCKDB
+    assert MOCKDB is True
+    assert DATABASE_URL == MOCKDATABASE_URL
+    assert DATABASE_URL is not None
+    assert len(DATABASE_URL) > 0

@@ -2,8 +2,16 @@
 
 ## Tasks
 
+### Backend
+- [ ] Test Server (with Dockerfile)
+- [ ] BusinessItem
+- [ ] DB tests for BusinessItem
+- [ ] Permissions
+- [ ] Permission control and business logic for BusinessItem
+
+
 ### Frontend
-- [ ] Fixture for backend server in frontend
+- [ ] Fixture for backend test server in frontend
 - [ ] Authorization for new project.
 - [ ] Registration for new project.
 - [ ] BusinessItem create, read, update and delete with permissions control for new project.
@@ -11,11 +19,6 @@
 - [ ] Improve manifest for PWA
 - [ ] Localization support
 
-### Backend
-- [ ] BusinessItem
-- [ ] DB tests for BusinessItem
-- [ ] Permissions
-- [ ] Permission control and business logic for BusinessItem
 
 ### DevOps
 - [ ] Check e2e and unit tests for frontend.
