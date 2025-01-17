@@ -3,7 +3,6 @@
 ## Tasks
 
 ### Frontend
-- [ ] Crud tests for Item
 - [ ] Fixture for backend server in frontend
 - [ ] Authorization for new project.
 - [ ] Registration for new project.
@@ -34,6 +33,7 @@
 - [ ] Password recovery for new project.
 
 ## Completed
+- [x] Crud tests for Item (Frontend)
 - [x] Fix assets paths
 - [x] Tests for auth and registration
 - [x] Make auto reload (Backend)

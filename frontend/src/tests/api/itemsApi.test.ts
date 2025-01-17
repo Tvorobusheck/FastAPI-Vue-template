@@ -43,13 +43,14 @@ test('test delete item', async () => {
   await expect(apiInstance.endpointItemsIdGet(createdItem.id)).rejects.toThrow(api.ApiException)
 })
 
-
-test('test read items (paginated)', async () => {    
-  const apiInstance = new api.ItemsApi(apiConfiguration);
-  const n = 3
+async function createTestItems(apiInstance: api.ItemsApi, n: number = 3) {
   for (let i = 0; i < n; i++) {
     await createTestItem(apiInstance)
   }
+}
+test('test read items (paginated)', async () => {    
+  const apiInstance = new api.ItemsApi(apiConfiguration);
+  await createTestItems(apiInstance);
   const data: api.DynamicPaginatedResponse = await apiInstance.endpointItemsGet(undefined, undefined, 1, 10);
   expect(data).toBeDefined()
   expect(data.totalCount).toBeDefined()
@@ -60,12 +61,10 @@ test('test read items (paginated)', async () => {
 
 test('test read items (list)', async () => {    
   const apiInstance = new api.ItemsApi(apiConfiguration);
-  const n = 3
-  for (let i = 0; i < n; i++) {
-    await createTestItem(apiInstance)
-  }
+  await createTestItems(apiInstance);
   const data: api.DynamicListResponse = await apiInstance.endpointItemsGet(0, 100);
   expect(data).toBeDefined()
+  expect((data as api.DynamicPaginatedResponse).totalCount).not.toBeDefined()
   const items: Array<api.ItemSchema> = data.data
   expect(items).toBeDefined()
 })
