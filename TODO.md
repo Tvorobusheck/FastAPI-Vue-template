@@ -4,6 +4,7 @@
 
 ### Backend
 - [ ] Test Server (with Dockerfile)
+- [ ] alembic upgrade head on startup (fix)
 - [ ] BusinessItem
 - [ ] DB tests for BusinessItem
 - [ ] Permissions

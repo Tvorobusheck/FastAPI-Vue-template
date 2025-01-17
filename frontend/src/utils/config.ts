@@ -2,7 +2,7 @@ import * as api from '@/api'
 
 // Create configuration parameter object
 const configurationParameters = {
-    baseServer: new api.ServerConfiguration('http://localhost:8000', {}), // First server is default
+    baseServer: new api.ServerConfiguration('http://localhost:8001', {}), // First server is default
 }
 
   

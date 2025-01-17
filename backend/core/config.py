@@ -4,6 +4,8 @@ import os
 dotenv_path = os.environ.get("DOTENV_PATH") 
 load_dotenv(dotenv_path=dotenv_path)
 
+PORT = int(os.environ.get("PORT", 8000))
+
 DB_DRIVER = os.environ.get("DB_DRIVER")
 DB_HOST = os.environ.get("DB_HOST")
 DB = os.environ.get("POSTGRES_DB")

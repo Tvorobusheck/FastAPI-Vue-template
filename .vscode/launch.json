@@ -5,6 +5,12 @@
             "type": "docker",
             "request": "launch",
             "preLaunchTask": "docker-run: debug",
+        },
+        {
+            "name": "Debug Backend Test Server",
+            "type": "docker",
+            "request": "launch",
+            "preLaunchTask": "docker-run: debug",
             "python": {
                 "pathMappings": [
                     {
@@ -18,7 +24,7 @@
         {
             "name": "Run Compose",
             "type": "chrome",
-            "request": "attach",
+            "request": "launch",
             "preLaunchTask": "run-compose",
             "url": "http://localhost:8080"
         }
