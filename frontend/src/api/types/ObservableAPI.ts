@@ -8,10 +8,14 @@ import { BodyResetResetPasswordUsersAuthResetPasswordPost } from '../models/Body
 import { BodyVerifyRequestTokenUsersAuthRequestVerifyTokenPost } from '../models/BodyVerifyRequestTokenUsersAuthRequestVerifyTokenPost';
 import { BodyVerifyVerifyUsersAuthVerifyPost } from '../models/BodyVerifyVerifyUsersAuthVerifyPost';
 import { Detail } from '../models/Detail';
+import { DynamicListResponse } from '../models/DynamicListResponse';
+import { DynamicPaginatedResponse } from '../models/DynamicPaginatedResponse';
 import { ErrorModel } from '../models/ErrorModel';
 import { HTTPValidationError } from '../models/HTTPValidationError';
 import { ItemCreateSchema } from '../models/ItemCreateSchema';
+import { ItemSchema } from '../models/ItemSchema';
 import { ItemUpdateSchema } from '../models/ItemUpdateSchema';
+import { ResponseEndpointItemsGet } from '../models/ResponseEndpointItemsGet';
 import { UserCreate } from '../models/UserCreate';
 import { UserRead } from '../models/UserRead';
 import { UserUpdate } from '../models/UserUpdate';
@@ -285,7 +289,7 @@ export class ObservableItemsApi {
      * @param [page] Page number
      * @param [itemsPerPage] Number of items per page
      */
-    public endpointItemsGetWithHttpInfo(offset?: number, limit?: number, page?: number, itemsPerPage?: number, _options?: Configuration): Observable<HttpInfo<any>> {
+    public endpointItemsGetWithHttpInfo(offset?: number, limit?: number, page?: number, itemsPerPage?: number, _options?: Configuration): Observable<HttpInfo<ResponseEndpointItemsGet>> {
         const requestContextPromise = this.requestFactory.endpointItemsGet(offset, limit, page, itemsPerPage, _options);
 
         // build promise chain
@@ -312,8 +316,8 @@ export class ObservableItemsApi {
      * @param [page] Page number
      * @param [itemsPerPage] Number of items per page
      */
-    public endpointItemsGet(offset?: number, limit?: number, page?: number, itemsPerPage?: number, _options?: Configuration): Observable<any> {
-        return this.endpointItemsGetWithHttpInfo(offset, limit, page, itemsPerPage, _options).pipe(map((apiResponse: HttpInfo<any>) => apiResponse.data));
+    public endpointItemsGet(offset?: number, limit?: number, page?: number, itemsPerPage?: number, _options?: Configuration): Observable<ResponseEndpointItemsGet> {
+        return this.endpointItemsGetWithHttpInfo(offset, limit, page, itemsPerPage, _options).pipe(map((apiResponse: HttpInfo<ResponseEndpointItemsGet>) => apiResponse.data));
     }
 
     /**
@@ -354,7 +358,7 @@ export class ObservableItemsApi {
      * Endpoint
      * @param id
      */
-    public endpointItemsIdGetWithHttpInfo(id: number, _options?: Configuration): Observable<HttpInfo<any>> {
+    public endpointItemsIdGetWithHttpInfo(id: number, _options?: Configuration): Observable<HttpInfo<ItemSchema>> {
         const requestContextPromise = this.requestFactory.endpointItemsIdGet(id, _options);
 
         // build promise chain
@@ -378,8 +382,8 @@ export class ObservableItemsApi {
      * Endpoint
      * @param id
      */
-    public endpointItemsIdGet(id: number, _options?: Configuration): Observable<any> {
-        return this.endpointItemsIdGetWithHttpInfo(id, _options).pipe(map((apiResponse: HttpInfo<any>) => apiResponse.data));
+    public endpointItemsIdGet(id: number, _options?: Configuration): Observable<ItemSchema> {
+        return this.endpointItemsIdGetWithHttpInfo(id, _options).pipe(map((apiResponse: HttpInfo<ItemSchema>) => apiResponse.data));
     }
 
     /**

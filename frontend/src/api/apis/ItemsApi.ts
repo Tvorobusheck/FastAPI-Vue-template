@@ -10,7 +10,9 @@ import {SecurityAuthentication} from '../auth/auth';
 
 import { HTTPValidationError } from '../models/HTTPValidationError';
 import { ItemCreateSchema } from '../models/ItemCreateSchema';
+import { ItemSchema } from '../models/ItemSchema';
 import { ItemUpdateSchema } from '../models/ItemUpdateSchema';
+import { ResponseEndpointItemsGet } from '../models/ResponseEndpointItemsGet';
 
 /**
  * no description
@@ -236,13 +238,13 @@ export class ItemsApiResponseProcessor {
      * @params response Response returned by the server for a request to endpointItemsGet
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async endpointItemsGetWithHttpInfo(response: ResponseContext): Promise<HttpInfo<any >> {
+     public async endpointItemsGetWithHttpInfo(response: ResponseContext): Promise<HttpInfo<ResponseEndpointItemsGet >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
+            const body: ResponseEndpointItemsGet = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
+                "ResponseEndpointItemsGet", ""
+            ) as ResponseEndpointItemsGet;
             return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("422", response.httpStatusCode)) {
@@ -255,10 +257,10 @@ export class ItemsApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: any = ObjectSerializer.deserialize(
+            const body: ResponseEndpointItemsGet = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
+                "ResponseEndpointItemsGet", ""
+            ) as ResponseEndpointItemsGet;
             return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
@@ -308,13 +310,13 @@ export class ItemsApiResponseProcessor {
      * @params response Response returned by the server for a request to endpointItemsIdGet
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async endpointItemsIdGetWithHttpInfo(response: ResponseContext): Promise<HttpInfo<any >> {
+     public async endpointItemsIdGetWithHttpInfo(response: ResponseContext): Promise<HttpInfo<ItemSchema >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
+            const body: ItemSchema = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
+                "ItemSchema", ""
+            ) as ItemSchema;
             return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("422", response.httpStatusCode)) {
@@ -327,10 +329,10 @@ export class ItemsApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: any = ObjectSerializer.deserialize(
+            const body: ItemSchema = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
+                "ItemSchema", ""
+            ) as ItemSchema;
             return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 

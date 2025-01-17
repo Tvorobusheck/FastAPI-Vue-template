@@ -11,7 +11,8 @@ async def test_read_items(client: AsyncClient):
 
 async def test_create_item(client: AsyncClient):
     read_response = await client.get(router.ROUTER_PATH)
-    old_quantity = int(read_response.json()['total_count'])
+    data = read_response.json()['data']
+    old_quantity = len(data)
     assert old_quantity >= 0
     new_item = schemas.ItemCreateSchema(name=random_str(), 
                                         description=random_str())
@@ -20,7 +21,7 @@ async def test_create_item(client: AsyncClient):
     assert create_response.status_code == 200
 
     read_response = await client.get(router.ROUTER_PATH)
-    new_quantity = int(read_response.json()['total_count'])
+    new_quantity = len(read_response.json()['data'])
     assert new_quantity == old_quantity + 1
 
     

@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 
 # **endpointItemsGet**
-> any endpointItemsGet()
+> ResponseEndpointItemsGet endpointItemsGet()
 
 Read multiple Item rows from the database.  - Use page & itemsPerPage for paginated results - Use offset & limit for specific ranges - Returns paginated response when using page/itemsPerPage - Returns simple list response when using offset/limit
 
@@ -54,7 +54,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**any**
+**ResponseEndpointItemsGet**
 
 ### Authorization
 
@@ -129,7 +129,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **endpointItemsIdGet**
-> any endpointItemsIdGet()
+> ItemSchema endpointItemsIdGet()
 
 Read a single Item row from the database by its primary keys: [\'id\'].
 
@@ -162,7 +162,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**any**
+**ItemSchema**
 
 ### Authorization
 

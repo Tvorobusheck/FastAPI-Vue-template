@@ -7,10 +7,14 @@ import { BodyResetResetPasswordUsersAuthResetPasswordPost } from '../models/Body
 import { BodyVerifyRequestTokenUsersAuthRequestVerifyTokenPost } from '../models/BodyVerifyRequestTokenUsersAuthRequestVerifyTokenPost';
 import { BodyVerifyVerifyUsersAuthVerifyPost } from '../models/BodyVerifyVerifyUsersAuthVerifyPost';
 import { Detail } from '../models/Detail';
+import { DynamicListResponse } from '../models/DynamicListResponse';
+import { DynamicPaginatedResponse } from '../models/DynamicPaginatedResponse';
 import { ErrorModel } from '../models/ErrorModel';
 import { HTTPValidationError } from '../models/HTTPValidationError';
 import { ItemCreateSchema } from '../models/ItemCreateSchema';
+import { ItemSchema } from '../models/ItemSchema';
 import { ItemUpdateSchema } from '../models/ItemUpdateSchema';
+import { ResponseEndpointItemsGet } from '../models/ResponseEndpointItemsGet';
 import { UserCreate } from '../models/UserCreate';
 import { UserRead } from '../models/UserRead';
 import { UserUpdate } from '../models/UserUpdate';
@@ -325,7 +329,7 @@ export class ObjectItemsApi {
      * Endpoint
      * @param param the request object
      */
-    public endpointItemsGetWithHttpInfo(param: ItemsApiEndpointItemsGetRequest = {}, options?: Configuration): Promise<HttpInfo<any>> {
+    public endpointItemsGetWithHttpInfo(param: ItemsApiEndpointItemsGetRequest = {}, options?: Configuration): Promise<HttpInfo<ResponseEndpointItemsGet>> {
         return this.api.endpointItemsGetWithHttpInfo(param.offset, param.limit, param.page, param.itemsPerPage,  options).toPromise();
     }
 
@@ -334,7 +338,7 @@ export class ObjectItemsApi {
      * Endpoint
      * @param param the request object
      */
-    public endpointItemsGet(param: ItemsApiEndpointItemsGetRequest = {}, options?: Configuration): Promise<any> {
+    public endpointItemsGet(param: ItemsApiEndpointItemsGetRequest = {}, options?: Configuration): Promise<ResponseEndpointItemsGet> {
         return this.api.endpointItemsGet(param.offset, param.limit, param.page, param.itemsPerPage,  options).toPromise();
     }
 
@@ -361,7 +365,7 @@ export class ObjectItemsApi {
      * Endpoint
      * @param param the request object
      */
-    public endpointItemsIdGetWithHttpInfo(param: ItemsApiEndpointItemsIdGetRequest, options?: Configuration): Promise<HttpInfo<any>> {
+    public endpointItemsIdGetWithHttpInfo(param: ItemsApiEndpointItemsIdGetRequest, options?: Configuration): Promise<HttpInfo<ItemSchema>> {
         return this.api.endpointItemsIdGetWithHttpInfo(param.id,  options).toPromise();
     }
 
@@ -370,7 +374,7 @@ export class ObjectItemsApi {
      * Endpoint
      * @param param the request object
      */
-    public endpointItemsIdGet(param: ItemsApiEndpointItemsIdGetRequest, options?: Configuration): Promise<any> {
+    public endpointItemsIdGet(param: ItemsApiEndpointItemsIdGetRequest, options?: Configuration): Promise<ItemSchema> {
         return this.api.endpointItemsIdGet(param.id,  options).toPromise();
     }
 

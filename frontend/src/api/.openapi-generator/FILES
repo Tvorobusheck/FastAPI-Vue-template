@@ -22,11 +22,15 @@ models/BodyResetResetPasswordUsersAuthResetPasswordPost.ts
 models/BodyVerifyRequestTokenUsersAuthRequestVerifyTokenPost.ts
 models/BodyVerifyVerifyUsersAuthVerifyPost.ts
 models/Detail.ts
+models/DynamicListResponse.ts
+models/DynamicPaginatedResponse.ts
 models/ErrorModel.ts
 models/HTTPValidationError.ts
 models/ItemCreateSchema.ts
+models/ItemSchema.ts
 models/ItemUpdateSchema.ts
 models/ObjectSerializer.ts
+models/ResponseEndpointItemsGet.ts
 models/UserCreate.ts
 models/UserRead.ts
 models/UserUpdate.ts

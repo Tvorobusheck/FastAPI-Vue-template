@@ -7,10 +7,14 @@ import { BodyResetResetPasswordUsersAuthResetPasswordPost } from '../models/Body
 import { BodyVerifyRequestTokenUsersAuthRequestVerifyTokenPost } from '../models/BodyVerifyRequestTokenUsersAuthRequestVerifyTokenPost';
 import { BodyVerifyVerifyUsersAuthVerifyPost } from '../models/BodyVerifyVerifyUsersAuthVerifyPost';
 import { Detail } from '../models/Detail';
+import { DynamicListResponse } from '../models/DynamicListResponse';
+import { DynamicPaginatedResponse } from '../models/DynamicPaginatedResponse';
 import { ErrorModel } from '../models/ErrorModel';
 import { HTTPValidationError } from '../models/HTTPValidationError';
 import { ItemCreateSchema } from '../models/ItemCreateSchema';
+import { ItemSchema } from '../models/ItemSchema';
 import { ItemUpdateSchema } from '../models/ItemUpdateSchema';
+import { ResponseEndpointItemsGet } from '../models/ResponseEndpointItemsGet';
 import { UserCreate } from '../models/UserCreate';
 import { UserRead } from '../models/UserRead';
 import { UserUpdate } from '../models/UserUpdate';
@@ -191,7 +195,7 @@ export class PromiseItemsApi {
      * @param [page] Page number
      * @param [itemsPerPage] Number of items per page
      */
-    public endpointItemsGetWithHttpInfo(offset?: number, limit?: number, page?: number, itemsPerPage?: number, _options?: Configuration): Promise<HttpInfo<any>> {
+    public endpointItemsGetWithHttpInfo(offset?: number, limit?: number, page?: number, itemsPerPage?: number, _options?: Configuration): Promise<HttpInfo<ResponseEndpointItemsGet>> {
         const result = this.api.endpointItemsGetWithHttpInfo(offset, limit, page, itemsPerPage, _options);
         return result.toPromise();
     }
@@ -204,7 +208,7 @@ export class PromiseItemsApi {
      * @param [page] Page number
      * @param [itemsPerPage] Number of items per page
      */
-    public endpointItemsGet(offset?: number, limit?: number, page?: number, itemsPerPage?: number, _options?: Configuration): Promise<any> {
+    public endpointItemsGet(offset?: number, limit?: number, page?: number, itemsPerPage?: number, _options?: Configuration): Promise<ResponseEndpointItemsGet> {
         const result = this.api.endpointItemsGet(offset, limit, page, itemsPerPage, _options);
         return result.toPromise();
     }
@@ -234,7 +238,7 @@ export class PromiseItemsApi {
      * Endpoint
      * @param id
      */
-    public endpointItemsIdGetWithHttpInfo(id: number, _options?: Configuration): Promise<HttpInfo<any>> {
+    public endpointItemsIdGetWithHttpInfo(id: number, _options?: Configuration): Promise<HttpInfo<ItemSchema>> {
         const result = this.api.endpointItemsIdGetWithHttpInfo(id, _options);
         return result.toPromise();
     }
@@ -244,7 +248,7 @@ export class PromiseItemsApi {
      * Endpoint
      * @param id
      */
-    public endpointItemsIdGet(id: number, _options?: Configuration): Promise<any> {
+    public endpointItemsIdGet(id: number, _options?: Configuration): Promise<ItemSchema> {
         const result = this.api.endpointItemsIdGet(id, _options);
         return result.toPromise();
     }
