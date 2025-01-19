@@ -2,18 +2,25 @@
   <div>
     <img alt="Vue logo" src="@/assets/logo.png">
     <ItemComponent />
+    <button @click="goToRegistration">Go to Registration</button>
   </div>
 </template>
 
 <script>
-import Counter from '@/components/Counter.vue';
-import HelloWorld from '@/components/HelloWorld.vue'
-import ItemComponent from '@/components/Item.vue'
+import ItemComponent from '@/components/Item.vue';
+import { useRouter } from 'vue-router';
 
 export default {
   name: 'App',
   components: {
     ItemComponent
+  },
+  setup() {
+    const router = useRouter();
+    const goToRegistration = () => {
+      router.push('/registration');
+    };
+    return { goToRegistration };
   }
 }
 </script>

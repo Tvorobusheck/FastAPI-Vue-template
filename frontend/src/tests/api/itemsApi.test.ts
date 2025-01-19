@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest'
 import { apiConfiguration } from '@/utils/config'
-import { generateRandomString } from '@/utils/func'
+import { generateRandomString } from '@/utils/helpers'
 import * as api from '@/api'
 
 async function createTestItem(apiInstance: api.ItemsApi, name: string = generateRandomString()): Promise<api.ItemSchema> {    
