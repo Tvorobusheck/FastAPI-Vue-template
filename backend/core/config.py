@@ -12,7 +12,8 @@ DB = os.environ.get("POSTGRES_DB")
 DB_USER = os.environ.get("POSTGRES_USER")
 DB_PASSWORD = os.environ.get("POSTGRES_PASSWORD")
 
-MOCKDATABASE_URL = "sqlite+aiosqlite:///:memory:"
+# aiosqlite sometimes gives: sqlalchemy.exc.InvalidRequestError: Could not refresh instance
+MOCKDATABASE_URL = "sqlite+aiosqlite:///:memory:" 
 MOCKDB = bool(os.environ.get("MOCKDB", False))
 if MOCKDB:
     DATABASE_URL = MOCKDATABASE_URL

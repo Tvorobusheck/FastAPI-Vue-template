@@ -12,7 +12,6 @@
 - [ ] Localization support
 
 ### Backend
-- [ ] Fix rare bug when run all tests
 - [ ] alembic upgrade head on startup (fix)
 - [ ] BusinessItem
 - [ ] DB tests for BusinessItem
@@ -36,6 +35,7 @@
 - [ ] Password recovery for new project.
 
 ## Completed
+- [x] Fix rare db-bug when run all tests. [Possible solution](https://stackoverflow.com/questions/77968323/invalidrequesterror-during-concurrent-requests-with-fastapi-aiosqlite-and-sqla)
 - [x] Fixture for backend test server in frontend
 - [x] Test Server (with Dockerfile)
 - [x] Crud tests for Item (Frontend)

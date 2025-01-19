@@ -5,7 +5,7 @@ import * as api from '@/api'
 import exp = require('constants')
 
 test('test env', async () => {
-    expect(backendUrl).toBe('http://localhost:8001')
+    expect(backendUrl).toBe('http://localhost:8000')
 })
 
 test('create user', async () => {
