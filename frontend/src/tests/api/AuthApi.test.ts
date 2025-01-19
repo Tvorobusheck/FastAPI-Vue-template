@@ -1,7 +1,11 @@
 import { expect, test } from 'vitest'
-import { apiConfiguration } from '@/utils/config'
+import { apiConfiguration, backendUrl } from '@/utils/config'
 import { generateRandomString } from '@/utils/helpers'
 import * as api from '@/api'
+
+test('test env', async () => {
+    expect(backendUrl).toBe('http://localhost:8001')
+})
 
 test('create user', async () => {
     const apiInstance = new api.AuthApi(apiConfiguration);

@@ -1,19 +1,20 @@
 <template>
   <div>
     <img alt="Vue logo" src="@/assets/logo.png">
-    <ItemComponent />
+    <Registration />
     <button @click="goToRegistration">Go to Registration</button>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import ItemComponent from '@/components/Item.vue';
+import Registration from './Registration.vue';
 import { useRouter } from 'vue-router';
 
 export default {
   name: 'App',
   components: {
-    ItemComponent
+    Registration
   },
   setup() {
     const router = useRouter();

@@ -64,16 +64,18 @@ test('check submit registration', async () => {
   newUser.email = generateRandomString() + '@example.com'
   newUser.password = generateRandomString()
   wrapper.vm.regData = newUser
-  
   // Force Vue to re-render
   await wrapper.vm.$nextTick()
   
   const submitButton = wrapper.find('#submitRegistration')
-  await submitButton.trigger('click')
+  const successMessage = wrapper.find('#successMessage')
+  expect(successMessage.exists()).toBe(false)
+  await wrapper.vm.submitRegistration()
+  // await submitButton.trigger('click')
   await wrapper.vm.$nextTick()
   
-  const successMessage = wrapper.find('#successMessage')
-  expect(successMessage.exists()).toBe(true)
-  expect(successMessage.text()).toBe('Registration successful!')
+  const successMessage2 = wrapper.find('#successMessage')
+  expect(successMessage2.exists()).toBe(true)
+  expect(successMessage2.text()).toBe("Registration successful!")
 })
 

@@ -3,6 +3,7 @@
 ## Tasks
 
 ### Frontend
+- [ ] Add ServerConfig from env
 - [ ] Registration for new project.
 - [ ] Authorization for new project.
 - [ ] BusinessItem create, read, update and delete with permissions control for new project.
