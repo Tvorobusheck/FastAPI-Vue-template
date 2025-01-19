@@ -1,7 +1,8 @@
-import { expect, test } from 'vitest'
+import { expect, it, test } from 'vitest'
 import { apiConfiguration } from '@/utils/config'
 import { generateRandomString } from '@/utils/helpers'
 import * as api from '@/api'
+import exp = require('constants');
 
 async function createTestItem(apiInstance: api.ItemsApi, name: string = generateRandomString()): Promise<api.ItemSchema> {    
   const item: api.ItemSchema = await apiInstance.endpointItemsPost({
@@ -67,4 +68,16 @@ test('test read items (list)', async () => {
   expect((data as api.DynamicPaginatedResponse).totalCount).not.toBeDefined()
   const items: Array<api.ItemSchema> = data.data
   expect(items).toBeDefined()
+})
+
+
+test('create multiple items async', async () => {
+    const apiInstance = new api.ItemsApi(apiConfiguration);
+    for (let i = 0; i < 100; i++) {
+        const name = generateRandomString()
+        createTestItem(apiInstance, name).then((item: api.ItemSchema) => {
+          expect(item).toBeDefined()
+          expect(item.name).toBe(name)
+        })
+    }
 })

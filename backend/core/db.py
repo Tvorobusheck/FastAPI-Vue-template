@@ -3,13 +3,17 @@ from typing import AsyncGenerator
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine, async_sessionmaker
 from sqlalchemy.orm import DeclarativeBase
 
-from .config import DATABASE_URL, MOCKDB
+from .config import DATABASE_URL, DEBUG
 
+if DEBUG:
+    import logging
+    logging.basicConfig()
+    logging.getLogger('sqlalchemy.engine').setLevel(logging.DEBUG)
 
 class Base(DeclarativeBase):
     pass
 
-engine = create_async_engine(DATABASE_URL)
+engine = create_async_engine(DATABASE_URL, echo=DEBUG)
 async_session_maker = async_sessionmaker(engine, expire_on_commit=False)
 
 

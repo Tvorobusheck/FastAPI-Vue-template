@@ -1,7 +1,8 @@
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
 
-from core.db import MOCKDB, create_db_and_tables, drop_db_and_tables
+from core.db import create_db_and_tables, drop_db_and_tables
+from core.config import MOCKDB
 from features.users.router import router as users_router
 from features.items.router import router as items_router
 

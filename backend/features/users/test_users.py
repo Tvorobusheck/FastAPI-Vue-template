@@ -11,7 +11,6 @@ from core.utils import *
 def test_schema():
     with pytest.raises(ValidationError):
         schemas.UserCreate(email="1.com", password="secret")
-
     schemas.UserCreate(email="correct@email.com", password="secret")
 
 

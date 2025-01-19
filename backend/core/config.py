@@ -19,7 +19,7 @@ if MOCKDB:
 else:
     DATABASE_URL = f"{DB_DRIVER}://{DB_USER}:{DB_PASSWORD}@{DB_HOST}/{DB}"
 
-DEBUG = os.environ.get("DEBUG", False)
+DEBUG = bool(os.environ.get("DEBUG", False))
 RELOAD = bool(os.environ.get("RELOAD", False))
 
 ROUTER_DATETIME_FORMAT = "%Y-%m-%d %H:%M:%S"

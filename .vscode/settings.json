@@ -1,5 +1,4 @@
 {
-    "typescript.tsdk": "node_modules/typescript/lib",
     "python.testing.cwd": "backend/",
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true,

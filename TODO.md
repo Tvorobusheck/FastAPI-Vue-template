@@ -12,6 +12,7 @@
 - [ ] Localization support
 
 ### Backend
+- [ ] Fix rare bug when run all tests
 - [ ] alembic upgrade head on startup (fix)
 - [ ] BusinessItem
 - [ ] DB tests for BusinessItem
