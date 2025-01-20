@@ -3,7 +3,6 @@
 ## Tasks
 
 ### Frontend
-- [ ] Add ServerConfig from env
 - [ ] Registration for new project.
 - [ ] Authorization for new project.
 - [ ] BusinessItem create, read, update and delete with permissions control for new project.
@@ -35,6 +34,7 @@
 - [ ] Password recovery for new project.
 
 ## Completed
+- [x] Add ServerConfig from env
 - [x] Fix rare db-bug when run all tests. [Possible solution](https://stackoverflow.com/questions/77968323/invalidrequesterror-during-concurrent-requests-with-fastapi-aiosqlite-and-sqla)
 - [x] Fixture for backend test server in frontend
 - [x] Test Server (with Dockerfile)

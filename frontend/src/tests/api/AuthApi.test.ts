@@ -2,10 +2,12 @@ import { expect, test } from 'vitest'
 import { apiConfiguration, backendUrl } from '@/utils/config'
 import { generateRandomString } from '@/utils/helpers'
 import * as api from '@/api'
-import exp = require('constants')
 
-test('test env', async () => {
-    expect(backendUrl).toBe('http://localhost:8000')
+test('test env backendUrl', async () => {
+    expect(process.env.BASE_URL).toBeDefined()
+    expect(process.env.VITE_BACKEND_URL).toBeDefined()
+    expect(process.env.VITE_BACKEND_URL).toBe('http://localhost:8001')
+    expect(backendUrl).toBe(process.env.VITE_BACKEND_URL)
 })
 
 test('create user', async () => {

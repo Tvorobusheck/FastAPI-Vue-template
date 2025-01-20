@@ -1,6 +1,6 @@
 import * as api from '@/api'
 
-const backendUrl = 'http://localhost:8001'
+const backendUrl = process.env.VITE_BACKEND_URL
 // Create configuration parameter object
 const configurationParameters = {
     baseServer: new api.ServerConfiguration(backendUrl, {}), // First server is default
