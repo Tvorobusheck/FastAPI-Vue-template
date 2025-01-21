@@ -7,8 +7,8 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import * as path from 'path'
 import dotenv from 'dotenv'
 
-// Load environment variables from .test.env
-dotenv.config({ path: '/home/user/proj/rapid_dev/FastAPI-Vue-template/frontend/env/.dev.env' })
+// Load environment variables from .env
+dotenv.config({ path: '.env' })
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {

@@ -6,7 +6,7 @@ import vue from '@vitejs/plugin-vue'
 import dotenv from 'dotenv'
 
 // Load environment variables from .test.env
-dotenv.config({ path: '/home/user/proj/rapid_dev/FastAPI-Vue-template/frontend/env/.test.env' })
+dotenv.config({ path: 'env/.test.env' })
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
