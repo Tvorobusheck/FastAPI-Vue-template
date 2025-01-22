@@ -3,9 +3,6 @@
 ## Tasks
 
 ### Frontend
-- [ ] Better interface for Registration
-- [ ] Main Page
-- [ ] Navigation
 - [ ] Authorization for new project.
 - [ ] BusinessItem create, read, update and delete with permissions control for new project.
 - [ ] Admin Panel ([template from git](https://github.com/PanJiaChen/vue-element-admin), [templates from vuejs website](https://vuejs.org/ecosystem/themes))
@@ -36,6 +33,9 @@
 - [ ] Password recovery for new project.
 
 ## Completed
+- [x] Main Page
+- [x] Navigation
+- [x] Better interface for Registration
 - [x] Registration for new project.
 - [x] Add ServerConfig from env
 - [x] Fix rare db-bug when run all tests. [Possible solution](https://stackoverflow.com/questions/77968323/invalidrequesterror-during-concurrent-requests-with-fastapi-aiosqlite-and-sqla)

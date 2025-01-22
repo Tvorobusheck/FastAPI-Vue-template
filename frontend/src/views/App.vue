@@ -1,30 +1,54 @@
 <template>
-  <div>
-    <img alt="Vue logo" src="@/assets/logo.png">
-    <Registration />
-    <button @click="goToRegistration">Go to Registration</button>
+  <div id="app" class="flex flex-col max-h-screen">
+    <nav class="bg-blue-500 p-4">
+      <div class="container mx-auto flex justify-between items-center">
+        <div class="text-white text-lg font-bold">My App</div>
+        <div class="block lg:hidden">
+          <button @click="toggleMenu" class="text-white focus:outline-none">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+            </svg>
+          </button>
+        </div>
+        <div :class="{'block': isMenuOpen, 'hidden': !isMenuOpen}" class="w-full lg:flex lg:items-center lg:w-auto">
+          <div class="text-sm lg:flex-grow">
+            <RouterLink to="/" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-200 mr-4">Go to Home</RouterLink>
+            <RouterLink to="/registration" id="nav-registration" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-200">Go to Registration</RouterLink>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <main class="flex-grow container mx-auto mt-2">
+      <RouterView />
+    </main>
+    <footer class="bg-gray-800 text-white p-4 mt-2">
+      <div class="container mx-auto text-center">
+        <p class="mb-2">Contact Us</p>
+        <p>Email: contact@example.com</p>
+        <p>Phone: +123 456 7890</p>
+        <p>Address: 123 Main Street, Anytown, USA</p>
+      </div>
+    </footer>
   </div>
 </template>
 
 <script lang="ts">
-import ItemComponent from '@/components/Item.vue';
-import Registration from './Registration.vue';
-import { useRouter } from 'vue-router';
+import { defineComponent, ref } from 'vue'
 import '@/index.css'
 
-export default {
+export default defineComponent({
   name: 'App',
-  components: {
-    Registration
-  },
   setup() {
-    const router = useRouter();
-    const goToRegistration = () => {
-      router.push('/registration');
-    };
-    return { goToRegistration };
+    const isMenuOpen = ref(false)
+    const toggleMenu = () => {
+      isMenuOpen.value = !isMenuOpen.value
+    }
+    return {
+      isMenuOpen,
+      toggleMenu
+    }
   }
-}
+})
 </script>
 
 <style>
@@ -34,6 +58,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>

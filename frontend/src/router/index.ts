@@ -1,10 +1,10 @@
 // filepath: /home/user/proj/rapid_dev/FastAPI-Vue-template/frontend/src/router/index.js
 import { createRouter, createWebHistory } from 'vue-router';
-import App from '@/views/App.vue';
+import Home from '@/views/Home.vue';
 import Registration from '@/views/Registration.vue';
 
 const routes = [
-  { path: '/', component: App },
+  { path: '/', component: Home },
   { path: '/registration', component: Registration },
 ];
 
