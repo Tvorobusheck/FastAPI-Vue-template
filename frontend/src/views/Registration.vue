@@ -1,6 +1,6 @@
 <template>
-  <div class="flex flex-col items-center justify-center min-h-full">
-    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-2xl text-center">
+  <div class="common-container">
+    <div class="common-card">
       <h1 class="text-2xl font-bold mb-6 text-center">Welcome!</h1>
       <div>
         <input
@@ -23,7 +23,7 @@
         <button
           id="submitRegistration"
           @click="submitRegistration"
-          class="w-full bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-600 transition duration-300"
+          class="common-button w-full"
         >
           Submit
         </button>
@@ -38,6 +38,7 @@
 <script lang="ts">
 import * as api from '@/api';
 import { apiConfiguration } from '@/utils/config';
+import '@/styles.css'
 
 export default {
   name: 'Registration',

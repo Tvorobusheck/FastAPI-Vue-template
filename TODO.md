@@ -33,6 +33,7 @@
 - [ ] Password recovery for new project.
 
 ## Completed
+- [x] Unite common styles.
 - [x] Main Page
 - [x] Navigation
 - [x] Better interface for Registration
