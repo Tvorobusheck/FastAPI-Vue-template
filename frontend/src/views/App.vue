@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="flex flex-col max-h-screen">
+  <div id="app" class="flex flex-col min-h-screen">
     <nav class="bg-blue-500 p-4">
       <div class="container mx-auto flex justify-between items-center">
         <div class="text-white text-lg font-bold">My App</div>
@@ -18,10 +18,10 @@
         </div>
       </div>
     </nav>
-    <main class="flex-grow container mx-auto mt-2">
-      <RouterView />
+    <main class="flex-grow flex items-center justify-center container mx-auto p-4 bg-gray-100">
+      <RouterView class="w-full" />
     </main>
-    <footer class="bg-gray-800 text-white p-4 mt-2">
+    <footer class="bg-gray-800 text-white p-4">
       <div class="container mx-auto text-center">
         <p class="mb-2">Contact Us</p>
         <p>Email: contact@example.com</p>

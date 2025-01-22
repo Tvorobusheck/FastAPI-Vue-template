@@ -1,6 +1,6 @@
 <template>
-  <div class="flex items-center justify-center min-h-screen bg-gray-100">
-    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+  <div class="flex flex-col items-center justify-center min-h-full">
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-2xl text-center">
       <h1 class="text-2xl font-bold mb-6 text-center">Welcome!</h1>
       <div>
         <input
