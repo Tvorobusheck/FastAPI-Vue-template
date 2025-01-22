@@ -10,6 +10,7 @@
 import ItemComponent from '@/components/Item.vue';
 import Registration from './Registration.vue';
 import { useRouter } from 'vue-router';
+import '@/index.css'
 
 export default {
   name: 'App',
