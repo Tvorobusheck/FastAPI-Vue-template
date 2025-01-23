@@ -30,3 +30,18 @@ test('create multiple users async', async () => {
         })
     }
 })
+test('login user', async () => {
+    const apiInstance = new api.AuthApi(apiConfiguration);
+    const newUser = new api.UserCreate()
+    newUser.email = generateRandomString() + '@example.com'
+    newUser.password = generateRandomString()
+    const user: api.UserRead = await apiInstance.registerRegisterUsersAuthRegisterPost(newUser)
+    expect(user).toBeDefined()
+
+
+    const responseValid = await apiInstance.authJwtLoginUsersJwtLoginPost(newUser.email, newUser.password)
+    expect(responseValid.accessToken).toBeDefined()
+    // Incorrect credentials
+    await expect(apiInstance.authJwtLoginUsersJwtLoginPost(generateRandomString() + newUser.email, 
+                                                            newUser.password + generateRandomString())).rejects.toThrow(api.ApiException)
+})

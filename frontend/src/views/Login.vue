@@ -1,0 +1,70 @@
+<template>
+    <div class="common-container">
+      <div class="common-card">
+        <h1 class="text-2xl font-bold mb-6 text-center">Welcome!</h1>
+        <div>
+          <input
+            id="username"
+            v-model="username"
+            placeholder="email@example.com"
+            class="w-full p-3 mb-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <input
+            id="password"
+            :type="passwordVisible ? 'text' : 'password'"
+            v-model="password"
+            placeholder="password"
+            class="w-full p-3 mb-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <label class="flex items-center mb-4">
+            <input type="checkbox" v-model="passwordVisible" class="mr-2" />
+            Show Password
+          </label>
+          <button
+            id="submitLogin"
+            @click="submitLogin"
+            class="common-button w-full"
+          >
+            Submit
+          </button>
+          <div v-if="successMessage" id="successMessage" class="mt-4 text-green-500">
+            {{ successMessage }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </template>
+  
+  <script lang="ts">
+  import * as api from '@/api';
+  import { apiConfiguration } from '@/utils/config';
+  import '@/styles.css'
+  
+  export default {
+    name: 'Login',
+    data() {
+      return {
+        username: '',
+        password: '',
+        passwordVisible: false, // Password visibility is disabled by default
+        successMessage: '' // Success message is initially empty
+      }
+    },
+    methods: {
+      async submitLogin() {
+        try {
+          // Simulate API call to register the user
+          const apiInstance = new api.AuthApi(apiConfiguration)    
+          const responseValid = await apiInstance.authJwtLoginUsersJwtLoginPost(this.username, this.password) as api.BearerResponse
+          this.successMessage = 'Login successful!'
+        } catch (error) {
+          console.error('Login failed:', error)
+        }
+      }
+    }
+  }
+  </script>
+  
+  <style scoped>
+  /* Add any additional styles here */
+  </style>

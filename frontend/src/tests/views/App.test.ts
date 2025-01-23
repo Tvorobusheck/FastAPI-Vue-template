@@ -1,10 +1,10 @@
 import { expect, test } from 'vitest'
-import { mount, flushPromises } from '@vue/test-utils'
+import { mount, flushPromises, VueWrapper } from '@vue/test-utils'
 import App from '@/views/App.vue'
 import router from '@/router';
 
 
-test('check redirect button to registration', async () => {
+async function initRouter() : Promise<VueWrapper> {
   router.push('/')
   // Wait for the router to be ready
   await router.isReady()
@@ -13,14 +13,26 @@ test('check redirect button to registration', async () => {
       plugins: [router],
     },
   })
-  
+  return wrapper
+}
 
-  const submitButton = wrapper.find('#nav-registration')
+async function clickNav(wrapper: VueWrapper, elementId: string) {
+  const submitButton = wrapper.find(elementId)
   await submitButton.trigger('click')
   await wrapper.vm.$nextTick()
-  
   await flushPromises()
+}
+
+test('check redirect button to registration', async () => {
+  const wrapper = await initRouter()
+  await clickNav(wrapper, "#nav-registration")
   const emailInput = wrapper.find('#email')
   expect(emailInput.exists()).toBe(true)
 })
 
+test('check redirect button to login', async () => {
+  const wrapper = await initRouter()
+  await clickNav(wrapper, "#nav-login")
+  const emailInput = wrapper.find('#username')
+  expect(emailInput.exists()).toBe(true)
+})

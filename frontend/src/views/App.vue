@@ -13,7 +13,8 @@
         <div :class="{'block': isMenuOpen, 'hidden': !isMenuOpen}" class="w-full lg:flex lg:items-center lg:w-auto">
           <div class="text-sm lg:flex-grow">
             <RouterLink to="/" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-200 mr-4">Go to Home</RouterLink>
-            <RouterLink to="/registration" id="nav-registration" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-200">Go to Registration</RouterLink>
+            <RouterLink to="/registration" id="nav-registration" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-200">Registration</RouterLink>
+            <RouterLink to="/login" id="nav-login" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-200">Login</RouterLink>
           </div>
         </div>
       </div>
