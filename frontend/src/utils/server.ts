@@ -1,17 +1,18 @@
 import * as api from '@/api'
-import { SecurityAuthentication, OAuth2PasswordBearerAuthentication } from '@/api'
 import { ConfigurationParameters } from '@/api/configuration'
-import { ref } from 'vue'
+
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL
-  
-const jwtToken = ref('')
+
+function getJwtToken(): string {
+    return JSON.parse( localStorage.getItem('token') )
+}
 function setJwtToken(token: string) {
-    jwtToken.value = token
+    localStorage.setItem( 'token', JSON.stringify(token) );
 }
 function configuration(): api.Configuration {
     const jwtAuth: api.OAuth2Configuration = {
-        accessToken: jwtToken.value
+        accessToken: getJwtToken()
     }
     const authConfig: api.AuthMethodsConfiguration = {
         "OAuth2PasswordBearer": jwtAuth

@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest'
-import { apiConfiguration, saveJwtToken } from '@/utils/config'
+import { apiConfiguration, saveJwtToken } from '@/utils/server'
 import { generateRandomString } from '@/utils/helpers'
 import * as api from '@/api'
 import exp = require('constants')

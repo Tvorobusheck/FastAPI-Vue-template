@@ -37,7 +37,7 @@
   
   <script lang="ts">
   import * as api from '@/api';
-  import { apiConfiguration } from '@/utils/config';
+  import { apiConfiguration } from '@/utils/server';
   import '@/styles.css'
   
   export default {

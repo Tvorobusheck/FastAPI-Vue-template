@@ -2,7 +2,7 @@ import { expect, test } from 'vitest'
 import { mount } from '@vue/test-utils'
 import { generateRandomString } from '@/utils/helpers'
 import Login from '@/views/Login.vue'
-import { apiConfiguration } from '@/utils/config'
+import { apiConfiguration } from '@/utils/server'
 import * as api from '@/api'
 
 test('write text in login', async () => {

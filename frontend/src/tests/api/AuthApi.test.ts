@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest'
-import { apiConfiguration, backendUrl } from '@/utils/config'
+import { apiConfiguration, backendUrl } from '@/utils/server'
 import { generateRandomString } from '@/utils/helpers'
 import * as api from '@/api'
 

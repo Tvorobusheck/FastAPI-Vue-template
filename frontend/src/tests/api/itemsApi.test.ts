@@ -1,5 +1,5 @@
 import { expect, it, test } from 'vitest'
-import { apiConfiguration } from '@/utils/config'
+import { apiConfiguration } from '@/utils/server'
 import { generateRandomString } from '@/utils/helpers'
 import * as api from '@/api'
 import exp = require('constants');

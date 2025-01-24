@@ -7,6 +7,7 @@
 - [ ] BusinessItem create, read, update and delete with permissions control for new project.
 - [ ] Admin Panel ([template from git](https://github.com/PanJiaChen/vue-element-admin), [templates from vuejs website](https://vuejs.org/ecosystem/themes))
 - [ ] Improve manifest for PWA
+- [ ] Token Refresh
 - [ ] Localization support
 
 ### Backend
@@ -15,6 +16,7 @@
 - [ ] DB tests for BusinessItem
 - [ ] Permissions
 - [ ] Permission control and business logic for BusinessItem
+- [ ] Token Refresh [for fastapi_users](https://github.com/fastapi-users/fastapi-users/discussions/350)
 
 ### DevOps
 - [ ] Fix debug
