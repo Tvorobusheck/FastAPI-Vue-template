@@ -40,6 +40,11 @@ test('check redirect button to login', async () => {
 test('check redirect button to profile', async () => {
   const wrapper = await initRouter()
   await clickNav(wrapper, "#nav-profile")
-  const emailField = wrapper.find('#profile-info')
-  expect(emailField.exists()).toBe(true)
+  expect(wrapper.find('#profile-info').exists()).toBe(true)
+})
+
+test('check redirect button to logout', async () => {
+  const wrapper = await initRouter()
+  await clickNav(wrapper, "#nav-logout")
+  expect(wrapper.find('#logout-success').exists()).toBe(true)
 })

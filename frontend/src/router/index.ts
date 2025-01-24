@@ -4,12 +4,14 @@ import Home from '@/views/Home.vue';
 import Registration from '@/views/Registration.vue';
 import Login from '@/views/Login.vue'
 import Profile from '@/views/Profile.vue'
+import Logout from '@/views/Logout.vue';
 
 const routes = [
   { path: '/', component: Home },
+  { path: '/profile', component: Profile },
   { path: '/registration', component: Registration },
   { path: '/login', component: Login },
-  { path: '/profile', component: Profile }
+  { path: '/logout', component: Logout },
 ];
 
 const router = createRouter({

@@ -2,6 +2,7 @@ import { expect, test } from 'vitest'
 import { apiConfiguration, backendUrl } from '@/utils/server'
 import { generateRandomString } from '@/utils/helpers'
 import * as api from '@/api'
+import { createAndLoginUser } from '@/tests/test_utils/auth'
 
 test('test env backendUrl', async () => {
     expect(process.env.BASE_URL).toBeDefined()
@@ -30,18 +31,28 @@ test('create multiple users async', async () => {
         })
     }
 })
+
+
 test('login user', async () => {
     const apiInstance = new api.AuthApi(apiConfiguration());
     const newUser = new api.UserCreate()
     newUser.email = generateRandomString() + '@example.com'
     newUser.password = generateRandomString()
-    const user: api.UserRead = await apiInstance.registerRegisterUsersAuthRegisterPost(newUser)
-    expect(user).toBeDefined()
-
-
+    await createAndLoginUser(apiInstance, newUser)
     const responseValid = await apiInstance.authJwtLoginUsersJwtLoginPost(newUser.email, newUser.password)
     expect(responseValid.accessToken).toBeDefined()
     // Incorrect credentials
     await expect(apiInstance.authJwtLoginUsersJwtLoginPost(generateRandomString() + newUser.email, 
                                                             newUser.password + generateRandomString())).rejects.toThrow(api.ApiException)
+})
+
+
+test('logout user', async () => {
+    const apiInstance = new api.AuthApi(apiConfiguration());
+    const newUser = new api.UserCreate()
+    newUser.email = generateRandomString() + '@example.com'
+    newUser.password = generateRandomString()
+    await createAndLoginUser(apiInstance, newUser)
+    const refreshedApiInstance = new api.AuthApi(apiConfiguration()); // because of jwt
+    await expect(refreshedApiInstance.authJwtLogoutUsersJwtLogoutPost()).rejects.toThrow(new Error("Cannot parse content. No Content-Type defined."))
 })

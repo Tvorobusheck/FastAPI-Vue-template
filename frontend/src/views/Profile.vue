@@ -23,6 +23,9 @@ import '@/styles.css'
 
 export default defineComponent({
   name: 'Profile',
+  methods: {
+    
+  },
   setup() {
     const userData = ref<api.UserRead | null>(null)
 

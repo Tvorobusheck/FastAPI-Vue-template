@@ -1,7 +1,7 @@
 <template>
   <div class="common-container">
     <div class="common-card">
-      <h1 class="text-2xl font-bold mb-6 text-center">Welcome!</h1>
+      <h1 class="text-2xl font-bold mb-6 text-center">Registration</h1>
       <div>
         <input
           id="email"
