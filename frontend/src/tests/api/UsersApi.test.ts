@@ -1,5 +1,6 @@
 import { expect, test } from 'vitest'
-import { apiConfiguration, saveJwtToken } from '@/utils/server'
+import { setJwtToken } from '@/utils/auth'
+import { apiConfiguration } from '@/utils/server'
 import { generateRandomString } from '@/utils/helpers'
 import * as api from '@/api'
 import exp = require('constants')
@@ -13,7 +14,7 @@ test('read user\'s profile (with auth)', async () => {
     expect(user).toBeDefined()
     const responseValid = await apiInstance.authJwtLoginUsersJwtLoginPost(newUser.email, newUser.password)
     expect(responseValid.accessToken).toBeDefined()
-    saveJwtToken(responseValid.accessToken)
+    setJwtToken(responseValid.accessToken)
     const usersApiInstance = new api.UsersApi(apiConfiguration())
     const profile = await usersApiInstance.usersCurrentUserUsersAuthMeGet() as api.UserRead
     expect(profile).toBeDefined()

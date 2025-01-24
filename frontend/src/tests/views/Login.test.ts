@@ -1,9 +1,10 @@
 import { expect, test } from 'vitest'
-import { mount } from '@vue/test-utils'
+import { flushPromises, mount } from '@vue/test-utils'
 import { generateRandomString } from '@/utils/helpers'
 import Login from '@/views/Login.vue'
 import { apiConfiguration } from '@/utils/server'
 import * as api from '@/api'
+import { isLogedIn } from '@/utils/auth'
 
 test('write text in login', async () => {
   const wrapper = mount(Login)
@@ -73,9 +74,11 @@ test('check submit login', async () => {
   expect(successMessage.exists()).toBe(false)
   await wrapper.vm.submitLogin()
   // await submitButton.trigger('click')
+
   await wrapper.vm.$nextTick()
-  
+  await flushPromises()
   const successMessage2 = wrapper.find('#successMessage')
   expect(successMessage2.exists()).toBe(true)
   expect(successMessage2.text()).toBe("Login successful!")
+  expect(isLogedIn()).toBeTruthy()
 })

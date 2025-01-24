@@ -3,7 +3,7 @@
 ## Tasks
 
 ### Frontend
-- [ ] Authorization for new project.
+- [ ] Logout
 - [ ] BusinessItem create, read, update and delete with permissions control for new project.
 - [ ] Admin Panel ([template from git](https://github.com/PanJiaChen/vue-element-admin), [templates from vuejs website](https://vuejs.org/ecosystem/themes))
 - [ ] Improve manifest for PWA
@@ -35,6 +35,8 @@
 - [ ] Password recovery for new project.
 
 ## Completed
+- [x] Profile
+- [x] Authorization for new project.
 - [x] Authentication (Frontend)
 - [x] Unite common styles.
 - [x] Main Page

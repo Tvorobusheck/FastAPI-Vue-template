@@ -1,15 +1,9 @@
 import * as api from '@/api'
 import { ConfigurationParameters } from '@/api/configuration'
-
+import { getJwtToken, setJwtToken } from '@/utils/auth'
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL
 
-function getJwtToken(): string {
-    return JSON.parse( localStorage.getItem('token') )
-}
-function setJwtToken(token: string) {
-    localStorage.setItem( 'token', JSON.stringify(token) );
-}
 function configuration(): api.Configuration {
     const jwtAuth: api.OAuth2Configuration = {
         accessToken: getJwtToken()
@@ -25,4 +19,4 @@ function configuration(): api.Configuration {
     return api.createConfiguration(configurationParameters);
 }
 
-export { backendUrl, setJwtToken as saveJwtToken, configuration as apiConfiguration }
+export { backendUrl, configuration as apiConfiguration }

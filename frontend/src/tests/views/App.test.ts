@@ -36,3 +36,10 @@ test('check redirect button to login', async () => {
   const emailInput = wrapper.find('#username')
   expect(emailInput.exists()).toBe(true)
 })
+
+test('check redirect button to profile', async () => {
+  const wrapper = await initRouter()
+  await clickNav(wrapper, "#nav-profile")
+  const emailField = wrapper.find('#profile-info')
+  expect(emailField.exists()).toBe(true)
+})

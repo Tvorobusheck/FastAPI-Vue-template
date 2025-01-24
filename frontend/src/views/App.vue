@@ -15,6 +15,7 @@
             <RouterLink to="/" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-200 mr-4">Go to Home</RouterLink>
             <RouterLink to="/registration" id="nav-registration" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-200">Registration</RouterLink>
             <RouterLink to="/login" id="nav-login" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-200">Login</RouterLink>
+            <RouterLink to="/profile" id="nav-profile" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-200">Profile</RouterLink>
           </div>
         </div>
       </div>

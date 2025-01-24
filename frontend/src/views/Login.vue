@@ -39,6 +39,7 @@
   import * as api from '@/api';
   import { apiConfiguration } from '@/utils/server';
   import '@/styles.css'
+import { setJwtToken } from '@/utils/auth';
   
   export default {
     name: 'Login',
@@ -56,6 +57,7 @@
           // Simulate API call to register the user
           const apiInstance = new api.AuthApi(apiConfiguration())    
           const responseValid = await apiInstance.authJwtLoginUsersJwtLoginPost(this.username, this.password) as api.BearerResponse
+          setJwtToken(responseValid.accessToken)
           this.successMessage = 'Login successful!'
         } catch (error) {
           console.error('Login failed:', error)
