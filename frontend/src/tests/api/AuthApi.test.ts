@@ -11,7 +11,7 @@ test('test env backendUrl', async () => {
 })
 
 test('create user', async () => {
-    const apiInstance = new api.AuthApi(apiConfiguration);
+    const apiInstance = new api.AuthApi(apiConfiguration());
     const newUser = new api.UserCreate()
     newUser.email = generateRandomString() + '@example.com'
     newUser.password = generateRandomString()
@@ -19,7 +19,7 @@ test('create user', async () => {
     expect(user).toBeDefined()
 })
 test('create multiple users async', async () => {
-    const apiInstance = new api.AuthApi(apiConfiguration);
+    const apiInstance = new api.AuthApi(apiConfiguration());
     for (let i = 0; i < 10; i++) {
         const newUser = new api.UserCreate()
         newUser.email = generateRandomString() + '@example.com'
@@ -31,7 +31,7 @@ test('create multiple users async', async () => {
     }
 })
 test('login user', async () => {
-    const apiInstance = new api.AuthApi(apiConfiguration);
+    const apiInstance = new api.AuthApi(apiConfiguration());
     const newUser = new api.UserCreate()
     newUser.email = generateRandomString() + '@example.com'
     newUser.password = generateRandomString()

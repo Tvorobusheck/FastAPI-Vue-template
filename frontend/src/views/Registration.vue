@@ -53,7 +53,7 @@ export default {
     async submitRegistration() {
       try {
         // Simulate API call to register the user
-        const apiInstance = new api.AuthApi(apiConfiguration)
+        const apiInstance = new api.AuthApi(apiConfiguration())
         const user = await apiInstance.registerRegisterUsersAuthRegisterPost(this.regData) as api.UserRead        
         this.successMessage = 'Registration successful!'
       } catch (error) {

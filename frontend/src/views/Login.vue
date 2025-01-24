@@ -54,7 +54,7 @@
       async submitLogin() {
         try {
           // Simulate API call to register the user
-          const apiInstance = new api.AuthApi(apiConfiguration)    
+          const apiInstance = new api.AuthApi(apiConfiguration())    
           const responseValid = await apiInstance.authJwtLoginUsersJwtLoginPost(this.username, this.password) as api.BearerResponse
           this.successMessage = 'Login successful!'
         } catch (error) {

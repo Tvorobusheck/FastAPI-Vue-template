@@ -13,7 +13,7 @@ async function createTestItem(apiInstance: api.ItemsApi, name: string = generate
 }
 
 test('test create item', async () => {
-  const apiInstance = new api.ItemsApi(apiConfiguration);
+  const apiInstance = new api.ItemsApi(apiConfiguration());
   const name = generateRandomString()
   const item = await createTestItem(apiInstance, name)
   expect(item).toBeDefined()
@@ -22,7 +22,7 @@ test('test create item', async () => {
 })
 
 test('test update item', async () => {    
-  const apiInstance = new api.ItemsApi(apiConfiguration);
+  const apiInstance = new api.ItemsApi(apiConfiguration());
   const createdItem = await createTestItem(apiInstance)
   const newName = generateRandomString()
   await apiInstance.endpointItemsIdPatch(
@@ -37,7 +37,7 @@ test('test update item', async () => {
 })
 
 test('test delete item', async () => {    
-  const apiInstance = new api.ItemsApi(apiConfiguration);
+  const apiInstance = new api.ItemsApi(apiConfiguration());
   const createdItem = await createTestItem(apiInstance)
   await apiInstance.endpointItemsIdDelete(createdItem.id);
   await expect(apiInstance.endpointItemsIdGet(createdItem.id)).rejects.not.toThrow(api.HttpException)
@@ -50,7 +50,7 @@ async function createTestItems(apiInstance: api.ItemsApi, n: number = 3) {
   }
 }
 test('test read items (paginated)', async () => {    
-  const apiInstance = new api.ItemsApi(apiConfiguration);
+  const apiInstance = new api.ItemsApi(apiConfiguration());
   await createTestItems(apiInstance);
   const data: api.DynamicPaginatedResponse = await apiInstance.endpointItemsGet(undefined, undefined, 1, 10);
   expect(data).toBeDefined()
@@ -61,7 +61,7 @@ test('test read items (paginated)', async () => {
 
 
 test('test read items (list)', async () => {    
-  const apiInstance = new api.ItemsApi(apiConfiguration);
+  const apiInstance = new api.ItemsApi(apiConfiguration());
   await createTestItems(apiInstance);
   const data: api.DynamicListResponse = await apiInstance.endpointItemsGet(0, 100);
   expect(data).toBeDefined()
@@ -72,7 +72,7 @@ test('test read items (list)', async () => {
 
 
 test('create multiple items async', async () => {
-    const apiInstance = new api.ItemsApi(apiConfiguration);
+    const apiInstance = new api.ItemsApi(apiConfiguration());
     for (let i = 0; i < 100; i++) {
         const name = generateRandomString()
         createTestItem(apiInstance, name).then((item: api.ItemSchema) => {

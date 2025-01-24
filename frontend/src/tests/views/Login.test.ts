@@ -56,7 +56,7 @@ test('check password input for hide option', async () => {
 
 test('check submit login', async () => {
   const wrapper = mount(Login)
-  const apiInstance = new api.AuthApi(apiConfiguration);
+  const apiInstance = new api.AuthApi(apiConfiguration());
   const newUser = new api.UserCreate()
   newUser.email = generateRandomString() + '@example.com'
   newUser.password = generateRandomString()
