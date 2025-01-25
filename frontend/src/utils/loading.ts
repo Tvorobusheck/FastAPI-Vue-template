@@ -1,6 +1,4 @@
 import { ref } from 'vue'
-import Loading from '@/components/Loading.vue'
-import { setTimeout } from 'timers/promises';
 
 export const isLoading = ref(false)
 
