@@ -4,7 +4,7 @@
       <h1 class="text-2xl font-bold mb-6 text-center">Profile</h1>
       <div id="profile-info">
         <div v-if="userData">
-          <p><strong>Email:</strong><div id="email">{{ userData.email }}</div></p>
+          <p><strong>Email:</strong> <span id="email">{{ userData.email }}</span></p>
           <!-- Add more fields as needed -->
         </div>
         <div v-else>
@@ -23,9 +23,6 @@ import '@/styles.css'
 
 export default defineComponent({
   name: 'Profile',
-  methods: {
-    
-  },
   setup() {
     const userData = ref<api.UserRead | null>(null)
 
@@ -45,8 +42,9 @@ export default defineComponent({
 
     return {
       userData,
+      initProfile
     }
-  },
+  }
 })
 </script>
 

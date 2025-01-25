@@ -15,6 +15,7 @@ test('check profile view', async () => {
     await createAndLoginUser(apiInstance, newUser)
     expect(isLogedIn()).toBeTruthy()
     const wrapper = mount(Profile)
+    await wrapper.vm.initProfile()
     await wrapper.vm.$nextTick()
     await flushPromises()
     const emailField = wrapper.find('#email')

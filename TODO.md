@@ -4,6 +4,8 @@
 
 ### Frontend
 - [ ] Logout
+- [ ] Loadings
+- [ ] Error and succeess messages
 - [ ] BusinessItem create, read, update and delete with permissions control for new project.
 - [ ] Admin Panel ([template from git](https://github.com/PanJiaChen/vue-element-admin), [templates from vuejs website](https://vuejs.org/ecosystem/themes))
 - [ ] Improve manifest for PWA
