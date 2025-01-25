@@ -3,7 +3,6 @@
 ## Tasks
 
 ### Frontend
-- [ ] Logout
 - [ ] Loadings
 - [ ] Error and succeess messages
 - [ ] BusinessItem create, read, update and delete with permissions control for new project.
@@ -37,6 +36,7 @@
 - [ ] Password recovery for new project.
 
 ## Completed
+- [x] Logout
 - [x] Profile
 - [x] Authorization for new project.
 - [x] Authentication (Frontend)

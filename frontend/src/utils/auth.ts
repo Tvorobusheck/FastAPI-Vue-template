@@ -5,7 +5,7 @@ export function getJwtToken(): string {
 }
 export function isLogedIn(): boolean {
     const token = getJwtToken()
-    if (token.toString().length > 0) {
+    if (token && token.toString().length > 0) {
         try {
             const decoded = jwtDecode<JwtPayload>(token);
             return true
