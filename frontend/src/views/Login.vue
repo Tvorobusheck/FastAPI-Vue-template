@@ -22,7 +22,7 @@
           </label>
           <button
             id="submitLogin"
-            @click="submitLogin"
+            @click="loadLogin"
             class="common-button w-full"
           >
             Submit
@@ -40,6 +40,7 @@
   import { apiConfiguration } from '@/utils/server';
   import '@/styles.css'
 import { setJwtToken } from '@/utils/auth';
+import { withLoading } from '@/utils/loading';
   
   export default {
     name: 'Login',
@@ -62,6 +63,9 @@ import { setJwtToken } from '@/utils/auth';
         } catch (error) {
           console.error('Login failed:', error)
         }
+      },
+      loadLogin() {
+        withLoading(() => this.submitLogin())
       }
     }
   }

@@ -7,9 +7,6 @@
           <p><strong>Email:</strong> <span id="email">{{ userData.email }}</span></p>
           <!-- Add more fields as needed -->
         </div>
-        <div v-else>
-          <p>Loading...</p>
-        </div>
       </div>
     </div>
   </div>
@@ -19,6 +16,7 @@
 import { defineComponent, ref, onMounted } from 'vue'
 import * as api from '@/api'
 import { apiConfiguration } from '@/utils/server'
+import { withLoading } from '@/utils/loading'
 import '@/styles.css'
 
 export default defineComponent({
@@ -37,7 +35,7 @@ export default defineComponent({
     }
 
     onMounted(() => {
-      initProfile()
+      withLoading(() => initProfile())
     })
 
     return {

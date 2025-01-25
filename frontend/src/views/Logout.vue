@@ -18,6 +18,7 @@ import * as api from '@/api'
 import { apiConfiguration } from '@/utils/server'
 import { clearJwtToken, isLogedIn } from '@/utils/auth'
 import '@/styles.css'
+import { withLoading } from '@/utils/loading'
 
 export default defineComponent({
   name: 'Logout',
@@ -43,7 +44,7 @@ export default defineComponent({
     }
 
     onMounted(() => {
-      logout()
+      withLoading(() => logout())
     })
 
     return {

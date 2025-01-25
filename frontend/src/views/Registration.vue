@@ -22,7 +22,7 @@
         </label>
         <button
           id="submitRegistration"
-          @click="submitRegistration"
+          @click="loadRegistration"
           class="common-button w-full"
         >
           Submit
@@ -39,6 +39,7 @@
 import * as api from '@/api';
 import { apiConfiguration } from '@/utils/server';
 import '@/styles.css'
+import { withLoading } from '@/utils/loading';
 
 export default {
   name: 'Registration',
@@ -59,6 +60,9 @@ export default {
       } catch (error) {
         console.error('Registration failed:', error)
       }
+    },
+    loadRegistration() {
+      withLoading(() => this.submitRegistration())
     }
   }
 }

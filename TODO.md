@@ -3,7 +3,6 @@
 ## Tasks
 
 ### Frontend
-- [ ] Loadings
 - [ ] Error and succeess messages
 - [ ] BusinessItem create, read, update and delete with permissions control for new project.
 - [ ] Admin Panel ([template from git](https://github.com/PanJiaChen/vue-element-admin), [templates from vuejs website](https://vuejs.org/ecosystem/themes))
@@ -36,6 +35,7 @@
 - [ ] Password recovery for new project.
 
 ## Completed
+- [x] Loadings (Frontend)
 - [x] Logout
 - [x] Profile
 - [x] Authorization for new project.
