@@ -6,8 +6,14 @@ services:
       context: ./backend
       dockerfile: test.Dockerfile
     ports:
-      - "8001:8001"
+      - "8001:8000"
     volumes:
       - ./backend/migrations/versions/:/app/migrations/versions/
       - ./backend/core/:/app/core
       - ./backend/features/:/app/features
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: username
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydatabase

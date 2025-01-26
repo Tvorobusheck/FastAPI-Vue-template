@@ -26,4 +26,4 @@ COPY migrations/ /app/migrations/
 COPY features/ /app/features/
 
 # During debugging, this entry point will be overridden. For more information, please refer to https://aka.ms/vscode-docker-python-debug
-CMD alembic upgrade head && python main.py
+ENTRYPOINT alembic upgrade head && python main.py

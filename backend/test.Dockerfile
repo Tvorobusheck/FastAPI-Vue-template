@@ -15,7 +15,7 @@ WORKDIR /app
 
 # Copy the .env file
 COPY pytest.ini /app/
-COPY env/.test.env /app/.env
+COPY env/.dev.env /app/.env
 
 # copy migrations
 COPY main.py /app/main.py
@@ -24,6 +24,5 @@ COPY alembic.ini /app/alembic.ini
 COPY migrations/ /app/migrations/
 COPY features/ /app/features/
 
-
 # During debugging, this entry point will be overridden. For more information, please refer to https://aka.ms/vscode-docker-python-debug
-ENTRYPOINT ["python", "main.py"]
+ENTRYPOINT alembic upgrade head && python main.py

@@ -1,7 +1,6 @@
 # TODO List
 
 ## Tasks
-
 ### Frontend
 - [ ] Error and succeess messages
 - [ ] Hide some navs with condition
@@ -31,11 +30,13 @@
 - [ ] A simple script to initialize a new project based on this template. It will set up the necessary folder structure, configuration files, and install dependencies for both frontend and backend.
 - [ ] Lint support
 
+
 ### Example project
 - [ ] Registration conformation via email for new project.
 - [ ] Password recovery for new project.
 
 ## Completed
+- [x] Fix database in backend container (make it PostgeSQL)
 - [x] Loadings (Frontend)
 - [x] Logout
 - [x] Profile
