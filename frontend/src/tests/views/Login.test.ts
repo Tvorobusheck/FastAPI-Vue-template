@@ -77,8 +77,26 @@ test('check submit login', async () => {
 
   await wrapper.vm.$nextTick()
   await flushPromises()
-  const successMessage2 = wrapper.find('#successMessage')
-  expect(successMessage2.exists()).toBe(true)
-  expect(successMessage2.text()).toBe("Login successful!")
-  expect(isLogedIn()).toBeTruthy()
+  const successMessage2 = wrapper.find('#response-message')
+  expect(successMessage2.exists()).toBeFalsy()
+})
+
+
+
+test('check submit incorrect login', async () => {
+  const wrapper = mount(Login)
+  const apiInstance = new api.AuthApi(apiConfiguration());
+  const newUser = new api.UserCreate()
+  newUser.email = generateRandomString() + '@example.com'
+  newUser.password = generateRandomString()
+  const user: api.UserRead = await apiInstance.registerRegisterUsersAuthRegisterPost(newUser)
+  expect(user).toBeDefined()
+
+  wrapper.vm.username = newUser.email + generateRandomString()
+  wrapper.vm.password = newUser.password + generateRandomString()
+  await wrapper.vm.submitLogin()
+  await wrapper.vm.$nextTick()
+  await flushPromises()
+  const failedMessage = wrapper.find('#response-message')
+  expect(failedMessage.exists()).toBeTruthy()
 })

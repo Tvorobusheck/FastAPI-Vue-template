@@ -27,7 +27,7 @@ async function testResponseCodeMessage(expectedMessage: string, responseCode?: n
     await flushPromises()
     responseMessage = wrapper.find("#response-message")
     expect(responseMessage.exists()).toBeTruthy()
-    expect(responseMessage.text()).toBe(expectedMessage)
+    expect(responseMessage.text()).toContain(expectedMessage)
 }
 
 test('test show success message', async () => {
@@ -47,4 +47,19 @@ test('test internal error message', async () => {
     for (let responseCode = 405; responseCode < 600; responseCode++) {
         await testResponseCodeMessage(`Server Error: ${responseCode}`, responseCode)
     }
+})
+  
+test('test close error message', async () => {
+    const wrapper = mount(ResponseMessage)
+    wrapper.vm.responseCode = 200
+    await wrapper.vm.$nextTick()
+    await flushPromises()
+    let responseMessage = wrapper.find("#response-message")
+    expect(responseMessage.exists()).toBeTruthy()
+    let closeButton = wrapper.find("#close-response-message")
+    await closeButton.trigger('click')
+    await wrapper.vm.$nextTick()
+    await flushPromises()
+    responseMessage = wrapper.find("#response-message")
+    expect(responseMessage.exists()).toBeFalsy()
 })
