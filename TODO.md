@@ -2,7 +2,6 @@
 
 ## Tasks
 ### Frontend
-- [ ] Loading refactor to just a component?
 - [ ] Error and succeess messages
 - [ ] Hide some navs with condition
 - [ ] BusinessItem create, read, update and delete with permissions control for new project.
@@ -37,6 +36,7 @@
 - [ ] Password recovery for new project.
 
 ## Completed
+- [x] Loading refactor to just a component
 - [x] Fix database in backend container (make it PostgeSQL)
 - [x] Loadings (Frontend)
 - [x] Logout
