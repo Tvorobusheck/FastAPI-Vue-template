@@ -1,6 +1,5 @@
 <template>
     <div class="common-container">
-      <Loading ref="loading"/>
       <div class="common-card">
         <h1 class="text-2xl font-bold mb-6 text-center">Login</h1>
         <div>
@@ -40,14 +39,11 @@
   import * as api from '@/api';
   import { apiConfiguration } from '@/utils/server';
   import '@/styles.css'
-  import Loading, { withLoading } from '@/components/Loading.vue'
+  import { withLoading } from '@/components/Loading.vue'
   import { setJwtToken } from '@/utils/auth';
   
   export default {
     name: 'Login',
-    components: {
-      Loading
-    },
     data() {
       return {
         username: '',

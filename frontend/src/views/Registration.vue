@@ -1,6 +1,5 @@
 <template>
   <div class="common-container">
-    <Loading ref="loading"/>
     <div class="common-card">
       <h1 class="text-2xl font-bold mb-6 text-center">Registration</h1>
       <div>

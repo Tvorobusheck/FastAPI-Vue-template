@@ -1,6 +1,5 @@
 <template>
   <div class="common-container">
-    <Loading />
     <div class="common-card">
       <h1 class="text-2xl font-bold mb-6 text-center">Profile</h1>
       <div id="profile-info">
@@ -20,14 +19,11 @@
 import { defineComponent, ref, onMounted } from 'vue'
 import * as api from '@/api'
 import { apiConfiguration } from '@/utils/server'
-import Loading, { withLoading } from '@/components/Loading.vue'
+import { withLoading } from '@/components/Loading.vue'
 import '@/styles.css'
 
 export default defineComponent({
   name: 'Profile',
-  components: {
-    Loading
-  },
   setup() {
     const userData = ref<api.UserRead | null>(null)
 

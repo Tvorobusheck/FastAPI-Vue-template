@@ -21,6 +21,7 @@
         </div>
       </div>
     </nav>
+    <Loading />
     <main class="flex-grow flex items-center justify-center container mx-auto p-4 bg-gray-100">
       <RouterView class="w-full" />
     </main>
@@ -37,10 +38,14 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
+import Loading from '@/components/Loading.vue';
 import '@/index.css'
 
 export default defineComponent({
   name: 'App',
+  components: {
+    Loading
+  },
   setup() {
     const isMenuOpen = ref(false)
     const toggleMenu = () => {
