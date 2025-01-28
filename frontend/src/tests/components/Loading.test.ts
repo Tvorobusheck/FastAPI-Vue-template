@@ -1,7 +1,6 @@
 import { expect, test } from 'vitest'
 import { flushPromises, mount } from '@vue/test-utils'
-import { withLoading } from '@/utils/loading'
-import Loading from '@/components/Loading.vue'
+import Loading, { withLoading } from '@/components/Loading.vue'
 import { setTimeout } from 'timers/promises';
 
 test('test loading', async () => {

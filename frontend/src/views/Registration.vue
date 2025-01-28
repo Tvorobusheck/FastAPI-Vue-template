@@ -1,5 +1,6 @@
 <template>
   <div class="common-container">
+    <Loading ref="loading"/>
     <div class="common-card">
       <h1 class="text-2xl font-bold mb-6 text-center">Registration</h1>
       <div>
@@ -39,7 +40,7 @@
 import * as api from '@/api';
 import { apiConfiguration } from '@/utils/server';
 import '@/styles.css'
-import { withLoading } from '@/utils/loading';
+import { withLoading } from '@/components/Loading.vue';
 
 export default {
   name: 'Registration',

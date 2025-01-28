@@ -6,7 +6,18 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { isLoading } from '@/utils/loading'
+
+const isLoading = ref(false)
+
+export const withLoading = async <T>(fn: () => Promise<T>): Promise<T> => {
+  isLoading.value = true
+  try {
+    const result = await fn()
+    return result
+  } finally {
+    isLoading.value = false
+  }
+}
 
 export default defineComponent({
   name: 'Loading',

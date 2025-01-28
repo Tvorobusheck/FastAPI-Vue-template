@@ -2,6 +2,7 @@
 
 ## Tasks
 ### Frontend
+- [ ] Loading refactor to just a component?
 - [ ] Error and succeess messages
 - [ ] Hide some navs with condition
 - [ ] BusinessItem create, read, update and delete with permissions control for new project.

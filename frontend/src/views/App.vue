@@ -1,6 +1,5 @@
 <template>
   <div id="app" class="flex flex-col min-h-screen">
-    <Loading />
     <nav class="bg-blue-500 p-4">
       <div class="container mx-auto flex justify-between items-center">
         <div class="text-white text-lg font-bold">My App</div>
@@ -38,14 +37,10 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import Loading from '@/components/Loading.vue'
 import '@/index.css'
 
 export default defineComponent({
   name: 'App',
-  components: {
-    Loading
-  },
   setup() {
     const isMenuOpen = ref(false)
     const toggleMenu = () => {

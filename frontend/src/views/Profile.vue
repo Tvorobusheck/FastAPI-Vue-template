@@ -1,11 +1,15 @@
 <template>
   <div class="common-container">
+    <Loading />
     <div class="common-card">
       <h1 class="text-2xl font-bold mb-6 text-center">Profile</h1>
       <div id="profile-info">
         <div v-if="userData">
           <p><strong>Email:</strong> <span id="email">{{ userData.email }}</span></p>
           <!-- Add more fields as needed -->
+        </div>
+        <div v-else>
+          <p>Loading...</p>
         </div>
       </div>
     </div>
@@ -16,11 +20,14 @@
 import { defineComponent, ref, onMounted } from 'vue'
 import * as api from '@/api'
 import { apiConfiguration } from '@/utils/server'
-import { withLoading } from '@/utils/loading'
+import Loading, { withLoading } from '@/components/Loading.vue'
 import '@/styles.css'
 
 export default defineComponent({
   name: 'Profile',
+  components: {
+    Loading
+  },
   setup() {
     const userData = ref<api.UserRead | null>(null)
 
