@@ -1,5 +1,9 @@
 <template>
   <div class="common-container">
+    <ResponseMessage 
+      :responseCode="responseCode" @update:responseCode="responseCode = $event" 
+      :customText="customText" @update:customText="customText = $event" 
+    />
     <div class="common-card">
       <h1 class="text-2xl font-bold mb-6 text-center">Registration</h1>
       <div>
@@ -27,9 +31,6 @@
         >
           Submit
         </button>
-        <div v-if="successMessage" id="successMessage" class="mt-4 text-green-500">
-          {{ successMessage }}
-        </div>
       </div>
     </div>
   </div>
@@ -40,14 +41,19 @@ import * as api from '@/api';
 import { apiConfiguration } from '@/utils/server';
 import '@/styles.css'
 import { withLoading } from '@/components/Loading.vue';
+import ResponseMessage from '@/components/ResponseMessage.vue'
 
 export default {
   name: 'Registration',
+  components: {
+    ResponseMessage
+  },
   data() {
     return {
       regData: new api.UserCreate(),
       passwordVisible: false, // Password visibility is disabled by default
-      successMessage: '' // Success message is initially empty
+      responseCode: null, // Response code for error messages
+      customText: null
     }
   },
   methods: {
@@ -56,9 +62,17 @@ export default {
         // Simulate API call to register the user
         const apiInstance = new api.AuthApi(apiConfiguration())
         const user = await apiInstance.registerRegisterUsersAuthRegisterPost(this.regData) as api.UserRead        
-        this.successMessage = 'Registration successful!'
       } catch (error) {
-        console.error('Registration failed:', error)
+        if (error instanceof api.ApiException) {
+          if (error.code == 400) {
+            this.customText = "User already exists or invalid data"
+          } else {
+            this.responseCode = error.code
+          }
+        } else {
+          console.error('Registration failed:', error)
+          this.responseCode = 500 // Generic server error
+        }
       }
     },
     loadRegistration() {

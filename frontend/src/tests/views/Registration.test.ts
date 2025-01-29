@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest'
-import { mount } from '@vue/test-utils'
+import { flushPromises, mount } from '@vue/test-utils'
 import { generateRandomString } from '@/utils/helpers'
 import Registration from '@/views/Registration.vue'
 import * as api from '@/api'
@@ -74,8 +74,31 @@ test('check submit registration', async () => {
   // await submitButton.trigger('click')
   await wrapper.vm.$nextTick()
   
-  const successMessage2 = wrapper.find('#successMessage')
-  expect(successMessage2.exists()).toBe(true)
-  expect(successMessage2.text()).toBe("Registration successful!")
+  await wrapper.vm.$nextTick()
+  await flushPromises()
+  const successMessage2 = wrapper.find('#response-message')
+  expect(successMessage2.exists()).toBeFalsy()
 })
 
+
+test('check submit existend registration', async () => {
+  const wrapper = mount(Registration)
+  const newUser = new api.UserCreate()
+  newUser.email = generateRandomString()
+  newUser.password = generateRandomString()
+  wrapper.vm.regData = newUser
+  // Force Vue to re-render
+  await wrapper.vm.$nextTick()
+  
+  const submitButton = wrapper.find('#submitRegistration')
+  const successMessage = wrapper.find('#successMessage')
+  expect(successMessage.exists()).toBe(false)
+  await wrapper.vm.submitRegistration()
+  // await submitButton.trigger('click')
+  await wrapper.vm.$nextTick()
+  
+  await wrapper.vm.$nextTick()
+  await flushPromises()
+  const successMessage2 = wrapper.find('#response-message')
+  expect(successMessage2.exists()).toBeTruthy()
+})

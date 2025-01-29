@@ -42,9 +42,15 @@ test('test show access denied message', async () => {
 test('test show not found message', async () => {
     await testResponseCodeMessage('Not found', 404)
 })
-  
+
+test('test show invalid data', async () => {
+    await testResponseCodeMessage('Invalid data', 422)
+})
+
 test('test internal error message', async () => {
     for (let responseCode = 405; responseCode < 600; responseCode++) {
+        if (responseCode == 422)
+            continue
         await testResponseCodeMessage(`Server Error: ${responseCode}`, responseCode)
     }
 })
@@ -62,4 +68,15 @@ test('test close error message', async () => {
     await flushPromises()
     responseMessage = wrapper.find("#response-message")
     expect(responseMessage.exists()).toBeFalsy()
+})
+
+test('test custom text message', async () => {
+    const wrapper = mount(ResponseMessage)
+    const customText = "Hello, world!"
+    wrapper.vm.customText = customText
+    await wrapper.vm.$nextTick()
+    await flushPromises()
+    let responseMessage = wrapper.find("#response-message")
+    expect(responseMessage.exists()).toBeTruthy()
+    expect(responseMessage.text()).toContain(customText)
 })
