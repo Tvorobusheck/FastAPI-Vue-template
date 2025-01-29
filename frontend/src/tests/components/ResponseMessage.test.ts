@@ -36,17 +36,6 @@ test('test show message', async () => {
   expect((await findAnyResponseMessage(wrapper)).exists()).toBeTruthy()
 })
 
-async function setResponseCodeMessage(expectedMessage: string, responseCode?: number) {
-    const wrapper = createWrapper()
-    await testNoResponseMessage(wrapper)
-    wrapper.vm.responseCode = responseCode
-    await wrapper.vm.$nextTick()
-    await flushPromises()
-    let responseMessage = await findAnyResponseMessage(wrapper)
-    expect(responseMessage.exists()).toBeTruthy()
-    expect(responseMessage.text()).toContain(expectedMessage)
-}
-
 async function testMessageContains(wrapper: VueWrapper, expectedMessage: string) {
     const responseMessage = await findAnyResponseMessage(wrapper)
     expect(responseMessage.exists()).toBeTruthy()
