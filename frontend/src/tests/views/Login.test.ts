@@ -5,6 +5,7 @@ import Login from '@/views/Login.vue'
 import { apiConfiguration } from '@/utils/server'
 import * as api from '@/api'
 import { isLogedIn } from '@/utils/auth'
+import i18n from '@/i18n'
 
 test('write text in login', async () => {
   const wrapper = mount(Login)
@@ -84,7 +85,11 @@ test('check submit login', async () => {
 
 
 test('check submit incorrect login', async () => {
-  const wrapper = mount(Login)
+  const wrapper = mount(Login, {
+    global: {
+      plugins: [i18n]
+    }
+  })
   const apiInstance = new api.AuthApi(apiConfiguration());
   const newUser = new api.UserCreate()
   newUser.email = generateRandomString() + '@example.com'

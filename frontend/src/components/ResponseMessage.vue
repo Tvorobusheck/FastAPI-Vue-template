@@ -5,11 +5,11 @@
         &times;
       </button>
       <p v-if="customText" class="text-red-500">{{ customText }}</p>
-      <p v-else-if="responseCode === 200" class="text-green-500">Success</p>
-      <p v-else-if="responseCode === 403" class="text-red-500">Access denied</p>
-      <p v-else-if="responseCode === 404" class="text-red-500">Not found</p>
-      <p v-else-if="responseCode === 422" class="text-red-500">Invalid data</p>
-      <p v-else class="text-red-500">Server Error: {{ responseCode }}</p>
+      <p v-else-if="responseCode === 200" class="text-green-500">{{ $t('messages.SUCCESS') }}</p>
+      <p v-else-if="responseCode === 403" class="text-red-500">{{ $t('messages.ACCESS_DENIED') }}</p>
+      <p v-else-if="responseCode === 404" class="text-red-500">{{ $t('messages.NOT_FOUND') }}</p>
+      <p v-else-if="responseCode === 422" class="text-red-500">{{ $t('messages.INVALID_DATA') }}</p>
+      <p v-else class="text-red-500">{{ $t('messages.SERVER_ERROR', { code: responseCode }) }}</p>
     </div>
   </div>
 </template>

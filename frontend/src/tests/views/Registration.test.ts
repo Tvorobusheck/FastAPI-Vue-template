@@ -3,6 +3,7 @@ import { flushPromises, mount } from '@vue/test-utils'
 import { generateRandomString } from '@/utils/helpers'
 import Registration from '@/views/Registration.vue'
 import * as api from '@/api'
+import i18n from '@/i18n'
 
 
 test('write text in registration', async () => {
@@ -82,7 +83,11 @@ test('check submit registration', async () => {
 
 
 test('check submit existend registration', async () => {
-  const wrapper = mount(Registration)
+  const wrapper = mount(Registration, {
+    global: {
+      plugins: [i18n]
+    }
+  })
   const newUser = new api.UserCreate()
   newUser.email = generateRandomString()
   newUser.password = generateRandomString()
