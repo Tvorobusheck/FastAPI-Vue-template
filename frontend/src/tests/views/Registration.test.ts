@@ -82,7 +82,7 @@ test('check submit registration', async () => {
 })
 
 
-test('check submit existend registration', async () => {
+test('check submit existed registration', async () => {
   const wrapper = mount(Registration, {
     global: {
       plugins: [i18n]
@@ -99,9 +99,6 @@ test('check submit existend registration', async () => {
   const successMessage = wrapper.find('#successMessage')
   expect(successMessage.exists()).toBe(false)
   await wrapper.vm.submitRegistration()
-  // await submitButton.trigger('click')
-  await wrapper.vm.$nextTick()
-  
   await wrapper.vm.$nextTick()
   await flushPromises()
   const successMessage2 = wrapper.find('#response-message')
