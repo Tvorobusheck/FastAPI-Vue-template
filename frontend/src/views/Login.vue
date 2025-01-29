@@ -22,7 +22,7 @@
           Show Password
         </label>
         <button
-          id="submitLogin"
+          id="submit-login"
           @click="loadLogin"
           class="common-button w-full"
         >

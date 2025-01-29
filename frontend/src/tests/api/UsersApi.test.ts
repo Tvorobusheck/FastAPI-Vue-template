@@ -3,6 +3,7 @@ import { apiConfiguration } from '@/utils/server'
 import { generateRandomString } from '@/utils/helpers'
 import { createAndLoginUser, generateEmail } from './AuthApi.test'
 import * as api from '@/api'
+import { clearJwtToken } from '@/utils/auth'
 
 
 const createApi = () => {
@@ -19,6 +20,7 @@ test('read user\'s profile (with auth)', async () => {
 })
 
 test('read user\'s profile (without auth)', async () => {
+    clearJwtToken()
     const usersApiInstance = createApi()
     await expect(usersApiInstance.usersCurrentUserUsersAuthMeGet()).rejects.toThrow(api.ApiException)
 })

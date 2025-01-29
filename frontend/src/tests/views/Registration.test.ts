@@ -4,6 +4,7 @@ import { generateRandomString } from '@/utils/helpers'
 import Registration from '@/views/Registration.vue'
 import * as api from '@/api'
 import i18n from '@/i18n'
+import { generateEmail } from '../api/AuthApi.test'
 
 
 test('write text in registration', async () => {
@@ -62,7 +63,7 @@ test('check password input for hide option', async () => {
 test('check submit registration', async () => {
   const wrapper = mount(Registration)
   const newUser = new api.UserCreate()
-  newUser.email = generateRandomString() + '@example.com'
+  newUser.email = generateEmail()
   newUser.password = generateRandomString()
   wrapper.vm.regData = newUser
   // Force Vue to re-render

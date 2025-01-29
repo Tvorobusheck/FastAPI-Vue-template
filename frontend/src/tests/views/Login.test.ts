@@ -4,7 +4,7 @@ import { generateRandomString } from '@/utils/helpers'
 import Login from '@/views/Login.vue'
 import { apiConfiguration } from '@/utils/server'
 import * as api from '@/api'
-import { isLogedIn } from '@/utils/auth'
+import { waitForTestTriggers } from '@/utils/helpers'
 import i18n from '@/i18n'
 
 test('write text in login', async () => {
@@ -70,11 +70,9 @@ test('check submit login', async () => {
   // Force Vue to re-render
   await wrapper.vm.$nextTick()
   
-  const submitButton = wrapper.find('#submitLogin')
-  const successMessage = wrapper.find('#successMessage')
-  expect(successMessage.exists()).toBe(false)
-  await wrapper.vm.submitLogin()
-  // await submitButton.trigger('click')
+  const submitButton = wrapper.find('#submit-login')
+  await submitButton.trigger('click')
+  await waitForTestTriggers()
 
   await wrapper.vm.$nextTick()
   await flushPromises()
@@ -99,9 +97,9 @@ test('check submit incorrect login', async () => {
 
   wrapper.vm.username = newUser.email + generateRandomString()
   wrapper.vm.password = newUser.password + generateRandomString()
-  await wrapper.vm.submitLogin()
-  await wrapper.vm.$nextTick()
-  await flushPromises()
+  const submitButton = wrapper.find('#submit-login')
+  await submitButton.trigger('click')
+  await waitForTestTriggers()
   const failedMessage = wrapper.find('#response-message')
   expect(failedMessage.exists()).toBeTruthy()
 })
