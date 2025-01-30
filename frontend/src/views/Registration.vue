@@ -26,7 +26,7 @@
         </label>
         <button
           id="submitRegistration"
-          @click="loadRegistration"
+          @click="submitRegistration()"
           class="common-button w-full"
         >
           Submit
@@ -42,6 +42,7 @@ import { apiConfiguration } from '@/utils/server';
 import '@/styles.css'
 import { withLoading } from '@/components/Loading.vue';
 import ResponseMessage from '@/components/ResponseMessage.vue'
+import i18n from '@/i18n';
 
 export default {
   name: 'Registration',
@@ -62,10 +63,11 @@ export default {
         // Simulate API call to register the user
         const apiInstance = new api.AuthApi(apiConfiguration())
         const user = await apiInstance.registerRegisterUsersAuthRegisterPost(this.regData) as api.UserRead        
+        this.responseCode = 200
       } catch (error) {
         if (error instanceof api.ApiException) {
           if (error.code == 400) {
-            this.customText = "User already exists or invalid data"
+            this.customText = i18n.global.t('messages.REGISTRATION_ERROR')
           } else {
             this.responseCode = error.code
           }

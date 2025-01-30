@@ -4,6 +4,7 @@
       "ACCESS_DENIED": "Access denied",
       "NOT_FOUND": "Not found",
       "INVALID_DATA": "Invalid data",
-      "SERVER_ERROR": "Server Error: {code}"
+      "SERVER_ERROR": "Server Error: {code}",
+      "REGISTRATION_ERROR": "User already exists or invalid data"
     }
   }

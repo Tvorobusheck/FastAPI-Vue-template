@@ -5,14 +5,10 @@ import { apiConfiguration } from '@/utils/server'
 import * as api from '@/api'
 import { isLogedIn } from '@/utils/auth'
 import Logout from '@/views/Logout.vue'
-import { createAndLoginUser } from '@/tests/test_utils/auth'
+import { createAndLoginUser } from '../test_utils/auth'
 
 test('check logout view', async () => {
-    const apiInstance = new api.AuthApi(apiConfiguration());
-    const newUser = new api.UserCreate()
-    newUser.email = generateRandomString() + '@example.com'
-    newUser.password = generateRandomString()
-    await createAndLoginUser(apiInstance, newUser)
+    await createAndLoginUser()
     expect(isLogedIn()).toBeTruthy()
 
     const wrapper = mount(Logout)

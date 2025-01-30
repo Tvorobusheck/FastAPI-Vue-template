@@ -3,6 +3,7 @@ import { apiConfiguration, backendUrl } from '@/utils/server'
 import { generateRandomString } from '@/utils/helpers'
 import * as api from '@/api'
 import { clearJwtToken, isLogedIn, setJwtToken } from '@/utils/auth'
+import { createAndLoginUser, createApi, createUser, generateEmail, logoutUser } from '../test_utils/auth'
 
 test('test env backendUrl', async () => {
     expect(process.env.BASE_URL).toBeDefined()
@@ -11,27 +12,6 @@ test('test env backendUrl', async () => {
     expect(backendUrl).toBe(process.env.VITE_BACKEND_URL)
 })
 
-const createApi = () => {
-    return new api.AuthApi(apiConfiguration())
-}
-
-export function generateEmail() {
-    return generateRandomString().toLocaleLowerCase() + '@' + 
-                        generateRandomString().toLocaleLowerCase() + '.com'
-}
-
-export async function createUser({ apiInstance, email, password }: 
-                                    { apiInstance?: api.AuthApi, 
-                                        email?: string, 
-                                        password?: string } = {}
-                                    ): Promise<api.UserRead> {
-    apiInstance ??= createApi()
-    const newUser = new api.UserCreate()
-    newUser.email = email ?? generateEmail()
-    newUser.password = password ?? generateRandomString()
-    const user: api.UserRead = await apiInstance.registerRegisterUsersAuthRegisterPost(newUser)
-    return user
-}
 test('create random user', async () => {
     const user = await createUser()
     expect(user).toBeDefined()
@@ -54,34 +34,12 @@ test('create multiple users async', async () => {
     }
 })
 
-export async function loginUser(email: string, password: string, { apiInstance }: { apiInstance?: api.AuthApi } = {}): Promise<string> {
-    apiInstance ??= createApi()
-    const responseValid = await apiInstance.authJwtLoginUsersJwtLoginPost(email, password)
-    const token = responseValid.accessToken
-    setJwtToken(token)
-    return token
-}
-
-
-export async function createAndLoginUser({ apiInstance, email }: { apiInstance?: api.AuthApi, email?: string } = {}) {
-    apiInstance ??= createApi()
-    email ??= generateEmail()
-    const password = generateRandomString()
-    await createUser({apiInstance: apiInstance, email: email, password: password})
-    await loginUser(email, password, {apiInstance: apiInstance})
-}
-
 test('login user', async () => {
     expect(isLogedIn()).toBeFalsy()
-    await createAndLoginUser()
+    const user = await createAndLoginUser()
     expect(isLogedIn()).toBeTruthy()
+    expect(user.email).toBeDefined()
 })
-
-export async function logoutUser({ apiInstance }: { apiInstance?: api.AuthApi } = {}) {
-    apiInstance ??= createApi()
-    await expect(apiInstance.authJwtLogoutUsersJwtLogoutPost()).rejects.toThrow(new Error("Cannot parse content. No Content-Type defined."))
-    clearJwtToken()
-}
 
 test('logout user', async () => {
     const apiInstance = createApi()

@@ -1,14 +1,24 @@
 import { expect, test } from 'vitest'
 import { flushPromises, mount } from '@vue/test-utils'
-import { generateRandomString } from '@/utils/helpers'
+import { generateRandomString, waitForTestTriggers } from '@/utils/helpers'
 import Registration from '@/views/Registration.vue'
 import * as api from '@/api'
 import i18n from '@/i18n'
-import { generateEmail } from '../api/AuthApi.test'
+import { generateEmail } from '../test_utils/auth'
+import { testIsSuccessResponseMessage, testMessageContains, testNoResponseMessage } from '../test_utils/responsemessage'
 
+
+const createWrapper = () => {
+  return mount(Registration, {
+      global: {
+        plugins: [i18n]
+      }
+    }
+  )
+}
 
 test('write text in registration', async () => {
-  const wrapper = mount(Registration)
+  const wrapper = createWrapper()
   const newMsg = 'test@example.com'  // New message
   const input = wrapper.find('#email')
   await input.setValue(newMsg)  // Set the input value
@@ -18,7 +28,7 @@ test('write text in registration', async () => {
 })
 
 test('change and read regData directly', async () => {
-  const wrapper = mount(Registration)
+  const wrapper = createWrapper()
   const newEmail = 'test@example.com'
   
   // Directly change regData.email
@@ -37,7 +47,7 @@ test('change and read regData directly', async () => {
 })
 
 test('check password input for hide option', async () => {
-  const wrapper = mount(Registration)
+  const wrapper = createWrapper()
   const newPassword = generateRandomString(10)
   wrapper.vm.regData.password = newPassword
   
@@ -61,7 +71,26 @@ test('check password input for hide option', async () => {
 })
 
 test('check submit registration', async () => {
-  const wrapper = mount(Registration)
+  const wrapper = createWrapper()
+  const newUser = new api.UserCreate()
+  newUser.email = generateEmail()
+  newUser.password = generateRandomString()
+  wrapper.vm.regData = newUser
+  await wrapper.vm.$nextTick()
+  
+  const submitButton = wrapper.find('#submitRegistration')
+  await testNoResponseMessage(wrapper)
+  //await submitButton.trigger('click')
+  await wrapper.vm.submitRegistration()
+  await wrapper.vm.$nextTick()
+  await flushPromises()
+  await waitForTestTriggers()
+  await testIsSuccessResponseMessage(wrapper)
+})
+
+
+test('check submit existed registration', async () => {
+  const wrapper = createWrapper()
   const newUser = new api.UserCreate()
   newUser.email = generateEmail()
   newUser.password = generateRandomString()
@@ -69,39 +98,11 @@ test('check submit registration', async () => {
   // Force Vue to re-render
   await wrapper.vm.$nextTick()
   
-  const submitButton = wrapper.find('#submitRegistration')
-  const successMessage = wrapper.find('#successMessage')
-  expect(successMessage.exists()).toBe(false)
+  // const submitButton = wrapper.find('#submitRegistration')
+  await testNoResponseMessage(wrapper)
   await wrapper.vm.submitRegistration()
-  // await submitButton.trigger('click')
-  await wrapper.vm.$nextTick()
-  
-  await wrapper.vm.$nextTick()
-  await flushPromises()
-  const successMessage2 = wrapper.find('#response-message')
-  expect(successMessage2.exists()).toBeFalsy()
-})
-
-
-test('check submit existed registration', async () => {
-  const wrapper = mount(Registration, {
-    global: {
-      plugins: [i18n]
-    }
-  })
-  const newUser = new api.UserCreate()
-  newUser.email = generateRandomString()
-  newUser.password = generateRandomString()
-  wrapper.vm.regData = newUser
-  // Force Vue to re-render
-  await wrapper.vm.$nextTick()
-  
-  const submitButton = wrapper.find('#submitRegistration')
-  const successMessage = wrapper.find('#successMessage')
-  expect(successMessage.exists()).toBe(false)
   await wrapper.vm.submitRegistration()
   await wrapper.vm.$nextTick()
   await flushPromises()
-  const successMessage2 = wrapper.find('#response-message')
-  expect(successMessage2.exists()).toBeTruthy()
+  await testMessageContains(wrapper, i18n.global.t('messages.REGISTRATION_ERROR'))
 })

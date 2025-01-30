@@ -6,9 +6,20 @@ import { apiConfiguration } from '@/utils/server'
 import * as api from '@/api'
 import { waitForTestTriggers } from '@/utils/helpers'
 import i18n from '@/i18n'
+import { createUser, generateEmail } from '../test_utils/auth'
+import { testIsServerErrorResponseMessage, testIsSuccessResponseMessage } from '../test_utils/responsemessage'
+
+const createWrapper = () => {
+  return mount(Login, {
+      global: {
+        plugins: [i18n]
+      }
+    }
+  )
+}
 
 test('write text in login', async () => {
-  const wrapper = mount(Login)
+  const wrapper = createWrapper()
   const newMsg = generateRandomString()  // New message
   const input = wrapper.find('#username')
   await input.setValue(newMsg)  // Set the input value
@@ -18,8 +29,8 @@ test('write text in login', async () => {
 })
 
 test('change and read username directly', async () => {
-  const wrapper = mount(Login)
-  const newEmail = generateRandomString() + '@example.com'
+  const wrapper = createWrapper()
+  const newEmail = generateEmail()
   
   wrapper.vm.username = newEmail
   await wrapper.vm.$nextTick()
@@ -32,7 +43,7 @@ test('change and read username directly', async () => {
 })
 
 test('check password input for hide option', async () => {
-  const wrapper = mount(Login)
+  const wrapper = createWrapper()
   const newPassword = generateRandomString(10)
   wrapper.vm.password = newPassword
   
@@ -57,49 +68,27 @@ test('check password input for hide option', async () => {
 
 
 test('check submit login', async () => {
-  const wrapper = mount(Login)
-  const apiInstance = new api.AuthApi(apiConfiguration());
-  const newUser = new api.UserCreate()
-  newUser.email = generateRandomString() + '@example.com'
-  newUser.password = generateRandomString()
-  const user: api.UserRead = await apiInstance.registerRegisterUsersAuthRegisterPost(newUser)
-  expect(user).toBeDefined()
+  const wrapper = createWrapper()
+  const password = generateRandomString()
+  const newUser = await createUser({password: password})
 
   wrapper.vm.username = newUser.email
-  wrapper.vm.password = newUser.password
-  // Force Vue to re-render
-  await wrapper.vm.$nextTick()
-  
+  wrapper.vm.password = password
+
   const submitButton = wrapper.find('#submit-login')
   await submitButton.trigger('click')
   await waitForTestTriggers()
-
-  await wrapper.vm.$nextTick()
-  await flushPromises()
-  const successMessage2 = wrapper.find('#response-message')
-  expect(successMessage2.exists()).toBeFalsy()
+  await testIsSuccessResponseMessage(wrapper)
 })
 
 
 
 test('check submit incorrect login', async () => {
-  const wrapper = mount(Login, {
-    global: {
-      plugins: [i18n]
-    }
-  })
-  const apiInstance = new api.AuthApi(apiConfiguration());
-  const newUser = new api.UserCreate()
-  newUser.email = generateRandomString() + '@example.com'
-  newUser.password = generateRandomString()
-  const user: api.UserRead = await apiInstance.registerRegisterUsersAuthRegisterPost(newUser)
-  expect(user).toBeDefined()
-
-  wrapper.vm.username = newUser.email + generateRandomString()
-  wrapper.vm.password = newUser.password + generateRandomString()
+  const wrapper = createWrapper()
+  wrapper.vm.username = generateEmail()
+  wrapper.vm.password = generateRandomString()
   const submitButton = wrapper.find('#submit-login')
   await submitButton.trigger('click')
   await waitForTestTriggers()
-  const failedMessage = wrapper.find('#response-message')
-  expect(failedMessage.exists()).toBeTruthy()
+  await testIsServerErrorResponseMessage(wrapper, 400)
 })

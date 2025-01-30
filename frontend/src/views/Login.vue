@@ -23,7 +23,7 @@
         </label>
         <button
           id="submit-login"
-          @click="loadLogin"
+          @click="this.submitLogin()"
           class="common-button w-full"
         >
           Submit
@@ -62,6 +62,7 @@ export default {
         const apiInstance = new api.AuthApi(apiConfiguration())    
         const responseValid = await apiInstance.authJwtLoginUsersJwtLoginPost(this.username, this.password) as api.BearerResponse
         setJwtToken(responseValid.accessToken)
+        this.responseCode = 200
       } catch (error) {
         if (error instanceof ApiException) {
           console.log(error.code)
