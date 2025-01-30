@@ -2,24 +2,27 @@ import { expect, test } from 'vitest'
 import { flushPromises, mount } from '@vue/test-utils'
 import { generateRandomString } from '@/utils/helpers'
 import Login from '@/views/Login.vue'
-import { apiConfiguration } from '@/utils/server'
-import * as api from '@/api'
+import router from '@/router';
 import i18n from '@/i18n'
 import { createUser, generateEmail } from '../test_utils/auth'
 import { testIsCloseResponseMessage, testIsServerErrorResponseMessage, testIsSuccessResponseMessage, testRedirectResponseMessage } from '../test_utils/responsemessage'
 import { waitForTestTriggers } from '../test_utils/helpers'
+import { HOME_ROUTE } from '@/router/routes';
 
-const createWrapper = () => {
-  return mount(Login, {
+const createWrapper = async () => {
+  const wrapper = mount(Login, {
       global: {
-        plugins: [i18n]
+        plugins: [i18n, router]
       }
     }
   )
+  router.push(HOME_ROUTE);
+  await router.isReady();
+  return wrapper
 }
 
 test('write text in login', async () => {
-  const wrapper = createWrapper()
+  const wrapper = await createWrapper()
   const newMsg = generateRandomString()  // New message
   const input = wrapper.find('#username')
   await input.setValue(newMsg)  // Set the input value
@@ -29,7 +32,7 @@ test('write text in login', async () => {
 })
 
 test('change and read username directly', async () => {
-  const wrapper = createWrapper()
+  const wrapper = await createWrapper()
   const newEmail = generateEmail()
   
   wrapper.vm.username = newEmail
@@ -43,7 +46,7 @@ test('change and read username directly', async () => {
 })
 
 test('check password input for hide option', async () => {
-  const wrapper = createWrapper()
+  const wrapper = await createWrapper()
   const newPassword = generateRandomString(10)
   wrapper.vm.password = newPassword
   
@@ -68,7 +71,7 @@ test('check password input for hide option', async () => {
 
 
 test('check submit login', async () => {
-  const wrapper = createWrapper()
+  const wrapper = await createWrapper()
   const password = generateRandomString()
   const newUser = await createUser({password: password})
 
@@ -78,14 +81,13 @@ test('check submit login', async () => {
   const submitButton = wrapper.find('#submit-login')
   await submitButton.trigger('click')
   await waitForTestTriggers()
-  await testIsSuccessResponseMessage(wrapper)
-  await testRedirectResponseMessage(wrapper, '/')
+  expect(wrapper.vm.$route.path).toBe(HOME_ROUTE)
 })
 
 
 
 test('check submit incorrect login', async () => {
-  const wrapper = createWrapper()
+  const wrapper = await createWrapper()
   wrapper.vm.username = generateEmail()
   wrapper.vm.password = generateRandomString()
   const submitButton = wrapper.find('#submit-login')

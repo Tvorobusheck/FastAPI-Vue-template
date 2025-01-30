@@ -5,13 +5,14 @@ import Registration from '@/views/Registration.vue';
 import Login from '@/views/Login.vue'
 import Profile from '@/views/Profile.vue'
 import Logout from '@/views/Logout.vue';
+import * as constants from '@/router/routes'
 
 const routes = [
-  { path: '/', component: Home },
-  { path: '/profile', component: Profile },
-  { path: '/registration', component: Registration },
-  { path: '/login', component: Login },
-  { path: '/logout', component: Logout },
+  { path: constants.HOME_ROUTE, component: Home },
+  { path: constants.PROFILE_ROUTE, component: Profile },
+  { path: constants.REGISTRATION_ROUTE, component: Registration },
+  { path: constants.LOGIN_ROUTE, component: Login },
+  { path: constants.LOGOUT_ROUTE, component: Logout },
 ];
 
 const router = createRouter({

@@ -6,6 +6,7 @@ import { clearJwtToken, isLogedIn } from '@/utils/auth';
 import { createAndLoginUser, logoutUser } from '../test_utils/auth';
 import { waitForTestTriggers } from '../test_utils/helpers';
 import { describe } from 'node:test';
+import { HOME_ROUTE, LOGIN_ROUTE, LOGOUT_ROUTE, PROFILE_ROUTE, REGISTRATION_ROUTE } from '@/router/routes';
 
 
 async function refreshAuth(wrapper: VueWrapper<InstanceType<typeof App>>) {
@@ -14,7 +15,7 @@ async function refreshAuth(wrapper: VueWrapper<InstanceType<typeof App>>) {
 }
 
 async function createWrapper(authorized: boolean = false): Promise<VueWrapper<InstanceType<typeof App>>> {
-  router.push('/')
+  router.push(HOME_ROUTE)
   // Wait for the router to be ready
   await router.isReady()
   const wrapper = mount(App, {
@@ -45,8 +46,7 @@ describe('registration tab', () =>{
   test('check redirect button to registration', async () => {
     const wrapper = await createWrapper()
     await clickNav(wrapper, tabName)
-    const emailInput = wrapper.find('#email')
-    expect(emailInput.exists()).toBeTruthy()
+    expect(wrapper.vm.$route.path).toBe(REGISTRATION_ROUTE)
   })
 
   test('hide registration for authorized user', async () => {
@@ -60,8 +60,7 @@ describe('login tab', () => {
   test('check redirect button to login', async () => {
     const wrapper = await createWrapper()
     await clickNav(wrapper, tabName)
-    const emailInput = wrapper.find('#username')
-    expect(emailInput.exists()).toBeTruthy()
+    expect(wrapper.vm.$route.path).toBe(LOGIN_ROUTE)
   })
   test('hide login tab for auth user', async () => {
     const wrapper = await createWrapper(true)
@@ -78,7 +77,7 @@ describe('profile tab', () => {
   test('check redirect button to profile', async () => {
     const wrapper = await createWrapper(true)
     await clickNav(wrapper, tabName)
-    expect(wrapper.find('#profile-info').exists()).toBeTruthy()
+    expect(wrapper.vm.$route.path).toBe(PROFILE_ROUTE)
   })
 })
 
@@ -107,5 +106,6 @@ describe('logout tab', () => {
     await waitForTestTriggers()
     await refreshAuth(wrapper)
     expect(wrapper.find('#nav-logout').exists()).toBeFalsy()
+    expect(wrapper.vm.$route.path).toBe(LOGOUT_ROUTE)
   })
 })

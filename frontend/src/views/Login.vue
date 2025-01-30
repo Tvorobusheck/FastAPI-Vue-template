@@ -46,6 +46,7 @@ import '@/styles.css'
 import { withLoading } from '@/components/Loading.vue'
 import ResponseMessage from '@/components/ResponseMessage.vue'
 import { setJwtToken } from '@/utils/auth';
+import { HOME_ROUTE } from '@/router/routes';
 
 export default {
   name: 'Login',
@@ -68,9 +69,8 @@ export default {
         const apiInstance = new api.AuthApi(apiConfiguration())    
         const responseValid = await apiInstance.authJwtLoginUsersJwtLoginPost(this.username, this.password) as api.BearerResponse
         setJwtToken(responseValid.accessToken)
-        this.responseCode = 200
-        this.redirectRoute = '/'
         this.$emit('authEvent')
+        this.$router.push({ path: HOME_ROUTE })
       } catch (error) {
         if (error instanceof ApiException) {
           console.log(error.code)

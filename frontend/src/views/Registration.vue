@@ -45,6 +45,7 @@ import { withLoading } from '@/components/Loading.vue';
 import ResponseMessage from '@/components/ResponseMessage.vue'
 import i18n from '@/i18n';
 import { setJwtToken } from '@/utils/auth';
+import { HOME_ROUTE } from '@/router/routes';
 
 export default {
   name: 'Registration',
@@ -69,7 +70,7 @@ export default {
         const jwtResponse = await apiInstance.authJwtLoginUsersJwtLoginPost(this.regData.email, this.regData.password)
         setJwtToken(jwtResponse.accessToken)
         this.responseCode = 200
-        this.redirectRoute = '/'
+        this.redirectRoute = HOME_ROUTE
         this.$emit('authEvent')
       } catch (error) {
         if (error instanceof api.ApiException) {
