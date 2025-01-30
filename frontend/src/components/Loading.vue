@@ -1,6 +1,6 @@
 <template>
   <div v-if="isLoading" class="fixed inset-0 flex items-center justify-center bg-gray-100 bg-opacity-75 z-50">
-    <div class="loader"></div>
+    <div id="loader" class="loader"></div>
   </div>
 </template>
 
@@ -10,11 +10,17 @@ import { defineComponent, ref } from 'vue'
 const isLoading = ref(false)
 
 export const withLoading = async <T>(fn: () => Promise<T>): Promise<T> => {
-  isLoading.value = true
+  let timeoutId: number | undefined
   try {
+    timeoutId = window.setTimeout(() => {
+      isLoading.value = true
+    }, 500)
     const result = await fn()
     return result
   } finally {
+    if (timeoutId) {
+      clearTimeout(timeoutId)
+    }
     isLoading.value = false
   }
 }
