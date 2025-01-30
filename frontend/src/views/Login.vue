@@ -63,6 +63,7 @@ export default {
         const responseValid = await apiInstance.authJwtLoginUsersJwtLoginPost(this.username, this.password) as api.BearerResponse
         setJwtToken(responseValid.accessToken)
         this.responseCode = 200
+        this.$emit('authEvent')
       } catch (error) {
         if (error instanceof ApiException) {
           console.log(error.code)

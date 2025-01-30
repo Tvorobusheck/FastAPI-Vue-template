@@ -2,7 +2,6 @@
 
 ## Tasks
 ### Frontend
-- [ ] Hide some navs for auth/unauth users
 - [ ] Redirects
 - [ ] BusinessItem create, read, update and delete with permissions control for new project.
 - [ ] Admin Panel ([template from git](https://github.com/PanJiaChen/vue-element-admin), [templates from vuejs website](https://vuejs.org/ecosystem/themes))
@@ -35,6 +34,7 @@
 - [ ] Password recovery for new project.
 
 ## Completed
+- [x] Hide some navs for auth/unauth users
 - [x] Error and succeess messages
 - [x] Localization support
 - [x] Loading refactor to just a component

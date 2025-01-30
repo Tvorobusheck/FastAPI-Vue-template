@@ -13,17 +13,17 @@
         <div :class="{'block': isMenuOpen, 'hidden': !isMenuOpen}" class="w-full lg:flex lg:items-center lg:w-auto">
           <div class="text-sm lg:flex-grow">
             <RouterLink to="/" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-200 mr-4">Go to Home</RouterLink>
-            <RouterLink to="/profile" id="nav-profile" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-200 mr-4">Profile</RouterLink>
-            <RouterLink to="/registration" id="nav-registration" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-200 mr-4">Registration</RouterLink>
-            <RouterLink to="/login" id="nav-login" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-200 mr-4">Login</RouterLink>
-            <RouterLink to="/logout" id="nav-logout" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-200">Logout</RouterLink>
+            <RouterLink v-if="logedIn" to="/profile" id="nav-profile" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-200 mr-4">Profile</RouterLink>
+            <RouterLink v-if="!logedIn" to="/registration" id="nav-registration" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-200 mr-4">Registration</RouterLink>
+            <RouterLink v-if="!logedIn" to="/login" id="nav-login" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-200 mr-4">Login</RouterLink>
+            <RouterLink v-if="logedIn" to="/logout" id="nav-logout" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-200">Logout</RouterLink>
           </div>
         </div>
       </div>
     </nav>
     <Loading />
     <main class="flex-grow flex items-center justify-center container mx-auto p-4 bg-gray-100">
-      <RouterView class="w-full" />
+      <RouterView class="w-full" @authEvent="handleAuthEvent"/>
     </main>
     <footer class="bg-gray-800 text-white p-4">
       <div class="container mx-auto text-center">
@@ -40,23 +40,33 @@
 import { defineComponent, ref } from 'vue'
 import Loading from '@/components/Loading.vue';
 import '@/index.css'
+import { isLogedIn } from '@/utils/auth';
 
-export default defineComponent({
+const logedIn = ref(isLogedIn());
+
+export default {
   name: 'App',
   components: {
     Loading
+  },
+  methods: {
+    handleAuthEvent() {
+      logedIn.value = isLogedIn()
+    },
   },
   setup() {
     const isMenuOpen = ref(false)
     const toggleMenu = () => {
       isMenuOpen.value = !isMenuOpen.value
     }
+    
     return {
       isMenuOpen,
-      toggleMenu
+      toggleMenu,
+      logedIn: logedIn
     }
   }
-})
+}
 </script>
 
 <style>

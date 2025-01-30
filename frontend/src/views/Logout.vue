@@ -20,39 +20,43 @@ import { clearJwtToken, isLogedIn } from '@/utils/auth'
 import '@/styles.css'
 import { withLoading } from '@/components/Loading.vue'
 
-export default defineComponent({
-  name: 'Logout',
-  setup() {
-    const isLogout = ref(false)
+const isLogout = ref(false)
 
-    const logout = async () => {
+async function logout() {
+  try {
+    if (isLogedIn()) {
+      const apiInstance = new api.AuthApi(apiConfiguration())
       try {
-        if (isLogedIn()) {
-          const apiInstance = new api.AuthApi(apiConfiguration())
-          try {
-            await apiInstance.authJwtLogoutUsersJwtLogoutPost()
-          } catch (error) {
-            console.error('Failed to logout:', error)
-          } finally {
-            clearJwtToken()
-          }
-        }
-        isLogout.value = !isLogedIn()
+        await apiInstance.authJwtLogoutUsersJwtLogoutPost()
       } catch (error) {
-        console.error('Failed to fetch profile data:', error)
+        console.error('Failed to logout:', error)
+      } finally {
+        clearJwtToken()
+        this.$emit('authEvent')
       }
     }
+    isLogout.value = !isLogedIn()
+  } catch (error) {
+    console.error('Failed to fetch profile data:', error)
+  }
+}
+
+export default {
+  name: 'Logout',
+  methods: {
+    logout
+  },
+  setup() {
 
     onMounted(() => {
       withLoading(() => logout())
     })
 
     return {
-      isLogout,
-      logout
+      isLogout
     }
   }
-})
+}
 </script>
 
 <style scoped>
