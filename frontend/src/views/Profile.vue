@@ -7,9 +7,6 @@
           <p><strong>Email:</strong> <span id="email">{{ userData.email }}</span></p>
           <!-- Add more fields as needed -->
         </div>
-        <div v-else>
-          <p>Loading...</p>
-        </div>
       </div>
     </div>
   </div>

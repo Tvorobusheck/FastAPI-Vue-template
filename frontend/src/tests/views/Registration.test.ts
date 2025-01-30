@@ -7,9 +7,11 @@ import i18n from '@/i18n'
 import { generateUserCreate } from '../test_utils/auth'
 import { testIsSuccessResponseMessage, testMessageContains, testNoResponseMessage } from '../test_utils/responsemessage'
 import { waitForTestTriggers } from '../test_utils/helpers'
+import { clearJwtToken, isLogedIn } from '@/utils/auth'
 
 
 const createWrapper = () => {
+  clearJwtToken()
   return mount(Registration, {
       global: {
         plugins: [i18n]
@@ -85,6 +87,7 @@ test('check submit registration', async () => {
   await testNoResponseMessage(wrapper)
   await clickSubmit(wrapper)
   await testIsSuccessResponseMessage(wrapper)
+  expect(isLogedIn()).toBeTruthy()
 })
 
 
