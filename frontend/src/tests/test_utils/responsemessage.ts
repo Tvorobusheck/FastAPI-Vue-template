@@ -39,3 +39,24 @@ export async function testIsInvalidDataResponseMessage(wrapper: VueWrapper) {
 export async function testIsServerErrorResponseMessage(wrapper: VueWrapper, responseCode: number) {
     await testMessageContains(wrapper, i18n.global.t('messages.SERVER_ERROR').replace('{code}', responseCode.toString()))
 }
+
+export async function testIsCloseResponseMessage(wrapper: VueWrapper) {
+    await wrapper.vm.$nextTick()
+    await flushPromises()
+    let closeButton = wrapper.find("#close-response-message")
+    expect(closeButton.exists()).toBeTruthy()
+}
+
+export async function clickCloseResponseMessage(wrapper: VueWrapper) {
+    let closeButton = wrapper.find("#close-response-message")
+    await closeButton.trigger('click')
+    await wrapper.vm.$nextTick()
+    await flushPromises()
+}
+
+export async function testRedirectResponseMessage(wrapper: VueWrapper, redirectRoute: string) {
+    await wrapper.vm.$nextTick()
+    await flushPromises()
+    let redirectText = wrapper.find("#redirect-response-message")
+    expect(redirectText.attributes('href')).toBe(redirectRoute)
+}

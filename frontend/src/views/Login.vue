@@ -1,6 +1,11 @@
 <template>
   <div class="common-container">
-    <ResponseMessage :responseCode="responseCode" @update:responseCode="responseCode = $event" />
+    <ResponseMessage 
+      :responseCode="responseCode" 
+      @update:responseCode="responseCode = $event" 
+      :redirectRoute="redirectRoute"
+      @update:redirectRoute="redirectRoute = $event"
+      />
     <div class="common-card">
       <h1 class="text-2xl font-bold mb-6 text-center">Login</h1>
       <div>
@@ -52,7 +57,8 @@ export default {
       username: '',
       password: '',
       passwordVisible: false, // Password visibility is disabled by default
-      responseCode: null // Response code for error messages
+      responseCode: null, // Response code for error messages
+      redirectRoute: null
     }
   },
   methods: {
@@ -63,6 +69,7 @@ export default {
         const responseValid = await apiInstance.authJwtLoginUsersJwtLoginPost(this.username, this.password) as api.BearerResponse
         setJwtToken(responseValid.accessToken)
         this.responseCode = 200
+        this.redirectRoute = '/'
         this.$emit('authEvent')
       } catch (error) {
         if (error instanceof ApiException) {

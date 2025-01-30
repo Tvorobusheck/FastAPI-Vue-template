@@ -2,12 +2,13 @@ import { expect, test } from 'vitest'
 import { flushPromises, mount, VueWrapper } from '@vue/test-utils'
 import ResponseMessage from '@/components/ResponseMessage.vue'
 import i18n from '@/i18n'
-import { findAnyResponseMessage, testIsAccessDeniedResponseMessage, testIsInvalidDataResponseMessage, testIsNotFoundResponseMessage, testIsServerErrorResponseMessage, testIsSuccessResponseMessage, testMessageContains, testNoResponseMessage } from '../test_utils/responsemessage'
+import { clickCloseResponseMessage, findAnyResponseMessage, testIsAccessDeniedResponseMessage, testIsCloseResponseMessage, testIsInvalidDataResponseMessage, testIsNotFoundResponseMessage, testIsServerErrorResponseMessage, testIsSuccessResponseMessage, testMessageContains, testNoResponseMessage, testRedirectResponseMessage } from '../test_utils/responsemessage'
 
 type ResponseMessageWrapper = VueWrapper<Partial<{
     responseCode: number;
     customText: string;
-}>> 
+    redirectRoute: string;
+}>>
 
 const createWrapper = () : ResponseMessageWrapper => {
         return mount(ResponseMessage, {
@@ -66,10 +67,8 @@ test('test close error message', async () => {
     const wrapper = createWrapper()
     wrapper.vm.responseCode = 200
     await testIsSuccessResponseMessage(wrapper)
-    let closeButton = wrapper.find("#close-response-message")
-    await closeButton.trigger('click')
-    await wrapper.vm.$nextTick()
-    await flushPromises()
+    await testIsCloseResponseMessage(wrapper)
+    await clickCloseResponseMessage(wrapper)
     await testNoResponseMessage(wrapper)
 })
 
@@ -78,4 +77,12 @@ test('test custom text message', async () => {
     const customText = "Hello, world!"
     wrapper.vm.customText = customText
     await testMessageContains(wrapper, customText)
+})
+
+test('test close error message', async () => {
+    const wrapper = createWrapper()
+    const redirectRoute = "/test-path"
+    wrapper.vm.redirectRoute = redirectRoute
+    expect((await findAnyResponseMessage(wrapper)).exists()).toBeTruthy()
+    await testRedirectResponseMessage(wrapper, redirectRoute)
 })

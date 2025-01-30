@@ -6,7 +6,7 @@ import { apiConfiguration } from '@/utils/server'
 import * as api from '@/api'
 import i18n from '@/i18n'
 import { createUser, generateEmail } from '../test_utils/auth'
-import { testIsServerErrorResponseMessage, testIsSuccessResponseMessage } from '../test_utils/responsemessage'
+import { testIsCloseResponseMessage, testIsServerErrorResponseMessage, testIsSuccessResponseMessage, testRedirectResponseMessage } from '../test_utils/responsemessage'
 import { waitForTestTriggers } from '../test_utils/helpers'
 
 const createWrapper = () => {
@@ -79,6 +79,7 @@ test('check submit login', async () => {
   await submitButton.trigger('click')
   await waitForTestTriggers()
   await testIsSuccessResponseMessage(wrapper)
+  await testRedirectResponseMessage(wrapper, '/')
 })
 
 
@@ -91,4 +92,5 @@ test('check submit incorrect login', async () => {
   await submitButton.trigger('click')
   await waitForTestTriggers()
   await testIsServerErrorResponseMessage(wrapper, 400)
+  await testIsCloseResponseMessage(wrapper)
 })

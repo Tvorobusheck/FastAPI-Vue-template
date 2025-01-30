@@ -9,7 +9,7 @@
 - [ ] Token Refresh
 
 ### Backend
-- [ ] alembic upgrade head on startup (fix)
+- [ ] alembic upgrade head on startup (fix, need to wait before database initialized)
 - [ ] BusinessItem
 - [ ] DB tests for BusinessItem
 - [ ] Permissions

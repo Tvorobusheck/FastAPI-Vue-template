@@ -67,7 +67,6 @@ describe('login tab', () => {
     const wrapper = await createWrapper(true)
     expect(wrapper.find(tabName).exists()).toBeFalsy()
   })
-  
 })
 
 describe('profile tab', () => {
