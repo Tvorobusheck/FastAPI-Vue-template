@@ -4,10 +4,10 @@ import { generateRandomString } from '@/utils/helpers'
 import Login from '@/views/Login.vue'
 import { apiConfiguration } from '@/utils/server'
 import * as api from '@/api'
-import { waitForTestTriggers } from '@/utils/helpers'
 import i18n from '@/i18n'
 import { createUser, generateEmail } from '../test_utils/auth'
 import { testIsServerErrorResponseMessage, testIsSuccessResponseMessage } from '../test_utils/responsemessage'
+import { waitForTestTriggers } from '../test_utils/helpers'
 
 const createWrapper = () => {
   return mount(Login, {

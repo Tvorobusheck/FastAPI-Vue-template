@@ -26,7 +26,7 @@
         </label>
         <button
           id="submitRegistration"
-          @click="submitRegistration()"
+          @click="this.loadRegistration()"
           class="common-button w-full"
         >
           Submit
@@ -77,8 +77,8 @@ export default {
         }
       }
     },
-    loadRegistration() {
-      withLoading(() => this.submitRegistration())
+    async loadRegistration() {
+      await withLoading(() => this.submitRegistration())
     }
   }
 }

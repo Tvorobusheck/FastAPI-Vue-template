@@ -2,14 +2,12 @@
 
 ## Tasks
 ### Frontend
-- [ ] Error and succeess messages
-- [ ] Hide some navs with condition
+- [ ] Hide some navs for auth/unauth users
 - [ ] Redirects
 - [ ] BusinessItem create, read, update and delete with permissions control for new project.
 - [ ] Admin Panel ([template from git](https://github.com/PanJiaChen/vue-element-admin), [templates from vuejs website](https://vuejs.org/ecosystem/themes))
 - [ ] Improve manifest for PWA
 - [ ] Token Refresh
-- [ ] Localization support
 
 ### Backend
 - [ ] alembic upgrade head on startup (fix)
@@ -37,6 +35,8 @@
 - [ ] Password recovery for new project.
 
 ## Completed
+- [x] Error and succeess messages
+- [x] Localization support
 - [x] Loading refactor to just a component
 - [x] Fix database in backend container (make it PostgeSQL)
 - [x] Loadings (Frontend)

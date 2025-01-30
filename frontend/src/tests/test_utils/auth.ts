@@ -13,6 +13,13 @@ export function generateEmail() {
                         generateRandomString().toLocaleLowerCase() + '.com'
 }
 
+export function generateUserCreate() : api.UserCreate {
+    const newUser = new api.UserCreate()
+    newUser.email = generateEmail()
+    newUser.password = generateRandomString()
+    return newUser
+}
+
 export async function createUser({ apiInstance, email, password }: 
                                     { apiInstance?: api.AuthApi, 
                                         email?: string, 

@@ -1,11 +1,12 @@
 import { expect, test } from 'vitest'
-import { flushPromises, mount } from '@vue/test-utils'
-import { generateRandomString, waitForTestTriggers } from '@/utils/helpers'
+import { flushPromises, mount, VueWrapper } from '@vue/test-utils'
+import { generateRandomString } from '@/utils/helpers'
 import Registration from '@/views/Registration.vue'
 import * as api from '@/api'
 import i18n from '@/i18n'
-import { generateEmail } from '../test_utils/auth'
+import { generateUserCreate } from '../test_utils/auth'
 import { testIsSuccessResponseMessage, testMessageContains, testNoResponseMessage } from '../test_utils/responsemessage'
+import { waitForTestTriggers } from '../test_utils/helpers'
 
 
 const createWrapper = () => {
@@ -70,39 +71,54 @@ test('check password input for hide option', async () => {
   expect(inputPassword.attributes('type')).toBe('text')
 })
 
+async function clickSubmit(wrapper: VueWrapper) {
+  const submitButton = wrapper.find('#submitRegistration')
+  await submitButton.trigger('click')
+  await waitForTestTriggers()
+}
+
 test('check submit registration', async () => {
   const wrapper = createWrapper()
-  const newUser = new api.UserCreate()
-  newUser.email = generateEmail()
-  newUser.password = generateRandomString()
+  const newUser = generateUserCreate()
   wrapper.vm.regData = newUser
   await wrapper.vm.$nextTick()
-  
-  const submitButton = wrapper.find('#submitRegistration')
   await testNoResponseMessage(wrapper)
-  //await submitButton.trigger('click')
-  await wrapper.vm.submitRegistration()
-  await wrapper.vm.$nextTick()
-  await flushPromises()
-  await waitForTestTriggers()
+  await clickSubmit(wrapper)
   await testIsSuccessResponseMessage(wrapper)
 })
 
 
 test('check submit existed registration', async () => {
   const wrapper = createWrapper()
-  const newUser = new api.UserCreate()
-  newUser.email = generateEmail()
-  newUser.password = generateRandomString()
+  const newUser = generateUserCreate()
   wrapper.vm.regData = newUser
-  // Force Vue to re-render
   await wrapper.vm.$nextTick()
   
-  // const submitButton = wrapper.find('#submitRegistration')
-  await testNoResponseMessage(wrapper)
-  await wrapper.vm.submitRegistration()
-  await wrapper.vm.submitRegistration()
-  await wrapper.vm.$nextTick()
-  await flushPromises()
+  await clickSubmit(wrapper)
+  await clickSubmit(wrapper)
   await testMessageContains(wrapper, i18n.global.t('messages.REGISTRATION_ERROR'))
+})
+
+
+test('check submit registration with invalid data', async () => {
+  const wrapper = createWrapper()
+  const newUser = generateUserCreate()
+  newUser.email = generateRandomString() // not valid email
+  wrapper.vm.regData = newUser
+  await wrapper.vm.$nextTick()
+
+  await clickSubmit(wrapper)
+  await testMessageContains(wrapper, i18n.global.t('messages.INVALID_DATA'))
+})
+
+
+
+test('check submit registration with empty data', async () => {
+  const wrapper = createWrapper()
+  const newUser = new api.UserCreate()
+  wrapper.vm.regData = newUser
+  await wrapper.vm.$nextTick()
+  
+  await clickSubmit(wrapper)
+  await testMessageContains(wrapper, i18n.global.t('messages.INVALID_DATA'))
 })

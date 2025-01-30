@@ -23,7 +23,7 @@
         </label>
         <button
           id="submit-login"
-          @click="this.submitLogin()"
+          @click="this.loadLogin()"
           class="common-button w-full"
         >
           Submit
@@ -73,8 +73,8 @@ export default {
         }
       }
     },
-    loadLogin() {
-      withLoading(() => this.submitLogin())
+    async loadLogin() {
+      await withLoading(() => this.submitLogin())
     }
   }
 }
