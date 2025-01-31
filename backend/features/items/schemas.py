@@ -1,3 +1,4 @@
+import uuid
 from pydantic import BaseModel
 
 class ItemBaseSchema(BaseModel):
@@ -6,6 +7,7 @@ class ItemBaseSchema(BaseModel):
 
 class ItemSchema(ItemBaseSchema):
     id: int
+    owner_id: uuid.UUID
     
 class ItemCreateSchema(ItemBaseSchema):
     pass

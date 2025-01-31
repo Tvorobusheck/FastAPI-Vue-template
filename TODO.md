@@ -2,7 +2,9 @@
 
 ## Tasks
 ### Backend
-- [ ] User's id for items
+- [ ] item's create route
+- [ ] item's path route
+- [ ] item's update route
 - [ ] Permissions
 - [ ] Permission control for Items
 - [ ] Sub Items
@@ -30,6 +32,7 @@
 - [ ] Add auto credentials from .env.
 - [ ] Improve run options in vscode.
 - [ ] A simple script to initialize a new project based on this template. It will set up the necessary folder structure, configuration files, and install dependencies for both frontend and backend.
+- [ ] Non-root in containers
 - [ ] Lint support
 
 
@@ -38,6 +41,8 @@
 - [ ] Password recovery for new project.
 
 ## Completed
+- [x] User's id for items
+- [x] Alembic autogenerate migrations script
 - [x] User and jwt fixtures
 - [x] Redirects
 - [x] Hide some navs for auth/unauth users
