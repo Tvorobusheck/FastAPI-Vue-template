@@ -1,5 +1,7 @@
 from httpx import AsyncClient
 import pytest
+
+from features.users.fixtures import create_user
 from . import schemas, router
 from core.fixtures import *
 from core.utils import random_str, path_with_id

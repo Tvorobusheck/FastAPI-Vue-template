@@ -3,6 +3,8 @@ from pydantic import ValidationError
 import pytest
 import urllib.parse
 
+from .fixtures import *
+
 from . import schemas, router
 from core.fixtures import *
 from core.utils import *
@@ -15,10 +17,13 @@ def test_schema():
 
 
 async def test_create_user(client: AsyncClient):
-    new_user = schemas.UserCreate(email="1@example.com", password=random_str())
+    email = random_str() + '@example.com'
+    password = random_str()
+    new_user = schemas.UserCreate(email=email, password=password)
     response = await client.post(router.REGISTER_PATH, json=new_user.model_dump())
     assert response.status_code == 201
 
+    new_user = schemas.UserCreate(email=email, password=random_str())
     repeat_response = await client.post(router.REGISTER_PATH, json=new_user.model_dump())
     assert repeat_response.status_code == 400
 
@@ -64,17 +69,28 @@ async def test_jwt_user(client: AsyncClient):
     assert login_response.status_code == 200
     jwt_token = login_response.json()['access_token']
     assert len(jwt_token) > 0
-    me_response = await client.get(router.ME_PATH, headers=jwt_header(jwt_token))
+    me_response = await client.get(router.ME_PATH, headers=get_jwt_header(jwt_token))
     assert me_response.status_code == 200
     me_schema = schemas.UserRead(**me_response.json())
     assert me_schema.email == email
-    me_unauth_response = await client.get(router.ME_PATH, headers=jwt_header(random_str()))
+    me_unauth_response = await client.get(router.ME_PATH, headers=get_jwt_header(random_str()))
     assert me_unauth_response.status_code == 401
 
-    logout_response = await client.post(router.LOGOUT_PATH, headers=jwt_header(jwt_token))
+    logout_response = await client.post(router.LOGOUT_PATH, headers=get_jwt_header(jwt_token))
     assert logout_response.status_code == 204
     # Logout doesn't remove jwt token
-    logout_response = await client.post(router.LOGOUT_PATH, headers=jwt_header(jwt_token))
+    logout_response = await client.post(router.LOGOUT_PATH, headers=get_jwt_header(jwt_token))
     assert logout_response.status_code == 204
     
-    
+
+async def test_jwt_fixture(client: AsyncClient, jwt: str):
+    assert type(jwt) is str
+    assert len(jwt) > 0
+    me_response = await client.get(router.ME_PATH, headers=get_jwt_header(jwt))
+    assert me_response.status_code == 200
+
+async def test_user_id_fixture(client: AsyncClient, jwt: str, user_id: uuid.UUID):
+    me_response = await client.get(router.ME_PATH, headers=get_jwt_header(jwt))
+    assert me_response.status_code == 200
+    me_schema = schemas.UserRead(**me_response.json())
+    assert me_schema.id == user_id

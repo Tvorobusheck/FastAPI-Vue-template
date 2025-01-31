@@ -4,5 +4,5 @@ export async function waitForMS(ms: number) {
 }
   
 export async function waitForTestTriggers() {
-    await waitForMS(1000)
+    await waitForMS(1500)
 }

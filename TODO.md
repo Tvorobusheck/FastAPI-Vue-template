@@ -1,19 +1,24 @@
 # TODO List
 
 ## Tasks
+### Backend
+- [ ] User's id for items
+- [ ] Permissions
+- [ ] Permission control for Items
+- [ ] Sub Items
+- [ ] alembic upgrade head on startup (fix, need to wait before database initialized)
+- [ ] Token Refresh [for fastapi_users](https://github.com/fastapi-users/fastapi-users/discussions/350)
+
 ### Frontend
-- [ ] BusinessItem create, read, update and delete with permissions control for new project.
-- [ ] Admin Panel ([template from git](https://github.com/PanJiaChen/vue-element-admin), [templates from vuejs website](https://vuejs.org/ecosystem/themes))
+- [ ] Wrapper and api's fixtures
+- [ ] Item create page
+- [ ] Item list page
+- [ ] Item view page
+- [ ] Item update and delete page
+- [ ] Sub items
 - [ ] Improve manifest for PWA
 - [ ] Token Refresh
-
-### Backend
-- [ ] alembic upgrade head on startup (fix, need to wait before database initialized)
-- [ ] BusinessItem
-- [ ] DB tests for BusinessItem
-- [ ] Permissions
-- [ ] Permission control and business logic for BusinessItem
-- [ ] Token Refresh [for fastapi_users](https://github.com/fastapi-users/fastapi-users/discussions/350)
+- [ ] Admin Panel ([template from git](https://github.com/PanJiaChen/vue-element-admin), [templates from vuejs website](https://vuejs.org/ecosystem/themes))
 
 ### DevOps
 - [ ] Fix debug
@@ -33,6 +38,7 @@
 - [ ] Password recovery for new project.
 
 ## Completed
+- [x] User and jwt fixtures
 - [x] Redirects
 - [x] Hide some navs for auth/unauth users
 - [x] Error and succeess messages

@@ -9,7 +9,7 @@ def random_str(length: int = 8) -> str:
 def path_with_id(router_path: str, id: int | uuid.UUID) -> str:
     return router_path + '/' + str(id)
 
-def jwt_header(jwt_token: str) -> dict:
+def get_jwt_header(jwt_token: str) -> dict:
     return {"Authorization": f"Bearer {jwt_token}"}
 
 def x_www_form_urlencoded_header() -> str:
