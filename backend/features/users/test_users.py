@@ -1,3 +1,4 @@
+from fastapi import Depends
 from httpx import AsyncClient
 from pydantic import ValidationError
 import pytest
@@ -5,7 +6,7 @@ import urllib.parse
 
 from .fixtures import *
 
-from . import schemas, router
+from . import models, schemas, router
 from core.fixtures import *
 from core.utils import *
 
@@ -94,3 +95,6 @@ async def test_user_id_fixture(client: AsyncClient, jwt: str, user_id: uuid.UUID
     assert me_response.status_code == 200
     me_schema = schemas.UserRead(**me_response.json())
     assert me_schema.id == user_id
+
+async def test_dep(user: models.User = Depends(models.current_active_user)):
+    assert 1 == 1
