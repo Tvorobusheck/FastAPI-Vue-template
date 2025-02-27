@@ -38,4 +38,4 @@ async def item_owner(item: schemas.ItemCreateSchema, current_user: User = Depend
 
 @router.post(path='/test-dep')
 async def test_dep(item: schemas.ItemCreateSchema = Depends(item_owner)):
-    return item
+    return item  # TODO: return ItemSchema instead of ItemSchemaCreate

@@ -14,6 +14,22 @@ async def test_read_items(client: AsyncClient, jwt: str):
     assert response.status_code == 401
 
 
+async def test_create_item_test_dep(client: AsyncClient, jwt: str, user_id: uuid.UUID):
+    new_item = schemas.ItemCreateSchema(name=random_str(), 
+                                        description=random_str())
+    create_response = await client.post('/test-dep', 
+                                        json={'name': new_item.name, 'description': new_item.description}, 
+                                        headers=get_jwt_header(jwt))
+    assert create_response.status_code == 200
+    created_item_dict = create_response.json()
+    created_item_dict['owner_id'] = uuid.UUID(created_item_dict['owner_id'])
+    created_item = schemas.ItemCreateSchema(**created_item_dict)
+    assert new_item.name == created_item.name
+    assert created_item.owner_id == user_id
+
+
+
+
 async def test_create_item(client: AsyncClient, jwt: str, user_id: uuid.UUID):
     read_response = await client.get(router.ROUTER_PATH, headers=get_jwt_header(jwt))
     data = read_response.json()['data']
