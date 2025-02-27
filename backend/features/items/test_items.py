@@ -35,10 +35,10 @@ async def test_create_item(client: AsyncClient, jwt: str, user_id: uuid.UUID):
     data = read_response.json()['data']
     old_quantity = len(data)
     assert old_quantity >= 0
-    # new_item = schemas.ItemCreateSchema(name=random_str(), 
-    #                                     description=random_str())
+    new_item = schemas.ItemCreateSchema(name=random_str(), 
+                                        description=random_str())
     create_response = await client.post(router.ROUTER_PATH, 
-                                        json={'name': random_str(), 'description': random_str()}, 
+                                        json={'name': new_item.name, 'description': new_item.description}, 
                                         headers=get_jwt_header(jwt))
     assert create_response.status_code == 200
     created_item = schemas.ItemSchema(**create_response.json())
