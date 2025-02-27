@@ -2,8 +2,9 @@
 # Add routers to core/router.py
 from typing import Annotated
 import uuid
-from fastapi import Depends
+from fastapi import Depends, HTTPException, Path
 from fastcrud import crud_router, EndpointCreator
+from sqlalchemy.ext.asyncio import AsyncSession
 from core.db import get_async_session
 from . import models, schemas
 from features.users.models import User, active_user_id, current_active_user
@@ -17,6 +18,13 @@ async def item_owner(item: schemas.ItemCreateSchema, current_user: User = Depend
     return item
 
 
+async def item_check_owner(session: Annotated[AsyncSession, Depends(get_async_session)], id: int = Path(),
+                            current_user: User = Depends(current_active_user)):
+    item = await session.get(models.Item, id)
+    if item.owner_id != current_user.id:
+        raise HTTPException(status_code=403)
+    
+
 router = crud_router(
     session=get_async_session,
     model=models.Item,
@@ -28,8 +36,8 @@ router = crud_router(
     create_deps=[current_active_user],
     read_deps=[current_active_user],
     read_multi_deps=[current_active_user],
-    update_deps=[current_active_user],
-    delete_deps=[current_active_user],
+    update_deps=[item_check_owner],
+    delete_deps=[item_check_owner],
     tags=["Items"],
 )
 
