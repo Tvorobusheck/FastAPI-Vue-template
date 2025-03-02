@@ -3,9 +3,10 @@ import uuid
 from fastapi import Depends
 from pydantic import BaseModel
 
+from features.users.ownership.schemas import OwnedBaseSchemaMixin
 
-class ItemBaseSchema(BaseModel):
-    owner_id: Optional[uuid.UUID] = None
+
+class ItemBaseSchema(OwnedBaseSchemaMixin, BaseModel):
     name: str
     description: str
 

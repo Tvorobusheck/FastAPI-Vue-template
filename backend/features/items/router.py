@@ -8,6 +8,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from core.db import get_async_session
 from . import models, schemas
 from features.users.common.models import User, active_user_id, current_active_user
+from features.users.ownership.dependencies import check_owner_dep, get_owner_dep
+
 
 ROUTER_PATH="/items"
 
@@ -24,14 +26,7 @@ async def item_owner_optionally(item: schemas.ItemBaseSchema, current_user: User
         item.owner_id = current_user.id
     return item
 
-
-async def item_check_owner(session: Annotated[AsyncSession, Depends(get_async_session)], id: int = Path(),
-                            current_user: User = Depends(current_active_user)):
-    item = await session.get(models.Item, id)
-    if item is None:
-        raise HTTPException(status_code=404)
-    if item.owner_id != current_user.id:
-        raise HTTPException(status_code=403)
+    
     
 
 router = crud_router(
@@ -43,16 +38,9 @@ router = crud_router(
     # included_methods=["read", "read_multi"],
     path=ROUTER_PATH,
     create_deps=[current_active_user],
-    read_deps=[item_check_owner],
+    read_deps=[check_owner_dep(models.Item)],
     read_multi_deps=[current_active_user],
-    update_deps=[item_check_owner],
-    delete_deps=[item_check_owner],
+    update_deps=[check_owner_dep(models.Item)],
+    delete_deps=[check_owner_dep(models.Item)],
     tags=["Items"],
 )
-
-async def my_dependency_function(item_id: int):
-    return {"item_id": item_id}
-
-@router.post(path='/test-dep')
-async def test_dep(item: Annotated[schemas.ItemCreateSchema, Depends(item_owner)]):
-    return item  # TODO: return ItemSchema instead of ItemSchemaCreate
