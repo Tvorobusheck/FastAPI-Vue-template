@@ -74,6 +74,6 @@ async def test_crud_item(client: AsyncClient, jwt: str):
                                           headers=get_jwt_header(jwt))
     assert remove_response.status_code == 200
 
-    read_response = await client.get(id_path, 
+    remove_response_2 = await client.get(id_path, 
                                      headers=get_jwt_header(jwt))
-    assert read_response != 200
+    assert remove_response_2.status_code == 404
