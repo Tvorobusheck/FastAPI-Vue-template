@@ -2,9 +2,6 @@
 
 ## Tasks
 ### Backend
-- [ ] item's create route
-- [ ] item's path route
-- [ ] item's update route
 - [ ] Permissions
 - [ ] Permission control for Items
 - [ ] Sub Items
@@ -41,6 +38,9 @@
 - [ ] Password recovery for new project.
 
 ## Completed
+- [x] item's create route
+- [x] item's path route
+- [x] item's update route
 - [x] User's id for items
 - [x] Alembic autogenerate migrations script
 - [x] User and jwt fixtures

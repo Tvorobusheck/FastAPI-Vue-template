@@ -49,7 +49,7 @@ async def test_create_item(client: AsyncClient, jwt: str, user_id: uuid.UUID):
     assert new_quantity == old_quantity + 1
 
     
-async def test_crud_item(client: AsyncClient, jwt: str):
+async def test_crud_item(client: AsyncClient, jwt: str, user_id: uuid.UUID):
     new_item = schemas.ItemCreateSchema(name=random_str(), description=random_str())
     create_response = await client.post(router.ROUTER_PATH, json=new_item.model_dump(), 
                                         headers=get_jwt_header(jwt))
@@ -69,6 +69,7 @@ async def test_crud_item(client: AsyncClient, jwt: str):
                                      headers=get_jwt_header(jwt))
     updated_item = schemas.ItemSchema(**read_response.json())
     assert updated_item.name == updating_item.name
+    assert updated_item.owner_id == user_id
 
     remove_response = await client.delete(id_path, 
                                           headers=get_jwt_header(jwt))
