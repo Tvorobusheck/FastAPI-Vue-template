@@ -7,7 +7,7 @@ from fastcrud import FilterConfig, crud_router, EndpointCreator
 from sqlalchemy.ext.asyncio import AsyncSession
 from core.db import get_async_session
 from . import models, schemas
-from features.users.models import User, active_user_id, current_active_user
+from features.users.common.models import User, active_user_id, current_active_user
 
 ROUTER_PATH="/items"
 

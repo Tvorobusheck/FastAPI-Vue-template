@@ -1,10 +1,10 @@
 from httpx import AsyncClient
 import pytest
 
-from features.users.fixtures import create_user
+from features.users.common.fixtures import create_user
 from . import schemas, router
 from core.fixtures import *
-from features.users.fixtures import jwt, user_id
+from features.users.common.fixtures import jwt, user_id
 from core.utils import get_jwt_header, random_str, path_with_id
 
 async def test_read_items(client: AsyncClient, jwt: str):

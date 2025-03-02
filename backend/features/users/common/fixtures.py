@@ -1,6 +1,8 @@
 from httpx import AsyncClient
 import urllib.parse
-from . import schemas, router
+
+from . import router
+from . import schemas
 from core.fixtures import *
 from core.utils import *
 

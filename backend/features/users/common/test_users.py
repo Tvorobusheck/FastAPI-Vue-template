@@ -4,9 +4,11 @@ from pydantic import ValidationError
 import pytest
 import urllib.parse
 
+from . import models, router
+
 from .fixtures import *
 
-from . import models, schemas, router
+from . import schemas
 from core.fixtures import *
 from core.utils import *
 

@@ -3,7 +3,7 @@ from contextlib import asynccontextmanager
 
 from core.db import create_db_and_tables, drop_db_and_tables
 from core.config import MOCKDB
-from features.users.router import router as users_router
+from features.users.common.router import router as users_router
 from features.items.router import router as items_router
 
 from fastapi.middleware.cors import CORSMiddleware

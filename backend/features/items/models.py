@@ -5,7 +5,7 @@
 import uuid
 from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship, Mapped, mapped_column
-from features.users.models import User
+from features.users.common.models import User
 from core.db import Base
 
 class Item(Base):

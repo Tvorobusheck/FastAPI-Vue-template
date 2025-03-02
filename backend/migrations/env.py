@@ -31,7 +31,7 @@ if config.config_file_name is not None:
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-from features.users import models
+from features.users.common import models
 from features.items import models
 target_metadata = Base.metadata
 
