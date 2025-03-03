@@ -18,17 +18,16 @@ def set_owner_dep(schema: Type[schemas.OwnedBaseSchemaMixin],
     return set_owner
 
 
-async def check_owner(
-        model: Base,
+
+def check_owner_dep(model: Base):
+    async def check_owner(
         session: AsyncSession = Depends(get_async_session), 
         id: int = Path(),
         current_user: User = Depends(current_active_user)):
-    item = await session.get(model, id)
-    if item is None:
-        raise HTTPException(status_code=404)
-    if item.owner_id != current_user.id:
-        raise HTTPException(status_code=403)
-
-
-def check_owner_dep(model: Base):
-    return lambda: check_owner(model)
+        item = await session.get(model, id)
+        if item is None:
+            raise HTTPException(status_code=404)
+        if item.owner_id != current_user.id:
+            raise HTTPException(status_code=403)
+        return item
+    return check_owner

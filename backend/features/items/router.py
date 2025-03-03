@@ -17,9 +17,9 @@ ROUTER_PATH="/items"
 router = crud_router(
     session=get_async_session,
     model=models.Item,
-    select_schema=schemas.ItemSchema,
+    select_schema=Annotated[schemas.ItemSchema, Depends(check_owner_dep(models.Item))],
     create_schema=Annotated[schemas.ItemCreateSchema, Depends(set_owner_dep(schemas.ItemCreateSchema))],
-    update_schema=Annotated[schemas.ItemCreateSchema, Depends(set_owner_dep(schemas.ItemCreateSchema, owner_required=False))],
+    update_schema=Annotated[schemas.ItemUpdateSchema, Depends(set_owner_dep(schemas.ItemCreateSchema, owner_required=False))],
     # included_methods=["read", "read_multi"],
     path=ROUTER_PATH,
     create_deps=[current_active_user],
