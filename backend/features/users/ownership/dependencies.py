@@ -1,4 +1,4 @@
-from typing import Annotated
+from typing import Annotated, Type
 from fastapi import Depends, HTTPException, Path
 from sqlalchemy.ext.asyncio import AsyncSession
 from pydantic import BaseModel
@@ -9,27 +9,14 @@ from . import models, schemas
 from core.db import Base
 
 
-# Dependency to get the owner_id
-async def get_owner(item: schemas.OwnedBaseSchemaMixin, 
-                    current_user: User = Depends(current_active_user)) -> schemas.OwnedBaseSchemaMixin:
-    item.owner_id = current_user.id
-    return item
+def set_owner_dep(schema: Type[schemas.OwnedBaseSchemaMixin],
+                    owner_required: bool = True):
+    def set_owner(item: schema, current_user: User = Depends(current_active_user)): # type: ignore
+        if owner_required or item.owner_id is None:
+            item.owner_id = current_user.id
+        return item
+    return set_owner
 
-
-# Dependency to get the owner_id
-async def get_owner_optionally(item: schemas.OwnedBaseSchemaMixin, 
-                               current_user: User = Depends(current_active_user)) -> schemas.OwnedBaseSchemaMixin:
-    if item.owner_id is None:
-        item.owner_id = current_user.id
-    return item
-
-
-def get_owner_dep(required: bool = True):
-    if required:
-        return lambda: get_owner
-    else:
-        return lambda: get_owner_optionally
-    
 
 async def check_owner(
         model: Base,
