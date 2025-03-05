@@ -1,6 +1,6 @@
 from typing import Annotated, Type
 import uuid
-from fastapi import Depends, HTTPException, Path, Query
+from fastapi import Depends, HTTPException, Path, Query, Request
 from sqlalchemy.ext.asyncio import AsyncSession
 from pydantic import BaseModel
 
@@ -34,6 +34,8 @@ def check_owner_dep(model: Base):
     return check_owner
 
 
-def multi_owner(owner_id: uuid.UUID = Query(default=None), current_user: User = Depends(current_active_user)):
+def multi_owner(request: Request,
+                owner_id: uuid.UUID = Query(None),
+                current_user: User = Depends(current_active_user)):
     owner_id = current_user.id
-    return owner_id
+    request.scope['path_params'] = owner_id

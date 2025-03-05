@@ -96,7 +96,8 @@ async def test_access_different_users(client: AsyncClient):
 
     updating_item_2 = schemas.ItemUpdateSchema(**created_item_2.model_dump())
     updating_item_2.name = random_str()
-    updating_item_2.owner_id = await get_user_id(client, jwt_1)
+    user_id_1 = await get_user_id(client, jwt_1)
+    updating_item_2.owner_id = user_id_1
     update_response = await client.patch(id_path, 
                                          data=updating_item_2.model_dump_json(), 
                                          headers=get_jwt_header(jwt_2))
@@ -106,4 +107,10 @@ async def test_access_different_users(client: AsyncClient):
     data = read_response.json()['data']
     new_quantity = len(data)
     assert old_quantity + 1 == new_quantity
+
+
+    read_response = await client.get(router.ROUTER_PATH, headers=get_jwt_header(jwt_2))
+    data = read_response.json()['data']
+    other_quantity = len(data)
+    assert other_quantity == 0
     
