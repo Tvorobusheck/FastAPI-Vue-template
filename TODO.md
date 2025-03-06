@@ -2,7 +2,6 @@
 
 ## Tasks
 ### Backend
-- [ ] Pagination and extended filters for Owned items endpoint
 - [ ] Sub Items
 - [ ] alembic upgrade head on startup (fix, need to wait before database initialized)
 - [ ] Token Refresh [for fastapi_users](https://github.com/fastapi-users/fastapi-users/discussions/350)
@@ -37,6 +36,7 @@
 - [ ] Password recovery for new project.
 
 ## Completed
+- [x] Pagination and extended filters for Owned items endpoint
 - [x] Ownership
 - [x] Ownership control for Items
 - [x] item's create route

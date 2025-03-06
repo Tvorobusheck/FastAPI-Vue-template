@@ -27,7 +27,7 @@ router = crud_router(
     read_multi_deps=[multi_owner],
     update_deps=[check_owner_dep(models.Item)],
     delete_deps=[check_owner_dep(models.Item)],
-    filter_config=FilterConfig(owner_id=None),
+    filter_config=FilterConfig(owner_id=None, name=None),
     endpoint_creator=OwnerFilteredEndpointCreator,
     tags=["Items"],
 )
