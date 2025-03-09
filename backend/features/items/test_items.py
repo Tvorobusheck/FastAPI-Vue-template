@@ -6,31 +6,18 @@ from . import schemas, router
 from core.fixtures import *
 from features.users.common.fixtures import init_user, jwt_login, get_user_id, jwt, client, user_id
 from core.utils import get_jwt_header, random_str, path_with_id
+from features.users.ownership.testing_utils import read_multi_owned
+from .testing_utils import create_item
 
 async def test_read_items(client: AsyncClient, jwt: str):
-    response = await client.get(router.ROUTER_PATH, headers=get_jwt_header(jwt))
-    assert response.status_code == 200
-    response = await client.get(router.ROUTER_PATH)
-    assert response.status_code == 401
+    await read_multi_owned(client, jwt, router.ROUTER_PATH)
 
 
 async def test_create_item(client: AsyncClient, jwt: str, user_id: uuid.UUID):
-    read_response = await client.get(router.ROUTER_PATH, headers=get_jwt_header(jwt))
-    data = read_response.json()['data']
-    old_quantity = len(data)
-    assert old_quantity >= 0
-    new_item = schemas.ItemCreateSchema(name=random_str(), 
-                                        description=random_str())
-    create_response = await client.post(router.ROUTER_PATH, 
-                                        json={'name': new_item.name, 'description': new_item.description}, 
-                                        headers=get_jwt_header(jwt))
-    assert create_response.status_code == 200
-    created_item = schemas.ItemSchema(**create_response.json())
-    assert new_item.name == created_item.name
+    created_item = await create_item(client, jwt, user_id)
     assert created_item.owner_id == user_id
-    read_response = await client.get(router.ROUTER_PATH, headers=get_jwt_header(jwt))
-    new_quantity = len(read_response.json()['data'])
-    assert new_quantity == old_quantity + 1
+    assert created_item.name is not None
+    assert created_item.description is not None
 
     
 async def test_crud_item(client: AsyncClient, jwt: str, user_id: uuid.UUID):

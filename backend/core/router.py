@@ -5,6 +5,7 @@ from core.db import create_db_and_tables, drop_db_and_tables
 from core.config import MOCKDB
 from features.users.common.router import router as users_router
 from features.items.router import router as items_router
+from features.subitems.router import router as subitems_router
 
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -37,3 +38,4 @@ app.add_middleware(
 
 app.include_router(users_router)
 app.include_router(items_router)
+app.include_router(subitems_router)

@@ -13,20 +13,20 @@ from features.users.common.models import User, active_user_id, current_active_us
 from features.users.ownership.dependencies import check_owner_dep, multi_owner, set_owner_dep
 
 
-ROUTER_PATH="/items"
+ROUTER_PATH="/subitems"
 router = crud_router(
     session=get_async_session,
-    model=models.Item,
-    select_schema=Annotated[schemas.ItemSchema, Depends(check_owner_dep(models.Item))],
-    create_schema=Annotated[schemas.ItemCreateSchema, Depends(set_owner_dep(schemas.ItemCreateSchema))],
-    update_schema=Annotated[schemas.ItemUpdateSchema, Depends(set_owner_dep(schemas.ItemCreateSchema, owner_required=False))],
+    model=models.Subitem,
+    select_schema=Annotated[schemas.SubitemSchema, Depends(check_owner_dep(models.Subitem))],
+    create_schema=Annotated[schemas.SubitemCreateSchema, Depends(set_owner_dep(schemas.SubitemCreateSchema))],
+    update_schema=Annotated[schemas.SubitemUpdateSchema, Depends(set_owner_dep(schemas.SubitemCreateSchema, owner_required=False))],
     path=ROUTER_PATH,
     create_deps=[current_active_user],
-    read_deps=[check_owner_dep(models.Item)],
+    read_deps=[check_owner_dep(models.Subitem)],
     read_multi_deps=[multi_owner],
-    update_deps=[check_owner_dep(models.Item)],
-    delete_deps=[check_owner_dep(models.Item)],
+    update_deps=[check_owner_dep(models.Subitem)],
+    delete_deps=[check_owner_dep(models.Subitem)],
     filter_config=FilterConfig(owner_id=None, name=None),
     endpoint_creator=OwnerFilteredEndpointCreator,
-    tags=["Items"],
+    tags=["Subitems"],
 )
