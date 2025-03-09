@@ -1,11 +1,12 @@
 from httpx import AsyncClient
 import pytest
+from suffix_trees import STree
 
 from features.users.common.fixtures import create_user
 from . import schemas, router
 from core.fixtures import *
 from features.users.common.fixtures import init_user, jwt_login, get_user_id, jwt, client, user_id
-from core.utils import get_jwt_header, random_str, path_with_id
+from core.utils import get_jwt_header, is_sorted, is_there_item, random_str, path_with_id
 from features.users.ownership.testing_utils import read_multi_owned
 from .testing_utils import create_item
 
@@ -101,3 +102,20 @@ async def test_access_different_users(client: AsyncClient):
     other_quantity = len(data)
     assert other_quantity == 0
     
+
+async def test_name_search_items(client: AsyncClient, jwt: str, user_id: uuid.UUID):
+    created_items = [await create_item(client, jwt, user_id) for _ in range(4)]
+    st = STree.STree([item.name for item in created_items])
+    common_substring = st.lcs()
+
+    response = await client.get(router.SEARCH_PATH, params={"name": common_substring}, headers=get_jwt_header(jwt))
+    assert response.status_code == 200
+    items = list(response.json()['items'])
+    assert len(items) >= len(created_items)
+    assert is_sorted(items, key=lambda x: x['name'])
+    
+    response = await client.get(router.SEARCH_PATH, params={"name": common_substring + random_str() + random_str()}, headers=get_jwt_header(jwt))
+    assert response.status_code == 200
+    items = list(response.json()['items'])
+    assert len(items) <= len(created_items)
+

@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
 
+from fastapi_pagination import add_pagination
+
 from core.db import create_db_and_tables, drop_db_and_tables
 from core.config import MOCKDB
 from features.users.common.router import router as users_router
@@ -39,3 +41,5 @@ app.add_middleware(
 app.include_router(users_router)
 app.include_router(items_router)
 app.include_router(subitems_router)
+
+add_pagination(app)

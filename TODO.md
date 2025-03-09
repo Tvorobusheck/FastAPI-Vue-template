@@ -36,6 +36,7 @@
 - [ ] Password recovery for new project.
 
 ## Completed
+- [x] Items name search
 - [x] Pagination and extended filters for Owned items endpoint
 - [x] Ownership
 - [x] Ownership control for Items
