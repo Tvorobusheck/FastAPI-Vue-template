@@ -11,7 +11,7 @@ from features.users.ownership.testing_utils import create_owned_item
 async def create_item(client: AsyncClient, jwt: str, user_id: uuid.UUID) -> schemas.ItemSchema:
     new_item = schemas.ItemCreateSchema(name=random_str(), 
                                         description=random_str())
-    created_item = await create_owned_item(client, jwt, router.ROUTER_PATH, new_item, schemas.ItemSchema)
+    created_item = schemas.ItemSchema(**(await create_owned_item(client, jwt, router.ROUTER_PATH, new_item)))
     assert new_item.name == created_item.name
     assert new_item.description == created_item.description
     assert created_item.owner_id == user_id

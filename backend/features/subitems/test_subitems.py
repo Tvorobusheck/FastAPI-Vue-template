@@ -24,6 +24,6 @@ async def test_create_subitem(client: AsyncClient, jwt: str, user_id: uuid.UUID)
                                               description=random_str(),
                                               item_id=created_item.id)
 
-    created_subitem = await create_owned_item(client, jwt, router.ROUTER_PATH, new_subitem, schemas.SubitemSchema)
+    created_subitem = schemas.SubitemSchema(**(await create_owned_item(client, jwt, router.ROUTER_PATH, new_subitem)))
     assert created_subitem.item_id == created_item.id
     assert created_subitem.owner_id == user_id
