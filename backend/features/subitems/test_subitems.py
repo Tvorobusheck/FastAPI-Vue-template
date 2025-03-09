@@ -27,3 +27,22 @@ async def test_create_subitem(client: AsyncClient, jwt: str, user_id: uuid.UUID)
     created_subitem = schemas.SubitemSchema(**(await create_owned_item(client, jwt, router.ROUTER_PATH, new_subitem)))
     assert created_subitem.item_id == created_item.id
     assert created_subitem.owner_id == user_id
+
+
+async def test_create_subitems_multi(client: AsyncClient, jwt: str, user_id: uuid.UUID):
+    created_item = await create_item(client, jwt, user_id)
+    new_subitem_1 = schemas.SubitemCreateSchema(name=random_str(), 
+                                                description=random_str(),
+                                                item_id=created_item.id)
+
+    created_subitem_1 = schemas.SubitemSchema(**(await create_owned_item(client, jwt, router.ROUTER_PATH, new_subitem_1)))
+    new_subitem_2 = schemas.SubitemCreateSchema(name=random_str(), 
+                                                description=random_str(),
+                                                item_id=created_item.id)
+
+    created_subitem_2 = schemas.SubitemSchema(**(await create_owned_item(client, jwt, router.ROUTER_PATH, new_subitem_2)))
+    response = await client.get(router.ROUTER_PATH, headers=get_jwt_header(jwt))
+    subitems = list(response.json()['data'])
+    assert len(subitems) == 2
+    assert len(list(filter(lambda x: x['id'] == created_subitem_1.id, subitems))) > 0
+    assert len(list(filter(lambda x: x['id'] == created_subitem_2.id, subitems))) > 0
