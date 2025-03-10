@@ -24,4 +24,5 @@ DEBUG = bool(os.environ.get("DEBUG", False))
 RELOAD = bool(os.environ.get("RELOAD", False))
 
 ROUTER_DATETIME_FORMAT = "%Y-%m-%d %H:%M:%S"
-JWT_EXPIRATION_TIME = 3600 # in seconds
+JWT_EXPIRATION_TIME = 7 * 24 * 3600 # in seconds
+JWT_SECRET = os.environ.get("JWT_SECRET", "sdf15-7j_kpjp1014ae")

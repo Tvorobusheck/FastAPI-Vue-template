@@ -1,9 +1,18 @@
 # Important!
 # Add routers to core/router.py
-from fastapi import Depends, APIRouter
+from typing import Annotated
+from fastapi import Cookie, Depends, APIRouter, HTTPException
+from fastapi_users.authentication import (
+    AuthenticationBackend,
+    BearerTransport,
+    JWTStrategy,
+)
 
+import jwt
+
+from core.config import JWT_SECRET
 from .schemas import UserCreate, UserRead, UserUpdate
-from .models import auth_backend, current_active_user, fastapi_users, User
+from .models import auth_backend, current_active_user, fastapi_users, bearer_transport, get_jwt_strategy
 
 ROUTER_PATH = '/users'
 AUTH_PREFIX = '/auth'
@@ -40,3 +49,9 @@ router.include_router(
     prefix=AUTH_PREFIX,
     tags=["users"],
 )
+
+REFRESH_PATH = JWT_PATH + '/refresh'
+@router.get(JWT_PREFIX + '/refresh')
+async def refresh_jwt(strategy: Annotated[JWTStrategy, Depends(get_jwt_strategy)], user=Depends(current_active_user)):
+    token = await strategy.write_token(user)
+    return await bearer_transport.get_login_response(token)

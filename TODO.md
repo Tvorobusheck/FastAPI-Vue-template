@@ -2,7 +2,6 @@
 
 ## Tasks
 ### Backend
-- [ ] Token Refresh [for fastapi_users](https://github.com/fastapi-users/fastapi-users/discussions/350)
 - [ ] OwnerMixin testing in ownership instead of items?
 - [ ] alembic upgrade head on startup (fix, need to wait before database initialized)
 
@@ -36,6 +35,7 @@
 - [ ] Password recovery for new project.
 
 ## Completed
+- [x] Token Refresh [for fastapi_users](https://github.com/fastapi-users/fastapi-users/discussions/350)
 - [x] Sub Items
 - [x] Items name search
 - [x] Pagination and extended filters for Owned items endpoint
