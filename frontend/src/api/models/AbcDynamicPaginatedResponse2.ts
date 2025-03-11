@@ -10,13 +10,15 @@
  * Do not edit the class manually.
  */
 
+import { SubitemSchema } from '../models/SubitemSchema';
 import { HttpFile } from '../http/http';
 
-export class ItemSchema {
-    'ownerId'?: string | null;
-    'name': string;
-    'description': string;
-    'id': number;
+export class AbcDynamicPaginatedResponse2 {
+    'data': Array<SubitemSchema>;
+    'totalCount': number;
+    'hasMore': boolean;
+    'page': number | null;
+    'itemsPerPage': number | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -24,32 +26,38 @@ export class ItemSchema {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "ownerId",
-            "baseName": "owner_id",
-            "type": "string",
-            "format": "uuid"
-        },
-        {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
+            "name": "data",
+            "baseName": "data",
+            "type": "Array<SubitemSchema>",
             "format": ""
         },
         {
-            "name": "description",
-            "baseName": "description",
-            "type": "string",
+            "name": "totalCount",
+            "baseName": "total_count",
+            "type": "number",
             "format": ""
         },
         {
-            "name": "id",
-            "baseName": "id",
+            "name": "hasMore",
+            "baseName": "has_more",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "page",
+            "baseName": "page",
+            "type": "number",
+            "format": ""
+        },
+        {
+            "name": "itemsPerPage",
+            "baseName": "items_per_page",
             "type": "number",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return ItemSchema.attributeTypeMap;
+        return AbcDynamicPaginatedResponse2.attributeTypeMap;
     }
 
     public constructor() {

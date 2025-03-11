@@ -3,6 +3,7 @@ import { apiConfiguration } from '@/utils/server'
 import { generateRandomString } from '@/utils/helpers'
 import * as api from '@/api'
 import exp = require('constants');
+import { createAndLoginUser } from '../test_utils/auth';
 
 async function createTestItem(apiInstance: api.ItemsApi, name: string = generateRandomString()): Promise<api.ItemSchema> {    
   const item: api.ItemSchema = await apiInstance.endpointItemsPost({
@@ -13,6 +14,7 @@ async function createTestItem(apiInstance: api.ItemsApi, name: string = generate
 }
 
 test('test create item', async () => {
+  await createAndLoginUser()
   const apiInstance = new api.ItemsApi(apiConfiguration());
   const name = generateRandomString()
   const item = await createTestItem(apiInstance, name)
@@ -21,7 +23,8 @@ test('test create item', async () => {
   expect(item.id).toBeGreaterThan(0)
 })
 
-test('test update item', async () => {    
+test('test update item', async () => {  
+  await createAndLoginUser()  
   const apiInstance = new api.ItemsApi(apiConfiguration());
   const createdItem = await createTestItem(apiInstance)
   const newName = generateRandomString()
@@ -37,6 +40,7 @@ test('test update item', async () => {
 })
 
 test('test delete item', async () => {    
+  await createAndLoginUser()
   const apiInstance = new api.ItemsApi(apiConfiguration());
   const createdItem = await createTestItem(apiInstance)
   await apiInstance.endpointItemsIdDelete(createdItem.id);
@@ -50,6 +54,7 @@ async function createTestItems(apiInstance: api.ItemsApi, n: number = 3) {
   }
 }
 test('test read items (paginated)', async () => {    
+  await createAndLoginUser()
   const apiInstance = new api.ItemsApi(apiConfiguration());
   await createTestItems(apiInstance);
   const data: api.DynamicPaginatedResponse = await apiInstance.endpointItemsGet(undefined, undefined, 1, 10);
@@ -61,6 +66,7 @@ test('test read items (paginated)', async () => {
 
 
 test('test read items (list)', async () => {    
+  await createAndLoginUser()
   const apiInstance = new api.ItemsApi(apiConfiguration());
   await createTestItems(apiInstance);
   const data: api.DynamicListResponse = await apiInstance.endpointItemsGet(0, 100);

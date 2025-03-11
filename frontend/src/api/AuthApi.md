@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**authJwtLoginUsersJwtLoginPost**](AuthApi.md#authJwtLoginUsersJwtLoginPost) | **POST** /users/jwt/login | Auth:Jwt.Login
 [**authJwtLogoutUsersJwtLogoutPost**](AuthApi.md#authJwtLogoutUsersJwtLogoutPost) | **POST** /users/jwt/logout | Auth:Jwt.Logout
+[**refreshJwtUsersJwtRefreshPost**](AuthApi.md#refreshJwtUsersJwtRefreshPost) | **POST** /users/jwt/refresh | Refresh Jwt
 [**registerRegisterUsersAuthRegisterPost**](AuthApi.md#registerRegisterUsersAuthRegisterPost) | **POST** /users/auth/register | Register:Register
 [**resetForgotPasswordUsersAuthForgotPasswordPost**](AuthApi.md#resetForgotPasswordUsersAuthForgotPasswordPost) | **POST** /users/auth/forgot-password | Reset:Forgot Password
 [**resetResetPasswordUsersAuthResetPasswordPost**](AuthApi.md#resetResetPasswordUsersAuthResetPasswordPost) | **POST** /users/auth/reset-password | Reset:Reset Password
@@ -125,6 +126,51 @@ This endpoint does not need any parameter.
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **401** | Missing token or inactive user. |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **refreshJwtUsersJwtRefreshPost**
+> any refreshJwtUsersJwtRefreshPost()
+
+
+### Example
+
+
+```typescript
+import { createConfiguration, AuthApi } from '';
+
+const configuration = createConfiguration();
+const apiInstance = new AuthApi(configuration);
+
+const request = {};
+
+const data = await apiInstance.refreshJwtUsersJwtRefreshPost(request);
+console.log('API called successfully. Returned data:', data);
+```
+
+
+### Parameters
+This endpoint does not need any parameter.
+
+
+### Return type
+
+**any**
+
+### Authorization
+
+[OAuth2PasswordBearer](README.md#OAuth2PasswordBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 

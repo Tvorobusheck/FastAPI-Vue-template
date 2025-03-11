@@ -10,12 +10,11 @@
  * Do not edit the class manually.
  */
 
+import { SubitemSchema } from '../models/SubitemSchema';
 import { HttpFile } from '../http/http';
 
-export class ItemCreateSchema {
-    'ownerId'?: string | null;
-    'name': string;
-    'description': string;
+export class AbcDynamicListResponse2 {
+    'data': Array<SubitemSchema>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -23,26 +22,14 @@ export class ItemCreateSchema {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "ownerId",
-            "baseName": "owner_id",
-            "type": "string",
-            "format": "uuid"
-        },
-        {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "description",
-            "baseName": "description",
-            "type": "string",
+            "name": "data",
+            "baseName": "data",
+            "type": "Array<SubitemSchema>",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return ItemCreateSchema.attributeTypeMap;
+        return AbcDynamicListResponse2.attributeTypeMap;
     }
 
     public constructor() {

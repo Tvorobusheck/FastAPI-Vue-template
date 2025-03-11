@@ -12,10 +12,10 @@
 
 import { HttpFile } from '../http/http';
 
-export class ItemCreateSchema {
+export class SubitemCreateSchema {
     'ownerId'?: string | null;
     'name': string;
-    'description': string;
+    'itemId': number;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -35,14 +35,14 @@ export class ItemCreateSchema {
             "format": ""
         },
         {
-            "name": "description",
-            "baseName": "description",
-            "type": "string",
+            "name": "itemId",
+            "baseName": "item_id",
+            "type": "number",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return ItemCreateSchema.attributeTypeMap;
+        return SubitemCreateSchema.attributeTypeMap;
     }
 
     public constructor() {

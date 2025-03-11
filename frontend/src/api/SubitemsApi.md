@@ -1,33 +1,32 @@
-# .ItemsApi
+# .SubitemsApi
 
 All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**endpointItemsGet**](ItemsApi.md#endpointItemsGet) | **GET** /items | Endpoint
-[**endpointItemsIdDelete**](ItemsApi.md#endpointItemsIdDelete) | **DELETE** /items/{id} | Endpoint
-[**endpointItemsIdGet**](ItemsApi.md#endpointItemsIdGet) | **GET** /items/{id} | Endpoint
-[**endpointItemsIdPatch**](ItemsApi.md#endpointItemsIdPatch) | **PATCH** /items/{id} | Endpoint
-[**endpointItemsPost**](ItemsApi.md#endpointItemsPost) | **POST** /items | Endpoint
-[**searchSearchItemsGet**](ItemsApi.md#searchSearchItemsGet) | **GET** /search/items | Search
+[**endpointSubitemsGet**](SubitemsApi.md#endpointSubitemsGet) | **GET** /subitems | Endpoint
+[**endpointSubitemsIdDelete**](SubitemsApi.md#endpointSubitemsIdDelete) | **DELETE** /subitems/{id} | Endpoint
+[**endpointSubitemsIdGet**](SubitemsApi.md#endpointSubitemsIdGet) | **GET** /subitems/{id} | Endpoint
+[**endpointSubitemsIdPatch**](SubitemsApi.md#endpointSubitemsIdPatch) | **PATCH** /subitems/{id} | Endpoint
+[**endpointSubitemsPost**](SubitemsApi.md#endpointSubitemsPost) | **POST** /subitems | Endpoint
 
 
-# **endpointItemsGet**
-> ResponseEndpointItemsGet endpointItemsGet()
+# **endpointSubitemsGet**
+> ResponseEndpointSubitemsGet endpointSubitemsGet()
 
-Read multiple Item rows from the database.  - Use page & itemsPerPage for paginated results - Use offset & limit for specific ranges - Returns paginated response when using page/itemsPerPage - Returns simple list response when using offset/limit
+Read multiple Subitem rows from the database.  - Use page & itemsPerPage for paginated results - Use offset & limit for specific ranges - Returns paginated response when using page/itemsPerPage - Returns simple list response when using offset/limit
 
 ### Example
 
 
 ```typescript
-import { createConfiguration, ItemsApi } from '';
-import type { ItemsApiEndpointItemsGetRequest } from '';
+import { createConfiguration, SubitemsApi } from '';
+import type { SubitemsApiEndpointSubitemsGetRequest } from '';
 
 const configuration = createConfiguration();
-const apiInstance = new ItemsApi(configuration);
+const apiInstance = new SubitemsApi(configuration);
 
-const request: ItemsApiEndpointItemsGetRequest = {
+const request: SubitemsApiEndpointSubitemsGetRequest = {
     // Offset for unpaginated queries (optional)
   offset: 1,
     // Limit for unpaginated queries (optional)
@@ -38,9 +37,11 @@ const request: ItemsApiEndpointItemsGetRequest = {
   itemsPerPage: 1,
   
   ownerId: null,
+  
+  itemId: null,
 };
 
-const data = await apiInstance.endpointItemsGet(request);
+const data = await apiInstance.endpointSubitemsGet(request);
 console.log('API called successfully. Returned data:', data);
 ```
 
@@ -54,11 +55,12 @@ Name | Type | Description  | Notes
  **page** | [**number**] | Page number | (optional) defaults to undefined
  **itemsPerPage** | [**number**] | Number of items per page | (optional) defaults to undefined
  **ownerId** | **any** |  | (optional) defaults to undefined
+ **itemId** | **any** |  | (optional) defaults to undefined
 
 
 ### Return type
 
-**ResponseEndpointItemsGet**
+**ResponseEndpointSubitemsGet**
 
 ### Authorization
 
@@ -78,27 +80,27 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-# **endpointItemsIdDelete**
-> any endpointItemsIdDelete()
+# **endpointSubitemsIdDelete**
+> any endpointSubitemsIdDelete()
 
-Delete a Item row from the database by its primary keys: [\'id\'].
+Delete a Subitem row from the database by its primary keys: [\'id\'].
 
 ### Example
 
 
 ```typescript
-import { createConfiguration, ItemsApi } from '';
-import type { ItemsApiEndpointItemsIdDeleteRequest } from '';
+import { createConfiguration, SubitemsApi } from '';
+import type { SubitemsApiEndpointSubitemsIdDeleteRequest } from '';
 
 const configuration = createConfiguration();
-const apiInstance = new ItemsApi(configuration);
+const apiInstance = new SubitemsApi(configuration);
 
-const request: ItemsApiEndpointItemsIdDeleteRequest = {
+const request: SubitemsApiEndpointSubitemsIdDeleteRequest = {
   
   id: 1,
 };
 
-const data = await apiInstance.endpointItemsIdDelete(request);
+const data = await apiInstance.endpointSubitemsIdDelete(request);
 console.log('API called successfully. Returned data:', data);
 ```
 
@@ -132,27 +134,27 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-# **endpointItemsIdGet**
-> ItemSchema endpointItemsIdGet()
+# **endpointSubitemsIdGet**
+> SubitemSchema endpointSubitemsIdGet()
 
-Read a single Item row from the database by its primary keys: [\'id\'].
+Read a single Subitem row from the database by its primary keys: [\'id\'].
 
 ### Example
 
 
 ```typescript
-import { createConfiguration, ItemsApi } from '';
-import type { ItemsApiEndpointItemsIdGetRequest } from '';
+import { createConfiguration, SubitemsApi } from '';
+import type { SubitemsApiEndpointSubitemsIdGetRequest } from '';
 
 const configuration = createConfiguration();
-const apiInstance = new ItemsApi(configuration);
+const apiInstance = new SubitemsApi(configuration);
 
-const request: ItemsApiEndpointItemsIdGetRequest = {
+const request: SubitemsApiEndpointSubitemsIdGetRequest = {
   
   id: 1,
 };
 
-const data = await apiInstance.endpointItemsIdGet(request);
+const data = await apiInstance.endpointSubitemsIdGet(request);
 console.log('API called successfully. Returned data:', data);
 ```
 
@@ -166,7 +168,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**ItemSchema**
+**SubitemSchema**
 
 ### Authorization
 
@@ -186,33 +188,33 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-# **endpointItemsIdPatch**
-> any endpointItemsIdPatch(itemCreateSchema)
+# **endpointSubitemsIdPatch**
+> any endpointSubitemsIdPatch(subitemCreateSchema)
 
-Update an existing Item row in the database by its primary keys: [\'id\'].
+Update an existing Subitem row in the database by its primary keys: [\'id\'].
 
 ### Example
 
 
 ```typescript
-import { createConfiguration, ItemsApi } from '';
-import type { ItemsApiEndpointItemsIdPatchRequest } from '';
+import { createConfiguration, SubitemsApi } from '';
+import type { SubitemsApiEndpointSubitemsIdPatchRequest } from '';
 
 const configuration = createConfiguration();
-const apiInstance = new ItemsApi(configuration);
+const apiInstance = new SubitemsApi(configuration);
 
-const request: ItemsApiEndpointItemsIdPatchRequest = {
+const request: SubitemsApiEndpointSubitemsIdPatchRequest = {
   
   id: 1,
   
-  itemCreateSchema: {
+  subitemCreateSchema: {
     ownerId: "ownerId_example",
     name: "name_example",
-    description: "description_example",
+    itemId: 1,
   },
 };
 
-const data = await apiInstance.endpointItemsIdPatch(request);
+const data = await apiInstance.endpointSubitemsIdPatch(request);
 console.log('API called successfully. Returned data:', data);
 ```
 
@@ -221,7 +223,7 @@ console.log('API called successfully. Returned data:', data);
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **itemCreateSchema** | **ItemCreateSchema**|  |
+ **subitemCreateSchema** | **SubitemCreateSchema**|  |
  **id** | [**number**] |  | defaults to undefined
 
 
@@ -247,31 +249,31 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-# **endpointItemsPost**
-> any endpointItemsPost(itemCreateSchema)
+# **endpointSubitemsPost**
+> any endpointSubitemsPost(subitemCreateSchema)
 
-Create a new Item row in the database.
+Create a new Subitem row in the database.
 
 ### Example
 
 
 ```typescript
-import { createConfiguration, ItemsApi } from '';
-import type { ItemsApiEndpointItemsPostRequest } from '';
+import { createConfiguration, SubitemsApi } from '';
+import type { SubitemsApiEndpointSubitemsPostRequest } from '';
 
 const configuration = createConfiguration();
-const apiInstance = new ItemsApi(configuration);
+const apiInstance = new SubitemsApi(configuration);
 
-const request: ItemsApiEndpointItemsPostRequest = {
+const request: SubitemsApiEndpointSubitemsPostRequest = {
   
-  itemCreateSchema: {
+  subitemCreateSchema: {
     ownerId: "ownerId_example",
     name: "name_example",
-    description: "description_example",
+    itemId: 1,
   },
 };
 
-const data = await apiInstance.endpointItemsPost(request);
+const data = await apiInstance.endpointSubitemsPost(request);
 console.log('API called successfully. Returned data:', data);
 ```
 
@@ -280,7 +282,7 @@ console.log('API called successfully. Returned data:', data);
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **itemCreateSchema** | **ItemCreateSchema**|  |
+ **subitemCreateSchema** | **SubitemCreateSchema**|  |
 
 
 ### Return type
@@ -294,65 +296,6 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Successful Response |  -  |
-**422** | Validation Error |  -  |
-
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
-
-# **searchSearchItemsGet**
-> PageItemSchema searchSearchItemsGet()
-
-
-### Example
-
-
-```typescript
-import { createConfiguration, ItemsApi } from '';
-import type { ItemsApiSearchSearchItemsGetRequest } from '';
-
-const configuration = createConfiguration();
-const apiInstance = new ItemsApi(configuration);
-
-const request: ItemsApiSearchSearchItemsGetRequest = {
-  
-  name: "name_example",
-    // Page number (optional)
-  page: 1,
-    // Page size (optional)
-  size: 50,
-};
-
-const data = await apiInstance.searchSearchItemsGet(request);
-console.log('API called successfully. Returned data:', data);
-```
-
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **name** | [**string**] |  | (optional) defaults to undefined
- **page** | [**number**] | Page number | (optional) defaults to 1
- **size** | [**number**] | Page size | (optional) defaults to 50
-
-
-### Return type
-
-**PageItemSchema**
-
-### Authorization
-
-[OAuth2PasswordBearer](README.md#OAuth2PasswordBearer)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
  - **Accept**: application/json
 
 

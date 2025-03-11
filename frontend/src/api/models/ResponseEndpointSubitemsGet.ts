@@ -10,13 +10,13 @@
  * Do not edit the class manually.
  */
 
-import { AbcDynamicListResponse1 } from '../models/AbcDynamicListResponse1';
-import { AbcDynamicPaginatedResponse1 } from '../models/AbcDynamicPaginatedResponse1';
-import { ItemSchema } from '../models/ItemSchema';
+import { AbcDynamicListResponse2 } from '../models/AbcDynamicListResponse2';
+import { AbcDynamicPaginatedResponse2 } from '../models/AbcDynamicPaginatedResponse2';
+import { SubitemSchema } from '../models/SubitemSchema';
 import { HttpFile } from '../http/http';
 
-export class ResponseEndpointItemsGet {
-    'data': Array<ItemSchema>;
+export class ResponseEndpointSubitemsGet {
+    'data': Array<SubitemSchema>;
     'totalCount': number;
     'hasMore': boolean;
     'page': number;
@@ -30,7 +30,7 @@ export class ResponseEndpointItemsGet {
         {
             "name": "data",
             "baseName": "data",
-            "type": "Array<ItemSchema>",
+            "type": "Array<SubitemSchema>",
             "format": ""
         },
         {
@@ -59,7 +59,7 @@ export class ResponseEndpointItemsGet {
         }    ];
 
     static getAttributeTypeMap() {
-        return ResponseEndpointItemsGet.attributeTypeMap;
+        return ResponseEndpointSubitemsGet.attributeTypeMap;
     }
 
     public constructor() {

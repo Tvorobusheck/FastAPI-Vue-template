@@ -10,13 +10,15 @@
  * Do not edit the class manually.
  */
 
+import { ItemSchema } from '../models/ItemSchema';
 import { HttpFile } from '../http/http';
 
-export class ItemSchema {
-    'ownerId'?: string | null;
-    'name': string;
-    'description': string;
-    'id': number;
+export class PageItemSchema {
+    'items': Array<ItemSchema>;
+    'total': number | null;
+    'page': number | null;
+    'size': number | null;
+    'pages'?: number | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -24,32 +26,38 @@ export class ItemSchema {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "ownerId",
-            "baseName": "owner_id",
-            "type": "string",
-            "format": "uuid"
-        },
-        {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
+            "name": "items",
+            "baseName": "items",
+            "type": "Array<ItemSchema>",
             "format": ""
         },
         {
-            "name": "description",
-            "baseName": "description",
-            "type": "string",
+            "name": "total",
+            "baseName": "total",
+            "type": "number",
             "format": ""
         },
         {
-            "name": "id",
-            "baseName": "id",
+            "name": "page",
+            "baseName": "page",
+            "type": "number",
+            "format": ""
+        },
+        {
+            "name": "size",
+            "baseName": "size",
+            "type": "number",
+            "format": ""
+        },
+        {
+            "name": "pages",
+            "baseName": "pages",
             "type": "number",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return ItemSchema.attributeTypeMap;
+        return PageItemSchema.attributeTypeMap;
     }
 
     public constructor() {
