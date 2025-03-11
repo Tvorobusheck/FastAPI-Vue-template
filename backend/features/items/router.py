@@ -1,6 +1,6 @@
 # Important!
 # Add routers to core/router.py
-from typing import Annotated
+from typing import Annotated, Optional
 import uuid
 from fastapi import Depends, HTTPException
 
@@ -39,7 +39,7 @@ router = crud_router(
 )
 
 @router.get(SEARCH_PATH, tags=['Items', 'Search'], response_model=Page[schemas.ItemSchema])
-async def search(name:str, 
+async def search(name: Optional[str] = '', 
                  db: AsyncSession = Depends(get_async_session),
                  current_user: User = Depends(current_active_user)): 
     

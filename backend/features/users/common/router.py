@@ -27,6 +27,12 @@ router.include_router(
     fastapi_users.get_auth_router(auth_backend), prefix=JWT_PREFIX, tags=["auth"]
 )
 
+REFRESH_PATH = JWT_PATH + '/refresh'
+@router.post(JWT_PREFIX + '/refresh', tags=['auth'])
+async def refresh_jwt(strategy: Annotated[JWTStrategy, Depends(get_jwt_strategy)], user=Depends(current_active_user)):
+    token = await strategy.write_token(user)
+    return await bearer_transport.get_login_response(token)
+
 REGISTER_PATH = AUTH_PATH + "/register"
 router.include_router(
     fastapi_users.get_register_router(UserRead, UserCreate),
@@ -49,9 +55,3 @@ router.include_router(
     prefix=AUTH_PREFIX,
     tags=["users"],
 )
-
-REFRESH_PATH = JWT_PATH + '/refresh'
-@router.get(JWT_PREFIX + '/refresh')
-async def refresh_jwt(strategy: Annotated[JWTStrategy, Depends(get_jwt_strategy)], user=Depends(current_active_user)):
-    token = await strategy.write_token(user)
-    return await bearer_transport.get_login_response(token)
