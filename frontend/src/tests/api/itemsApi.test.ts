@@ -1,9 +1,19 @@
-import { expect, it, test } from 'vitest'
+import { expect, test, beforeEach } from 'vitest'
 import { apiConfiguration } from '@/utils/server'
 import { generateRandomString } from '@/utils/helpers'
 import * as api from '@/api'
-import exp = require('constants');
-import { createAndLoginUser } from '../test_utils/auth';
+import { createAndLoginUser } from '../test_utils/auth'
+
+let apiInstance: api.ItemsApi
+
+const createApiInstance = () => {
+    return new api.ItemsApi(apiConfiguration())
+}
+
+beforeEach(async () => {
+    await createAndLoginUser()
+    apiInstance = createApiInstance()
+})
 
 async function createTestItem(apiInstance: api.ItemsApi, name: string = generateRandomString()): Promise<api.ItemSchema> {    
   const item: api.ItemSchema = await apiInstance.endpointItemsPost({
@@ -14,8 +24,6 @@ async function createTestItem(apiInstance: api.ItemsApi, name: string = generate
 }
 
 test('test create item', async () => {
-  await createAndLoginUser()
-  const apiInstance = new api.ItemsApi(apiConfiguration());
   const name = generateRandomString()
   const item = await createTestItem(apiInstance, name)
   expect(item).toBeDefined()
@@ -24,8 +32,6 @@ test('test create item', async () => {
 })
 
 test('test update item', async () => {  
-  await createAndLoginUser()  
-  const apiInstance = new api.ItemsApi(apiConfiguration());
   const createdItem = await createTestItem(apiInstance)
   const newName = generateRandomString()
   await apiInstance.endpointItemsIdPatch(
@@ -40,8 +46,6 @@ test('test update item', async () => {
 })
 
 test('test delete item', async () => {    
-  await createAndLoginUser()
-  const apiInstance = new api.ItemsApi(apiConfiguration());
   const createdItem = await createTestItem(apiInstance)
   await apiInstance.endpointItemsIdDelete(createdItem.id);
   await expect(apiInstance.endpointItemsIdGet(createdItem.id)).rejects.not.toThrow(api.HttpException)
@@ -53,9 +57,8 @@ async function createTestItems(apiInstance: api.ItemsApi, n: number = 3) {
     await createTestItem(apiInstance)
   }
 }
+
 test('test read items (paginated)', async () => {    
-  await createAndLoginUser()
-  const apiInstance = new api.ItemsApi(apiConfiguration());
   await createTestItems(apiInstance);
   const data: api.DynamicPaginatedResponse = await apiInstance.endpointItemsGet(undefined, undefined, 1, 10);
   expect(data).toBeDefined()
@@ -64,10 +67,7 @@ test('test read items (paginated)', async () => {
   expect(items).toBeDefined()
 })
 
-
 test('test read items (list)', async () => {    
-  await createAndLoginUser()
-  const apiInstance = new api.ItemsApi(apiConfiguration());
   await createTestItems(apiInstance);
   const data: api.DynamicListResponse = await apiInstance.endpointItemsGet(0, 100);
   expect(data).toBeDefined()
@@ -76,9 +76,7 @@ test('test read items (list)', async () => {
   expect(items).toBeDefined()
 })
 
-
 test('create multiple items async', async () => {
-    const apiInstance = new api.ItemsApi(apiConfiguration());
     for (let i = 0; i < 100; i++) {
         const name = generateRandomString()
         createTestItem(apiInstance, name).then((item: api.ItemSchema) => {

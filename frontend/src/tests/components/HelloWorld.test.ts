@@ -1,10 +1,14 @@
-import { expect, test } from 'vitest'
-import { mount } from '@vue/test-utils'
-import { apiConfiguration } from '@/utils/server'
+import { expect, test, beforeEach } from 'vitest'
+import { mount, VueWrapper } from '@vue/test-utils'
 import HelloWorld from '@/components/HelloWorld.vue'
 
+let wrapper: VueWrapper
+
+beforeEach(() => {
+  wrapper = mount(HelloWorld)
+})
+
 test('write text in input', async () => {
-  const wrapper = mount(HelloWorld)
   const newMsg = 'It\'s me!'
   const input = wrapper.find('#message')
   await input.setValue(newMsg)  // Set the input value
@@ -13,7 +17,6 @@ test('write text in input', async () => {
 })
 
 test('check echo messaging', async () => {
-  const wrapper = mount(HelloWorld)
   const input = wrapper.find('#message')  // Find the input field
   const msg = 'Hello, Vue!'
   await input.setValue(msg)  // Set the input value
@@ -21,6 +24,5 @@ test('check echo messaging', async () => {
   await button.trigger('click')  // Simulate the button click
   let answer = wrapper.find('#answer').text()
   expect(answer).toBe(msg)
-
 })
 
