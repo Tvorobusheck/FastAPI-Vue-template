@@ -1,37 +1,47 @@
+export * from '../models/AbcDynamicListResponse1';
+export * from '../models/AbcDynamicListResponse2';
+export * from '../models/AbcDynamicPaginatedResponse1';
+export * from '../models/AbcDynamicPaginatedResponse2';
 export * from '../models/BearerResponse';
 export * from '../models/BodyResetForgotPasswordUsersAuthForgotPasswordPost';
 export * from '../models/BodyResetResetPasswordUsersAuthResetPasswordPost';
 export * from '../models/BodyVerifyRequestTokenUsersAuthRequestVerifyTokenPost';
 export * from '../models/BodyVerifyVerifyUsersAuthVerifyPost';
 export * from '../models/Detail';
-export * from '../models/DynamicListResponse';
-export * from '../models/DynamicPaginatedResponse';
 export * from '../models/ErrorModel';
 export * from '../models/HTTPValidationError';
 export * from '../models/ItemCreateSchema';
 export * from '../models/ItemSchema';
-export * from '../models/ItemUpdateSchema';
+export * from '../models/PageItemSchema';
 export * from '../models/ResponseEndpointItemsGet';
+export * from '../models/ResponseEndpointSubitemsGet';
+export * from '../models/SubitemCreateSchema';
+export * from '../models/SubitemSchema';
 export * from '../models/UserCreate';
 export * from '../models/UserRead';
 export * from '../models/UserUpdate';
 export * from '../models/ValidationError';
 export * from '../models/ValidationErrorLocInner';
 
+import { AbcDynamicListResponse1 } from '../models/AbcDynamicListResponse1';
+import { AbcDynamicListResponse2 } from '../models/AbcDynamicListResponse2';
+import { AbcDynamicPaginatedResponse1 } from '../models/AbcDynamicPaginatedResponse1';
+import { AbcDynamicPaginatedResponse2 } from '../models/AbcDynamicPaginatedResponse2';
 import { BearerResponse } from '../models/BearerResponse';
 import { BodyResetForgotPasswordUsersAuthForgotPasswordPost } from '../models/BodyResetForgotPasswordUsersAuthForgotPasswordPost';
 import { BodyResetResetPasswordUsersAuthResetPasswordPost } from '../models/BodyResetResetPasswordUsersAuthResetPasswordPost';
 import { BodyVerifyRequestTokenUsersAuthRequestVerifyTokenPost } from '../models/BodyVerifyRequestTokenUsersAuthRequestVerifyTokenPost';
 import { BodyVerifyVerifyUsersAuthVerifyPost } from '../models/BodyVerifyVerifyUsersAuthVerifyPost';
 import { Detail } from '../models/Detail';
-import { DynamicListResponse } from '../models/DynamicListResponse';
-import { DynamicPaginatedResponse } from '../models/DynamicPaginatedResponse';
 import { ErrorModel } from '../models/ErrorModel';
 import { HTTPValidationError } from '../models/HTTPValidationError';
 import { ItemCreateSchema } from '../models/ItemCreateSchema';
 import { ItemSchema } from '../models/ItemSchema';
-import { ItemUpdateSchema } from '../models/ItemUpdateSchema';
+import { PageItemSchema } from '../models/PageItemSchema';
 import { ResponseEndpointItemsGet } from '../models/ResponseEndpointItemsGet';
+import { ResponseEndpointSubitemsGet } from '../models/ResponseEndpointSubitemsGet';
+import { SubitemCreateSchema } from '../models/SubitemCreateSchema';
+import { SubitemSchema } from '../models/SubitemSchema';
 import { UserCreate } from '../models/UserCreate';
 import { UserRead } from '../models/UserRead';
 import { UserUpdate } from '../models/UserUpdate';
@@ -54,20 +64,25 @@ let enumsMap: Set<string> = new Set<string>([
 ]);
 
 let typeMap: {[index: string]: any} = {
+    "AbcDynamicListResponse1": AbcDynamicListResponse1,
+    "AbcDynamicListResponse2": AbcDynamicListResponse2,
+    "AbcDynamicPaginatedResponse1": AbcDynamicPaginatedResponse1,
+    "AbcDynamicPaginatedResponse2": AbcDynamicPaginatedResponse2,
     "BearerResponse": BearerResponse,
     "BodyResetForgotPasswordUsersAuthForgotPasswordPost": BodyResetForgotPasswordUsersAuthForgotPasswordPost,
     "BodyResetResetPasswordUsersAuthResetPasswordPost": BodyResetResetPasswordUsersAuthResetPasswordPost,
     "BodyVerifyRequestTokenUsersAuthRequestVerifyTokenPost": BodyVerifyRequestTokenUsersAuthRequestVerifyTokenPost,
     "BodyVerifyVerifyUsersAuthVerifyPost": BodyVerifyVerifyUsersAuthVerifyPost,
     "Detail": Detail,
-    "DynamicListResponse": DynamicListResponse,
-    "DynamicPaginatedResponse": DynamicPaginatedResponse,
     "ErrorModel": ErrorModel,
     "HTTPValidationError": HTTPValidationError,
     "ItemCreateSchema": ItemCreateSchema,
     "ItemSchema": ItemSchema,
-    "ItemUpdateSchema": ItemUpdateSchema,
+    "PageItemSchema": PageItemSchema,
     "ResponseEndpointItemsGet": ResponseEndpointItemsGet,
+    "ResponseEndpointSubitemsGet": ResponseEndpointSubitemsGet,
+    "SubitemCreateSchema": SubitemCreateSchema,
+    "SubitemSchema": SubitemSchema,
     "UserCreate": UserCreate,
     "UserRead": UserRead,
     "UserUpdate": UserUpdate,

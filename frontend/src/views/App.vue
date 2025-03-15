@@ -14,6 +14,7 @@
           <div class="text-sm lg:flex-grow">
             <RouterLink to="/" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-200 mr-4">Go to Home</RouterLink>
             <RouterLink v-if="logedIn" to="/profile" id="nav-profile" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-200 mr-4">Profile</RouterLink>
+            <RouterLink v-if="logedIn" to="/items" id="nav-items" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-200 mr-4">Items</RouterLink>
             <RouterLink v-if="!logedIn" to="/registration" id="nav-registration" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-200 mr-4">Registration</RouterLink>
             <RouterLink v-if="!logedIn" to="/login" id="nav-login" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-200 mr-4">Login</RouterLink>
             <RouterLink v-if="logedIn" to="/logout" id="nav-logout" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-200">Logout</RouterLink>

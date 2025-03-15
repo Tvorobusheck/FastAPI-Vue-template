@@ -38,7 +38,7 @@ router = crud_router(
     tags=["Items"],
 )
 
-@router.get(SEARCH_PATH, tags=['Items', 'Search'], response_model=Page[schemas.ItemSchema])
+@router.get(SEARCH_PATH, tags=['Items'], response_model=Page[schemas.ItemSchema])
 async def search(name: Optional[str] = '', 
                  db: AsyncSession = Depends(get_async_session),
                  current_user: User = Depends(current_active_user)): 

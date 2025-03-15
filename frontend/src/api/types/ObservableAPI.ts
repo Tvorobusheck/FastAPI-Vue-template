@@ -2,20 +2,25 @@ import { ResponseContext, RequestContext, HttpFile, HttpInfo } from '../http/htt
 import { Configuration} from '../configuration'
 import { Observable, of, from } from '../rxjsStub';
 import {mergeMap, map} from  '../rxjsStub';
+import { AbcDynamicListResponse1 } from '../models/AbcDynamicListResponse1';
+import { AbcDynamicListResponse2 } from '../models/AbcDynamicListResponse2';
+import { AbcDynamicPaginatedResponse1 } from '../models/AbcDynamicPaginatedResponse1';
+import { AbcDynamicPaginatedResponse2 } from '../models/AbcDynamicPaginatedResponse2';
 import { BearerResponse } from '../models/BearerResponse';
 import { BodyResetForgotPasswordUsersAuthForgotPasswordPost } from '../models/BodyResetForgotPasswordUsersAuthForgotPasswordPost';
 import { BodyResetResetPasswordUsersAuthResetPasswordPost } from '../models/BodyResetResetPasswordUsersAuthResetPasswordPost';
 import { BodyVerifyRequestTokenUsersAuthRequestVerifyTokenPost } from '../models/BodyVerifyRequestTokenUsersAuthRequestVerifyTokenPost';
 import { BodyVerifyVerifyUsersAuthVerifyPost } from '../models/BodyVerifyVerifyUsersAuthVerifyPost';
 import { Detail } from '../models/Detail';
-import { DynamicListResponse } from '../models/DynamicListResponse';
-import { DynamicPaginatedResponse } from '../models/DynamicPaginatedResponse';
 import { ErrorModel } from '../models/ErrorModel';
 import { HTTPValidationError } from '../models/HTTPValidationError';
 import { ItemCreateSchema } from '../models/ItemCreateSchema';
 import { ItemSchema } from '../models/ItemSchema';
-import { ItemUpdateSchema } from '../models/ItemUpdateSchema';
+import { PageItemSchema } from '../models/PageItemSchema';
 import { ResponseEndpointItemsGet } from '../models/ResponseEndpointItemsGet';
+import { ResponseEndpointSubitemsGet } from '../models/ResponseEndpointSubitemsGet';
+import { SubitemCreateSchema } from '../models/SubitemCreateSchema';
+import { SubitemSchema } from '../models/SubitemSchema';
 import { UserCreate } from '../models/UserCreate';
 import { UserRead } from '../models/UserRead';
 import { UserUpdate } from '../models/UserUpdate';
@@ -106,6 +111,35 @@ export class ObservableAuthApi {
      */
     public authJwtLogoutUsersJwtLogoutPost(_options?: Configuration): Observable<any> {
         return this.authJwtLogoutUsersJwtLogoutPostWithHttpInfo(_options).pipe(map((apiResponse: HttpInfo<any>) => apiResponse.data));
+    }
+
+    /**
+     * Refresh Jwt
+     */
+    public refreshJwtUsersJwtRefreshPostWithHttpInfo(_options?: Configuration): Observable<HttpInfo<any>> {
+        const requestContextPromise = this.requestFactory.refreshJwtUsersJwtRefreshPost(_options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (const middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (const middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.refreshJwtUsersJwtRefreshPostWithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * Refresh Jwt
+     */
+    public refreshJwtUsersJwtRefreshPost(_options?: Configuration): Observable<any> {
+        return this.refreshJwtUsersJwtRefreshPostWithHttpInfo(_options).pipe(map((apiResponse: HttpInfo<any>) => apiResponse.data));
     }
 
     /**
@@ -288,9 +322,10 @@ export class ObservableItemsApi {
      * @param [limit] Limit for unpaginated queries
      * @param [page] Page number
      * @param [itemsPerPage] Number of items per page
+     * @param [ownerId]
      */
-    public endpointItemsGetWithHttpInfo(offset?: number, limit?: number, page?: number, itemsPerPage?: number, _options?: Configuration): Observable<HttpInfo<ResponseEndpointItemsGet>> {
-        const requestContextPromise = this.requestFactory.endpointItemsGet(offset, limit, page, itemsPerPage, _options);
+    public endpointItemsGetWithHttpInfo(offset?: number, limit?: number, page?: number, itemsPerPage?: number, ownerId?: any, _options?: Configuration): Observable<HttpInfo<ResponseEndpointItemsGet>> {
+        const requestContextPromise = this.requestFactory.endpointItemsGet(offset, limit, page, itemsPerPage, ownerId, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -315,9 +350,10 @@ export class ObservableItemsApi {
      * @param [limit] Limit for unpaginated queries
      * @param [page] Page number
      * @param [itemsPerPage] Number of items per page
+     * @param [ownerId]
      */
-    public endpointItemsGet(offset?: number, limit?: number, page?: number, itemsPerPage?: number, _options?: Configuration): Observable<ResponseEndpointItemsGet> {
-        return this.endpointItemsGetWithHttpInfo(offset, limit, page, itemsPerPage, _options).pipe(map((apiResponse: HttpInfo<ResponseEndpointItemsGet>) => apiResponse.data));
+    public endpointItemsGet(offset?: number, limit?: number, page?: number, itemsPerPage?: number, ownerId?: any, _options?: Configuration): Observable<ResponseEndpointItemsGet> {
+        return this.endpointItemsGetWithHttpInfo(offset, limit, page, itemsPerPage, ownerId, _options).pipe(map((apiResponse: HttpInfo<ResponseEndpointItemsGet>) => apiResponse.data));
     }
 
     /**
@@ -390,10 +426,10 @@ export class ObservableItemsApi {
      * Update an existing Item row in the database by its primary keys: [\'id\'].
      * Endpoint
      * @param id
-     * @param itemUpdateSchema
+     * @param itemCreateSchema
      */
-    public endpointItemsIdPatchWithHttpInfo(id: number, itemUpdateSchema: ItemUpdateSchema, _options?: Configuration): Observable<HttpInfo<any>> {
-        const requestContextPromise = this.requestFactory.endpointItemsIdPatch(id, itemUpdateSchema, _options);
+    public endpointItemsIdPatchWithHttpInfo(id: number, itemCreateSchema: ItemCreateSchema, _options?: Configuration): Observable<HttpInfo<any>> {
+        const requestContextPromise = this.requestFactory.endpointItemsIdPatch(id, itemCreateSchema, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -415,10 +451,10 @@ export class ObservableItemsApi {
      * Update an existing Item row in the database by its primary keys: [\'id\'].
      * Endpoint
      * @param id
-     * @param itemUpdateSchema
+     * @param itemCreateSchema
      */
-    public endpointItemsIdPatch(id: number, itemUpdateSchema: ItemUpdateSchema, _options?: Configuration): Observable<any> {
-        return this.endpointItemsIdPatchWithHttpInfo(id, itemUpdateSchema, _options).pipe(map((apiResponse: HttpInfo<any>) => apiResponse.data));
+    public endpointItemsIdPatch(id: number, itemCreateSchema: ItemCreateSchema, _options?: Configuration): Observable<any> {
+        return this.endpointItemsIdPatchWithHttpInfo(id, itemCreateSchema, _options).pipe(map((apiResponse: HttpInfo<any>) => apiResponse.data));
     }
 
     /**
@@ -452,6 +488,236 @@ export class ObservableItemsApi {
      */
     public endpointItemsPost(itemCreateSchema: ItemCreateSchema, _options?: Configuration): Observable<any> {
         return this.endpointItemsPostWithHttpInfo(itemCreateSchema, _options).pipe(map((apiResponse: HttpInfo<any>) => apiResponse.data));
+    }
+
+    /**
+     * Search
+     * @param [name]
+     * @param [page] Page number
+     * @param [size] Page size
+     */
+    public searchSearchItemsGetWithHttpInfo(name?: string, page?: number, size?: number, _options?: Configuration): Observable<HttpInfo<PageItemSchema>> {
+        const requestContextPromise = this.requestFactory.searchSearchItemsGet(name, page, size, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (const middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (const middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.searchSearchItemsGetWithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * Search
+     * @param [name]
+     * @param [page] Page number
+     * @param [size] Page size
+     */
+    public searchSearchItemsGet(name?: string, page?: number, size?: number, _options?: Configuration): Observable<PageItemSchema> {
+        return this.searchSearchItemsGetWithHttpInfo(name, page, size, _options).pipe(map((apiResponse: HttpInfo<PageItemSchema>) => apiResponse.data));
+    }
+
+}
+
+import { SubitemsApiRequestFactory, SubitemsApiResponseProcessor} from "../apis/SubitemsApi";
+export class ObservableSubitemsApi {
+    private requestFactory: SubitemsApiRequestFactory;
+    private responseProcessor: SubitemsApiResponseProcessor;
+    private configuration: Configuration;
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: SubitemsApiRequestFactory,
+        responseProcessor?: SubitemsApiResponseProcessor
+    ) {
+        this.configuration = configuration;
+        this.requestFactory = requestFactory || new SubitemsApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new SubitemsApiResponseProcessor();
+    }
+
+    /**
+     * Read multiple Subitem rows from the database.  - Use page & itemsPerPage for paginated results - Use offset & limit for specific ranges - Returns paginated response when using page/itemsPerPage - Returns simple list response when using offset/limit
+     * Endpoint
+     * @param [offset] Offset for unpaginated queries
+     * @param [limit] Limit for unpaginated queries
+     * @param [page] Page number
+     * @param [itemsPerPage] Number of items per page
+     * @param [ownerId]
+     * @param [itemId]
+     */
+    public endpointSubitemsGetWithHttpInfo(offset?: number, limit?: number, page?: number, itemsPerPage?: number, ownerId?: any, itemId?: any, _options?: Configuration): Observable<HttpInfo<ResponseEndpointSubitemsGet>> {
+        const requestContextPromise = this.requestFactory.endpointSubitemsGet(offset, limit, page, itemsPerPage, ownerId, itemId, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (const middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (const middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.endpointSubitemsGetWithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * Read multiple Subitem rows from the database.  - Use page & itemsPerPage for paginated results - Use offset & limit for specific ranges - Returns paginated response when using page/itemsPerPage - Returns simple list response when using offset/limit
+     * Endpoint
+     * @param [offset] Offset for unpaginated queries
+     * @param [limit] Limit for unpaginated queries
+     * @param [page] Page number
+     * @param [itemsPerPage] Number of items per page
+     * @param [ownerId]
+     * @param [itemId]
+     */
+    public endpointSubitemsGet(offset?: number, limit?: number, page?: number, itemsPerPage?: number, ownerId?: any, itemId?: any, _options?: Configuration): Observable<ResponseEndpointSubitemsGet> {
+        return this.endpointSubitemsGetWithHttpInfo(offset, limit, page, itemsPerPage, ownerId, itemId, _options).pipe(map((apiResponse: HttpInfo<ResponseEndpointSubitemsGet>) => apiResponse.data));
+    }
+
+    /**
+     * Delete a Subitem row from the database by its primary keys: [\'id\'].
+     * Endpoint
+     * @param id
+     */
+    public endpointSubitemsIdDeleteWithHttpInfo(id: number, _options?: Configuration): Observable<HttpInfo<any>> {
+        const requestContextPromise = this.requestFactory.endpointSubitemsIdDelete(id, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (const middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (const middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.endpointSubitemsIdDeleteWithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * Delete a Subitem row from the database by its primary keys: [\'id\'].
+     * Endpoint
+     * @param id
+     */
+    public endpointSubitemsIdDelete(id: number, _options?: Configuration): Observable<any> {
+        return this.endpointSubitemsIdDeleteWithHttpInfo(id, _options).pipe(map((apiResponse: HttpInfo<any>) => apiResponse.data));
+    }
+
+    /**
+     * Read a single Subitem row from the database by its primary keys: [\'id\'].
+     * Endpoint
+     * @param id
+     */
+    public endpointSubitemsIdGetWithHttpInfo(id: number, _options?: Configuration): Observable<HttpInfo<SubitemSchema>> {
+        const requestContextPromise = this.requestFactory.endpointSubitemsIdGet(id, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (const middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (const middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.endpointSubitemsIdGetWithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * Read a single Subitem row from the database by its primary keys: [\'id\'].
+     * Endpoint
+     * @param id
+     */
+    public endpointSubitemsIdGet(id: number, _options?: Configuration): Observable<SubitemSchema> {
+        return this.endpointSubitemsIdGetWithHttpInfo(id, _options).pipe(map((apiResponse: HttpInfo<SubitemSchema>) => apiResponse.data));
+    }
+
+    /**
+     * Update an existing Subitem row in the database by its primary keys: [\'id\'].
+     * Endpoint
+     * @param id
+     * @param subitemCreateSchema
+     */
+    public endpointSubitemsIdPatchWithHttpInfo(id: number, subitemCreateSchema: SubitemCreateSchema, _options?: Configuration): Observable<HttpInfo<any>> {
+        const requestContextPromise = this.requestFactory.endpointSubitemsIdPatch(id, subitemCreateSchema, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (const middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (const middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.endpointSubitemsIdPatchWithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * Update an existing Subitem row in the database by its primary keys: [\'id\'].
+     * Endpoint
+     * @param id
+     * @param subitemCreateSchema
+     */
+    public endpointSubitemsIdPatch(id: number, subitemCreateSchema: SubitemCreateSchema, _options?: Configuration): Observable<any> {
+        return this.endpointSubitemsIdPatchWithHttpInfo(id, subitemCreateSchema, _options).pipe(map((apiResponse: HttpInfo<any>) => apiResponse.data));
+    }
+
+    /**
+     * Create a new Subitem row in the database.
+     * Endpoint
+     * @param subitemCreateSchema
+     */
+    public endpointSubitemsPostWithHttpInfo(subitemCreateSchema: SubitemCreateSchema, _options?: Configuration): Observable<HttpInfo<any>> {
+        const requestContextPromise = this.requestFactory.endpointSubitemsPost(subitemCreateSchema, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (const middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (const middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.endpointSubitemsPostWithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * Create a new Subitem row in the database.
+     * Endpoint
+     * @param subitemCreateSchema
+     */
+    public endpointSubitemsPost(subitemCreateSchema: SubitemCreateSchema, _options?: Configuration): Observable<any> {
+        return this.endpointSubitemsPostWithHttpInfo(subitemCreateSchema, _options).pipe(map((apiResponse: HttpInfo<any>) => apiResponse.data));
     }
 
 }

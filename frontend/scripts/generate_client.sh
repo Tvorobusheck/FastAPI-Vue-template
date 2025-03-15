@@ -5,6 +5,5 @@ docker run --rm \
   openapitools/openapi-generator-cli generate \
   -i /local/scripts/openapi.json \
   -g typescript \
-  -o /local/src/api \
-  --global-property apis,models
+  -o /local/src/api
 rm scripts/openapi.json

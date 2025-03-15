@@ -1,20 +1,25 @@
 import { ResponseContext, RequestContext, HttpFile, HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 
+import { AbcDynamicListResponse1 } from '../models/AbcDynamicListResponse1';
+import { AbcDynamicListResponse2 } from '../models/AbcDynamicListResponse2';
+import { AbcDynamicPaginatedResponse1 } from '../models/AbcDynamicPaginatedResponse1';
+import { AbcDynamicPaginatedResponse2 } from '../models/AbcDynamicPaginatedResponse2';
 import { BearerResponse } from '../models/BearerResponse';
 import { BodyResetForgotPasswordUsersAuthForgotPasswordPost } from '../models/BodyResetForgotPasswordUsersAuthForgotPasswordPost';
 import { BodyResetResetPasswordUsersAuthResetPasswordPost } from '../models/BodyResetResetPasswordUsersAuthResetPasswordPost';
 import { BodyVerifyRequestTokenUsersAuthRequestVerifyTokenPost } from '../models/BodyVerifyRequestTokenUsersAuthRequestVerifyTokenPost';
 import { BodyVerifyVerifyUsersAuthVerifyPost } from '../models/BodyVerifyVerifyUsersAuthVerifyPost';
 import { Detail } from '../models/Detail';
-import { DynamicListResponse } from '../models/DynamicListResponse';
-import { DynamicPaginatedResponse } from '../models/DynamicPaginatedResponse';
 import { ErrorModel } from '../models/ErrorModel';
 import { HTTPValidationError } from '../models/HTTPValidationError';
 import { ItemCreateSchema } from '../models/ItemCreateSchema';
 import { ItemSchema } from '../models/ItemSchema';
-import { ItemUpdateSchema } from '../models/ItemUpdateSchema';
+import { PageItemSchema } from '../models/PageItemSchema';
 import { ResponseEndpointItemsGet } from '../models/ResponseEndpointItemsGet';
+import { ResponseEndpointSubitemsGet } from '../models/ResponseEndpointSubitemsGet';
+import { SubitemCreateSchema } from '../models/SubitemCreateSchema';
+import { SubitemSchema } from '../models/SubitemSchema';
 import { UserCreate } from '../models/UserCreate';
 import { UserRead } from '../models/UserRead';
 import { UserUpdate } from '../models/UserUpdate';
@@ -75,6 +80,22 @@ export class PromiseAuthApi {
      */
     public authJwtLogoutUsersJwtLogoutPost(_options?: Configuration): Promise<any> {
         const result = this.api.authJwtLogoutUsersJwtLogoutPost(_options);
+        return result.toPromise();
+    }
+
+    /**
+     * Refresh Jwt
+     */
+    public refreshJwtUsersJwtRefreshPostWithHttpInfo(_options?: Configuration): Promise<HttpInfo<any>> {
+        const result = this.api.refreshJwtUsersJwtRefreshPostWithHttpInfo(_options);
+        return result.toPromise();
+    }
+
+    /**
+     * Refresh Jwt
+     */
+    public refreshJwtUsersJwtRefreshPost(_options?: Configuration): Promise<any> {
+        const result = this.api.refreshJwtUsersJwtRefreshPost(_options);
         return result.toPromise();
     }
 
@@ -194,9 +215,10 @@ export class PromiseItemsApi {
      * @param [limit] Limit for unpaginated queries
      * @param [page] Page number
      * @param [itemsPerPage] Number of items per page
+     * @param [ownerId]
      */
-    public endpointItemsGetWithHttpInfo(offset?: number, limit?: number, page?: number, itemsPerPage?: number, _options?: Configuration): Promise<HttpInfo<ResponseEndpointItemsGet>> {
-        const result = this.api.endpointItemsGetWithHttpInfo(offset, limit, page, itemsPerPage, _options);
+    public endpointItemsGetWithHttpInfo(offset?: number, limit?: number, page?: number, itemsPerPage?: number, ownerId?: any, _options?: Configuration): Promise<HttpInfo<ResponseEndpointItemsGet>> {
+        const result = this.api.endpointItemsGetWithHttpInfo(offset, limit, page, itemsPerPage, ownerId, _options);
         return result.toPromise();
     }
 
@@ -207,9 +229,10 @@ export class PromiseItemsApi {
      * @param [limit] Limit for unpaginated queries
      * @param [page] Page number
      * @param [itemsPerPage] Number of items per page
+     * @param [ownerId]
      */
-    public endpointItemsGet(offset?: number, limit?: number, page?: number, itemsPerPage?: number, _options?: Configuration): Promise<ResponseEndpointItemsGet> {
-        const result = this.api.endpointItemsGet(offset, limit, page, itemsPerPage, _options);
+    public endpointItemsGet(offset?: number, limit?: number, page?: number, itemsPerPage?: number, ownerId?: any, _options?: Configuration): Promise<ResponseEndpointItemsGet> {
+        const result = this.api.endpointItemsGet(offset, limit, page, itemsPerPage, ownerId, _options);
         return result.toPromise();
     }
 
@@ -257,10 +280,10 @@ export class PromiseItemsApi {
      * Update an existing Item row in the database by its primary keys: [\'id\'].
      * Endpoint
      * @param id
-     * @param itemUpdateSchema
+     * @param itemCreateSchema
      */
-    public endpointItemsIdPatchWithHttpInfo(id: number, itemUpdateSchema: ItemUpdateSchema, _options?: Configuration): Promise<HttpInfo<any>> {
-        const result = this.api.endpointItemsIdPatchWithHttpInfo(id, itemUpdateSchema, _options);
+    public endpointItemsIdPatchWithHttpInfo(id: number, itemCreateSchema: ItemCreateSchema, _options?: Configuration): Promise<HttpInfo<any>> {
+        const result = this.api.endpointItemsIdPatchWithHttpInfo(id, itemCreateSchema, _options);
         return result.toPromise();
     }
 
@@ -268,10 +291,10 @@ export class PromiseItemsApi {
      * Update an existing Item row in the database by its primary keys: [\'id\'].
      * Endpoint
      * @param id
-     * @param itemUpdateSchema
+     * @param itemCreateSchema
      */
-    public endpointItemsIdPatch(id: number, itemUpdateSchema: ItemUpdateSchema, _options?: Configuration): Promise<any> {
-        const result = this.api.endpointItemsIdPatch(id, itemUpdateSchema, _options);
+    public endpointItemsIdPatch(id: number, itemCreateSchema: ItemCreateSchema, _options?: Configuration): Promise<any> {
+        const result = this.api.endpointItemsIdPatch(id, itemCreateSchema, _options);
         return result.toPromise();
     }
 
@@ -292,6 +315,159 @@ export class PromiseItemsApi {
      */
     public endpointItemsPost(itemCreateSchema: ItemCreateSchema, _options?: Configuration): Promise<any> {
         const result = this.api.endpointItemsPost(itemCreateSchema, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Search
+     * @param [name]
+     * @param [page] Page number
+     * @param [size] Page size
+     */
+    public searchSearchItemsGetWithHttpInfo(name?: string, page?: number, size?: number, _options?: Configuration): Promise<HttpInfo<PageItemSchema>> {
+        const result = this.api.searchSearchItemsGetWithHttpInfo(name, page, size, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Search
+     * @param [name]
+     * @param [page] Page number
+     * @param [size] Page size
+     */
+    public searchSearchItemsGet(name?: string, page?: number, size?: number, _options?: Configuration): Promise<PageItemSchema> {
+        const result = this.api.searchSearchItemsGet(name, page, size, _options);
+        return result.toPromise();
+    }
+
+
+}
+
+
+
+import { ObservableSubitemsApi } from './ObservableAPI';
+
+import { SubitemsApiRequestFactory, SubitemsApiResponseProcessor} from "../apis/SubitemsApi";
+export class PromiseSubitemsApi {
+    private api: ObservableSubitemsApi
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: SubitemsApiRequestFactory,
+        responseProcessor?: SubitemsApiResponseProcessor
+    ) {
+        this.api = new ObservableSubitemsApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Read multiple Subitem rows from the database.  - Use page & itemsPerPage for paginated results - Use offset & limit for specific ranges - Returns paginated response when using page/itemsPerPage - Returns simple list response when using offset/limit
+     * Endpoint
+     * @param [offset] Offset for unpaginated queries
+     * @param [limit] Limit for unpaginated queries
+     * @param [page] Page number
+     * @param [itemsPerPage] Number of items per page
+     * @param [ownerId]
+     * @param [itemId]
+     */
+    public endpointSubitemsGetWithHttpInfo(offset?: number, limit?: number, page?: number, itemsPerPage?: number, ownerId?: any, itemId?: any, _options?: Configuration): Promise<HttpInfo<ResponseEndpointSubitemsGet>> {
+        const result = this.api.endpointSubitemsGetWithHttpInfo(offset, limit, page, itemsPerPage, ownerId, itemId, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Read multiple Subitem rows from the database.  - Use page & itemsPerPage for paginated results - Use offset & limit for specific ranges - Returns paginated response when using page/itemsPerPage - Returns simple list response when using offset/limit
+     * Endpoint
+     * @param [offset] Offset for unpaginated queries
+     * @param [limit] Limit for unpaginated queries
+     * @param [page] Page number
+     * @param [itemsPerPage] Number of items per page
+     * @param [ownerId]
+     * @param [itemId]
+     */
+    public endpointSubitemsGet(offset?: number, limit?: number, page?: number, itemsPerPage?: number, ownerId?: any, itemId?: any, _options?: Configuration): Promise<ResponseEndpointSubitemsGet> {
+        const result = this.api.endpointSubitemsGet(offset, limit, page, itemsPerPage, ownerId, itemId, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Delete a Subitem row from the database by its primary keys: [\'id\'].
+     * Endpoint
+     * @param id
+     */
+    public endpointSubitemsIdDeleteWithHttpInfo(id: number, _options?: Configuration): Promise<HttpInfo<any>> {
+        const result = this.api.endpointSubitemsIdDeleteWithHttpInfo(id, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Delete a Subitem row from the database by its primary keys: [\'id\'].
+     * Endpoint
+     * @param id
+     */
+    public endpointSubitemsIdDelete(id: number, _options?: Configuration): Promise<any> {
+        const result = this.api.endpointSubitemsIdDelete(id, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Read a single Subitem row from the database by its primary keys: [\'id\'].
+     * Endpoint
+     * @param id
+     */
+    public endpointSubitemsIdGetWithHttpInfo(id: number, _options?: Configuration): Promise<HttpInfo<SubitemSchema>> {
+        const result = this.api.endpointSubitemsIdGetWithHttpInfo(id, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Read a single Subitem row from the database by its primary keys: [\'id\'].
+     * Endpoint
+     * @param id
+     */
+    public endpointSubitemsIdGet(id: number, _options?: Configuration): Promise<SubitemSchema> {
+        const result = this.api.endpointSubitemsIdGet(id, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Update an existing Subitem row in the database by its primary keys: [\'id\'].
+     * Endpoint
+     * @param id
+     * @param subitemCreateSchema
+     */
+    public endpointSubitemsIdPatchWithHttpInfo(id: number, subitemCreateSchema: SubitemCreateSchema, _options?: Configuration): Promise<HttpInfo<any>> {
+        const result = this.api.endpointSubitemsIdPatchWithHttpInfo(id, subitemCreateSchema, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Update an existing Subitem row in the database by its primary keys: [\'id\'].
+     * Endpoint
+     * @param id
+     * @param subitemCreateSchema
+     */
+    public endpointSubitemsIdPatch(id: number, subitemCreateSchema: SubitemCreateSchema, _options?: Configuration): Promise<any> {
+        const result = this.api.endpointSubitemsIdPatch(id, subitemCreateSchema, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Create a new Subitem row in the database.
+     * Endpoint
+     * @param subitemCreateSchema
+     */
+    public endpointSubitemsPostWithHttpInfo(subitemCreateSchema: SubitemCreateSchema, _options?: Configuration): Promise<HttpInfo<any>> {
+        const result = this.api.endpointSubitemsPostWithHttpInfo(subitemCreateSchema, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Create a new Subitem row in the database.
+     * Endpoint
+     * @param subitemCreateSchema
+     */
+    public endpointSubitemsPost(subitemCreateSchema: SubitemCreateSchema, _options?: Configuration): Promise<any> {
+        const result = this.api.endpointSubitemsPost(subitemCreateSchema, _options);
         return result.toPromise();
     }
 

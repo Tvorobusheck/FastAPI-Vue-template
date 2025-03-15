@@ -25,5 +25,6 @@ test('read user\'s profile (with auth)', async () => {
 
 test('read user\'s profile (without auth)', async () => {
     clearJwtToken()
+    usersApiInstance = createApi()
     await expect(usersApiInstance.usersCurrentUserUsersAuthMeGet()).rejects.toThrow(api.ApiException)
 })

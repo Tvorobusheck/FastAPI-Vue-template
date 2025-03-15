@@ -3,7 +3,6 @@
 ## Tasks
 
 ### Frontend
-- [ ] Wrapper and api's fixtures
 - [ ] Item create page
 - [ ] Item list page
 - [ ] Item view page
@@ -34,6 +33,7 @@
 - [ ] alembic upgrade head on startup (fix, need to wait before database initialized)
 
 ## Completed
+- [x] Wrapper and api's fixtures
 - [x] Token Refresh [for fastapi_users](https://github.com/fastapi-users/fastapi-users/discussions/350)
 - [x] Sub Items
 - [x] Items name search
