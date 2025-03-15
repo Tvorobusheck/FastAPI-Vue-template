@@ -3,8 +3,6 @@
 ## Tasks
 
 ### Frontend
-- [ ] Item create page
-- [ ] Item list page
 - [ ] Item view page
 - [ ] Item update and delete page
 - [ ] Sub items
@@ -33,6 +31,8 @@
 - [ ] alembic upgrade head on startup (fix, need to wait before database initialized)
 
 ## Completed
+- [x] Item create page
+- [x] Item list page
 - [x] Wrapper and api's fixtures
 - [x] Token Refresh [for fastapi_users](https://github.com/fastapi-users/fastapi-users/discussions/350)
 - [x] Sub Items
