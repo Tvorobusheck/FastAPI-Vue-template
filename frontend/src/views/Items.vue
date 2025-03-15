@@ -19,7 +19,9 @@
       </button>
       <div id="items-list">
         <ul>
-          <li v-for="item in items" :key="item.id">{{ item.name }}</li>
+          <li v-for="item in items" :key="item.id">
+            <RouterLink :to="{ name: 'ViewItem', params: { id: item.id } }">{{ item.name }}</RouterLink>
+          </li>
         </ul>
       </div>
     </div>

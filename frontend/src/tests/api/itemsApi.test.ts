@@ -85,3 +85,21 @@ test('create multiple items async', async () => {
         })
     }
 })
+
+test('test search query', async () => {
+  // Create multiple items
+  const itemName1 = generateRandomString()
+  const itemName2 = generateRandomString()
+  await createTestItem(apiInstance, itemName1)
+  await createTestItem(apiInstance, itemName2)
+
+  // Search for the first item
+  const searchQuery = itemName1
+  const data: api.DynamicListResponse = await apiInstance.searchSearchItemsGet(searchQuery)
+  expect(data).toBeDefined()
+  const items: Array<api.ItemSchema> = data.items
+  expect(items).toBeDefined()
+  expect(items.length).toBe(1)
+  expect(items[0].name).toBe(itemName1)
+  expect(items[0].id).toBeDefined()
+})
