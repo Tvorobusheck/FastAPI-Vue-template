@@ -103,3 +103,18 @@ test('test search query', async () => {
   expect(items[0].name).toBe(itemName1)
   expect(items[0].id).toBeDefined()
 })
+
+test('test edit item name and description', async () => {
+  const createdItem = await createTestItem(apiInstance)
+  const newName = generateRandomString()
+  const newDescription = generateRandomString()
+  await apiInstance.endpointItemsIdPatch(
+    createdItem.id, {
+    name: newName,
+    description: newDescription,
+  });
+  const updatedItem: api.ItemSchema = await apiInstance.endpointItemsIdGet(createdItem.id);
+  expect(updatedItem).toBeDefined()
+  expect(updatedItem.name).toBe(newName)
+  expect(updatedItem.description).toBe(newDescription)
+})
