@@ -1,4 +1,4 @@
-import { expect, test, beforeEach } from 'vitest'
+import { expect, test, beforeEach, vi } from 'vitest'
 import { flushPromises, mount, VueWrapper } from '@vue/test-utils'
 import { generateRandomString } from '@/utils/helpers'
 import { apiConfiguration } from '@/utils/server'
@@ -48,4 +48,31 @@ test('create item and view it', async () => {
   const itemDescriptionElement = wrapper.find('[data-testid="item-description"]')
   expect(itemNameElement.text()).toContain(itemName)
   expect(itemDescriptionElement.text()).toContain(itemDescription)
+})
+
+test('delete item', async () => {
+  // Create an item
+  const apiInstance = new api.ItemsApi(apiConfiguration())
+  const itemName = generateRandomString()
+  const itemDescription = generateRandomString()
+  const createdItem = await apiInstance.endpointItemsPost({
+    name: itemName,
+    description: itemDescription
+  })
+
+  // Navigate to the ItemView page
+  wrapper = await createWrapper(createdItem.id)
+  await flushPromises()
+  await waitForTestTriggers()
+
+  // Mock window.confirm to always return true
+  vi.spyOn(window, 'confirm').mockReturnValue(true)
+
+  // Click the delete button
+  await wrapper.find('button.common-button.mt-4:nth-of-type(2)').trigger('click')
+  await flushPromises()
+  await waitForTestTriggers()
+
+  // Check if the item was deleted
+  await expect(apiInstance.endpointItemsIdGet(createdItem.id)).rejects.toThrow(api.ApiException)
 })

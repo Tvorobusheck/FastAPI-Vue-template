@@ -14,6 +14,7 @@
           <input id="description" v-model="editDescription" />
         </div>
         <button @click="updateItem" class="common-button mt-4">Save</button>
+        <button @click="confirmDeleteItem" class="common-button mt-4">Delete</button>
       </div>
       <div v-else>
         <p>Loading...</p>
@@ -63,6 +64,20 @@ export default defineComponent({
       }
     }
 
+    const deleteItem = async () => {
+      if (item.value) {
+        const apiInstance = new api.ItemsApi(apiConfiguration())
+        await apiInstance.endpointItemsIdDelete(item.value.id)
+        goBack()
+      }
+    }
+
+    const confirmDeleteItem = () => {
+      if (confirm('Are you sure you want to delete this item?')) {
+        deleteItem()
+      }
+    }
+
     const goBack = () => {
       router.go(-1)
     }
@@ -76,6 +91,7 @@ export default defineComponent({
       editName,
       editDescription,
       updateItem,
+      confirmDeleteItem,
       goBack
     }
   }
