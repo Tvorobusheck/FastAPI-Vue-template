@@ -18,7 +18,12 @@
         <h2 class="text-xl font-bold mt-6">Subitems</h2>
         <ul>
           <li v-for="subitem in subitems" :key="subitem.id">
-            <strong>{{ subitem.name }}</strong>
+            <input
+              v-model="subitem.editName"
+              placeholder="Edit Subitem Name"
+              class="common-input"
+            />
+            <button @click="updateSubitem(subitem)" class="common-button mt-2">Save</button>
           </li>
         </ul>
         <div class="mt-4">
@@ -69,7 +74,10 @@ export default defineComponent({
     const fetchSubitems = async (itemId: number) => {
       const apiInstance = new api.SubitemsApi(apiConfiguration())
       const response = await apiInstance.endpointSubitemsGet(undefined, undefined, undefined, undefined, undefined, itemId)
-      subitems.value = response.data || []
+      subitems.value = response.data.map((subitem) => ({
+        ...subitem,
+        editName: subitem.name, // Add editName property for each subitem
+      }))
     }
 
     const updateItem = async () => {
@@ -109,6 +117,17 @@ export default defineComponent({
       }
     }
 
+    const updateSubitem = async (subitem: api.SubitemSchema) => {
+      if (subitem.editName.trim()) {
+        const apiInstance = new api.SubitemsApi(apiConfiguration())
+        await apiInstance.endpointSubitemsIdPatch(subitem.id, {
+          name: subitem.editName,
+          itemId: subitem.itemId,
+        })
+        await fetchSubitems(subitem.itemId)
+      }
+    }
+
     const goBack = () => {
       router.go(-1)
     }
@@ -127,6 +146,7 @@ export default defineComponent({
       updateItem,
       confirmDeleteItem,
       addSubitem,
+      updateSubitem,
       goBack
     }
   }
