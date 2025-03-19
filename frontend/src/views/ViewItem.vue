@@ -15,6 +15,12 @@
         </div>
         <button @click="updateItem" class="common-button mt-4">Save</button>
         <button @click="confirmDeleteItem" class="common-button mt-4">Delete</button>
+        <h2 class="text-xl font-bold mt-6">Subitems</h2>
+        <ul>
+          <li v-for="subitem in subitems" :key="subitem.id">
+            <strong>{{ subitem.name }}</strong>
+          </li>
+        </ul>
       </div>
       <div v-else>
         <p>Loading...</p>
@@ -43,6 +49,7 @@ export default defineComponent({
     const item = ref<api.ItemSchema | null>(null)
     const editName = ref('')
     const editDescription = ref('')
+    const subitems = ref<api.SubitemSchema[]>([])
     const router = useRouter()
 
     const fetchItem = async (id: number) => {
@@ -51,6 +58,12 @@ export default defineComponent({
       item.value = response
       editName.value = response.name
       editDescription.value = response.description
+    }
+
+    const fetchSubitems = async (itemId: number) => {
+      const apiInstance = new api.SubitemsApi(apiConfiguration())
+      const response = await apiInstance.endpointSubitemsGet(undefined, undefined, undefined, undefined, undefined, itemId)
+      subitems.value = response.data || []
     }
 
     const updateItem = async () => {
@@ -84,12 +97,14 @@ export default defineComponent({
 
     onMounted(async () => {
       await fetchItem(props.id)
+      await fetchSubitems(props.id)
     })
 
     return {
       item,
       editName,
       editDescription,
+      subitems,
       updateItem,
       confirmDeleteItem,
       goBack
