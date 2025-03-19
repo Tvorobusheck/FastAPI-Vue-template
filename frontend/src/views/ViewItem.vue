@@ -24,6 +24,7 @@
               class="common-input"
             />
             <button @click="updateSubitem(subitem)" class="common-button mt-2">Save</button>
+            <button @click="confirmDeleteSubitem(subitem)" class="common-button mt-2">Delete</button>
           </li>
         </ul>
         <div class="mt-4">
@@ -128,6 +129,18 @@ export default defineComponent({
       }
     }
 
+    const deleteSubitem = async (subitem: api.SubitemSchema) => {
+      const apiInstance = new api.SubitemsApi(apiConfiguration())
+      await apiInstance.endpointSubitemsIdDelete(subitem.id)
+      await fetchSubitems(subitem.itemId)
+    }
+
+    const confirmDeleteSubitem = (subitem: api.SubitemSchema) => {
+      if (confirm(`Are you sure you want to delete the subitem "${subitem.name}"?`)) {
+        deleteSubitem(subitem)
+      }
+    }
+
     const goBack = () => {
       router.go(-1)
     }
@@ -147,7 +160,9 @@ export default defineComponent({
       confirmDeleteItem,
       addSubitem,
       updateSubitem,
-      goBack
+      goBack,
+      confirmDeleteSubitem,
+      deleteSubitem
     }
   }
 })

@@ -3,7 +3,6 @@
 ## Tasks
 
 ### Frontend
-- [ ] Sub items delete
 - [ ] Improve manifest for PWA
 - [ ] Token Refresh
 
@@ -29,6 +28,7 @@
 - [ ] alembic upgrade head on startup (fix, need to wait before database initialized)
 
 ## Completed
+- [x] Sub items delete
 - [x] Sub items update
 - [x] Sub items create
 - [x] Sub items list
