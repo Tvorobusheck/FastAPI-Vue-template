@@ -21,6 +21,11 @@
             <strong>{{ subitem.name }}</strong>
           </li>
         </ul>
+        <div class="mt-4">
+          <h3 class="text-lg font-bold">Add Subitem</h3>
+          <input v-model="newSubitemName" placeholder="Subitem Name" class="common-input" />
+          <button @click="addSubitem" class="common-button mt-2">Add</button>
+        </div>
       </div>
       <div v-else>
         <p>Loading...</p>
@@ -50,6 +55,7 @@ export default defineComponent({
     const editName = ref('')
     const editDescription = ref('')
     const subitems = ref<api.SubitemSchema[]>([])
+    const newSubitemName = ref('')
     const router = useRouter()
 
     const fetchItem = async (id: number) => {
@@ -91,6 +97,18 @@ export default defineComponent({
       }
     }
 
+    const addSubitem = async () => {
+      if (newSubitemName.value.trim() && item.value) {
+        const apiInstance = new api.SubitemsApi(apiConfiguration())
+        await apiInstance.endpointSubitemsPost({
+          name: newSubitemName.value,
+          itemId: item.value.id,
+        })
+        newSubitemName.value = ''
+        await fetchSubitems(item.value.id)
+      }
+    }
+
     const goBack = () => {
       router.go(-1)
     }
@@ -105,8 +123,10 @@ export default defineComponent({
       editName,
       editDescription,
       subitems,
+      newSubitemName,
       updateItem,
       confirmDeleteItem,
+      addSubitem,
       goBack
     }
   }

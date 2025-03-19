@@ -3,7 +3,6 @@
 ## Tasks
 
 ### Frontend
-- [ ] Sub items create
 - [ ] Sub items update
 - [ ] Sub items delete
 - [ ] Improve manifest for PWA
@@ -31,6 +30,7 @@
 - [ ] alembic upgrade head on startup (fix, need to wait before database initialized)
 
 ## Completed
+- [x] Sub items create
 - [x] Sub items list
 - [x] Item update and delete page
 - [x] Item view page
