@@ -2,8 +2,9 @@ import { expect, test, beforeEach } from 'vitest'
 import { apiConfiguration, backendUrl } from '@/utils/server'
 import { generateRandomString } from '@/utils/helpers'
 import * as api from '@/api'
-import { clearJwtToken, isLogedIn, setJwtToken } from '@/utils/auth'
+import { clearJwtToken, getJwtToken, isLogedIn, setJwtToken } from '@/utils/auth'
 import { createAndLoginUser, createApi, createUser, generateEmail, logoutUser } from '../test_utils/auth'
+import { waitForMS } from '../test_utils/helpers'
 
 let apiInstance: api.AuthApi
 
@@ -59,3 +60,20 @@ test('logout user', async () => {
     await logoutUser({ apiInstance: refreshedApiInstance })
     expect(isLogedIn()).toBeFalsy()
 })
+
+test('refresh token', async () => {
+    clearJwtToken()
+    try {
+        await apiInstance.refreshJwtUsersJwtRefreshPost();
+        expect(false).toBeTruthy();
+    } catch (error) {
+        expect(isLogedIn()).toBeFalsy();
+    }
+    await createAndLoginUser({ apiInstance: apiInstance });
+    expect(isLogedIn()).toBeTruthy();
+    const refreshedApiInstance = createApiInstance() // Old apiInstance has no JWT
+    const old_token = getJwtToken()
+    await waitForMS(2000)
+    const new_token = await refreshedApiInstance.refreshJwtUsersJwtRefreshPost();
+    expect(old_token).not.toEqual(new_token.access_token)
+});

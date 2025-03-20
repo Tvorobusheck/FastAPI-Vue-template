@@ -4,20 +4,17 @@
 
 ### Frontend
 - [ ] Improve manifest for PWA
-- [ ] Token Refresh
 
 ### DevOps
-- [ ] Fix debug
-- [ ] Check e2e and unit tests for frontend.
-- [ ] Check new ideas for docker-compose.prod.yml. Traefick, for example.
-- [ ] The `docker-compose.prod.yml` for deploying all services, including the database, on a VPS
-- [ ] Add auto reload for backend and frontend.
+- [ ] Build prod for frontend (js + html code) with script
+- [ ] The `Dockerfile.prod.yml` for deploying backend on a VPS
 - [ ] Certbot service.
 - [ ] Add auto credentials from .env.
 - [ ] Improve run options in vscode.
-- [ ] A simple script to initialize a new project based on this template. It will set up the necessary folder structure, configuration files, and install dependencies for both frontend and backend.
-- [ ] Non-root in containers
 - [ ] Lint support
+- [ ] Check new ideas for docker-compose.prod.yml. Traefick, for example.
+- [ ] Non-root in containers
+- [ ] A simple script to initialize a new project based on this template. It will set up the necessary folder structure, configuration files, and install dependencies for both frontend and backend.
 
 ### Example project
 - [ ] Registration conformation via email for new project.
@@ -28,6 +25,8 @@
 - [ ] alembic upgrade head on startup (fix, need to wait before database initialized)
 
 ## Completed
+- [x] Token Refresh
+- [x] Add auto reload for backend and frontend.
 - [x] Sub items delete
 - [x] Sub items update
 - [x] Sub items create

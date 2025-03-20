@@ -38,10 +38,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref, onMounted } from 'vue'
 import Loading from '@/components/Loading.vue';
 import '@/index.css'
-import { isLogedIn } from '@/utils/auth';
+import { clearJwtToken, isLogedIn, setJwtToken } from '@/utils/auth';
+import { AuthApi } from '@/api';
+import { apiConfiguration } from '@/utils/server';
 
 const logedIn = ref(isLogedIn());
 
@@ -54,13 +56,35 @@ export default {
     handleAuthEvent() {
       logedIn.value = isLogedIn()
     },
+    async refreshJwtToken() {
+      if (logedIn.value) {
+        try {
+          const authApi = new AuthApi(apiConfiguration());
+          await authApi.refreshJwtUsersJwtRefreshPost();
+        } catch (error) {
+          console.error('Error refreshing JWT token:', error);
+        }
+      }
+    }
   },
   setup() {
     const isMenuOpen = ref(false)
     const toggleMenu = () => {
       isMenuOpen.value = !isMenuOpen.value
     }
-    
+
+    onMounted(async () => {
+      if (logedIn.value) {
+        const authApi = new AuthApi(apiConfiguration());
+        try {
+          setJwtToken(await authApi.refreshJwtUsersJwtRefreshPost());
+        } catch (error) {
+          clearJwtToken()
+          console.error('Error refreshing JWT token on mount:', error);
+        }
+      }
+    });
+
     return {
       isMenuOpen,
       toggleMenu,

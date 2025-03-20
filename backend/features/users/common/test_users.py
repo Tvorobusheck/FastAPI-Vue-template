@@ -104,17 +104,17 @@ async def test_dep(user: models.User = Depends(models.current_active_user)):
     assert 1 == 1
 
 
-@pytest.mark.skip("Requeres waiting time and changing of JWT_EXPIRATION_TIME")
 async def test_refresh_token(client: AsyncClient, jwt: str):
     wait_time = 6
     time.sleep(wait_time)
-    refresh_response = await client.get(router.REFRESH_PATH, headers=get_jwt_header(jwt))
+    refresh_response = await client.post(router.REFRESH_PATH, headers=get_jwt_header(jwt))
     assert refresh_response.status_code == 200
-    token = refresh_response.json()['access_token']
+    token_1 = refresh_response.json()['access_token']
     time.sleep(wait_time)
-    refresh_response = await client.get(router.REFRESH_PATH, headers=get_jwt_header(token))
+    refresh_response = await client.post(router.REFRESH_PATH, headers=get_jwt_header(token_1))
     assert refresh_response.status_code == 200
-    token = refresh_response.json()['access_token']
-    me_response = await client.get(router.ME_PATH, headers=get_jwt_header(token))
+    token_2 = refresh_response.json()['access_token']
+    me_response = await client.get(router.ME_PATH, headers=get_jwt_header(token_2))
     assert me_response.status_code == 200
+    assert token_1 != token_2
     
