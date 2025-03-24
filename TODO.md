@@ -1,10 +1,6 @@
 # TODO List
 
 ## Tasks
-
-### Frontend
-- [ ] Improve manifest for PWA
-
 ### DevOps
 - [ ] Build prod for frontend (js + html code) with script
 - [ ] The `Dockerfile.prod.yml` for deploying backend on a VPS
@@ -12,13 +8,23 @@
 - [ ] Add auto credentials from .env.
 - [ ] Improve run options in vscode.
 - [ ] Lint support
-- [ ] Check new ideas for docker-compose.prod.yml. Traefick, for example.
+- [ ] Better Readme
+
+### Frontend
+- [ ] Improve manifest for PWA
+
+## Optional
+### DevOps
 - [ ] Non-root in containers
 - [ ] A simple script to initialize a new project based on this template. It will set up the necessary folder structure, configuration files, and install dependencies for both frontend and backend.
+- [ ] Check new ideas for docker-compose.prod.yml. Traefick, for example.
 
 ### Example project
 - [ ] Registration conformation via email for new project.
 - [ ] Password recovery for new project.
+
+### Frontend
+- [ ] Improve manifest for PWA
 
 ### Backend
 - [ ] OwnerMixin testing in ownership instead of items?
