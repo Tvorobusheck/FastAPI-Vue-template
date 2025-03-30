@@ -8,26 +8,26 @@
             "url": "http://localhost:8080"
         },
         {
-            "name": "Run test backend server",
+            "name": "Run Backend Server (for forntend tests)",
             "type": "chrome",
             "request": "launch",
             "preLaunchTask": "run-compose: test",
             "url": "http://localhost:8001/docs"
         },
-        {
-            "name": "Debug Backend Test Server",
-            "type": "docker",
-            "request": "launch",
-            "preLaunchTask": "docker-run: debug",
-            "python": {
-                "pathMappings": [
-                    {
-                        "localRoot": "${workspaceFolder}/backend",
-                        "remoteRoot": "/app/"
-                    }
-                ],
-                "projectType": "fastapi"
-            }
-        }
+        // {
+        //     "name": "Debug Backend Test Server",
+        //     "type": "docker",
+        //     "request": "launch",
+        //     "preLaunchTask": "docker-run: debug",
+        //     "python": {
+        //         "pathMappings": [
+        //             {
+        //                 "localRoot": "${workspaceFolder}/backend",
+        //                 "remoteRoot": "/app/"
+        //             }
+        //         ],
+        //         "projectType": "fastapi"
+        //     }
+        // }
     ]
 }

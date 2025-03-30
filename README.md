@@ -1,73 +1,94 @@
 # FastAPI-Vue-template
 
-This project is a template designed to help you quickly start solo development. It provides a full-stack setup with FastAPI for the backend and Vue for the frontend, with built-in testing, Docker support, and Visual Studio Code (VS Code) compatibility. You can easily initialize a new project with the provided script.
+This project is a template designed to help you quickly start solo development. It provides a full-stack setup with FastAPI for the backend and Vue for the frontend, with built-in testing, Docker support, and Visual Studio Code (VSCode) compatibility. You can easily initialize a new project with the provided script.
 
-> [!WARNING]  
-> This template is still under development. Some features may not be fully implemented or functional. Please proceed with caution and ensure to test thoroughly before using it in production.
+> **Warning**  
+> This template is under active development. Some features may not be fully implemented or functional. Please test thoroughly before using it in production.
 
 ## Features
 
 ### Backend with FastAPI
-The backend is built using FastAPI, a modern and fast web framework for building APIs with Python. It includes:
-- [x] Pytest for unit testing
-- [x] SQLAlchemy for ORM and database interaction
-- [x] Alembic for database migrations
-- [x] OpenAPI.json specification
-- [x] [FastAPI Users](https://github.com/fastapi-users/fastapi-users) for authorization, registration, and more
-- [x] [FastCRUD](https://github.com/igorbenav/fastcrud) for reducing boilerplate code
+The backend is built using FastAPI, a modern and fast web framework for building APIs with Python. Key features include:
+- Pytest for unit testing
+- SQLAlchemy for ORM and database interaction
+- Alembic for database migrations
+- OpenAPI.json specification
+- [FastAPI Users](https://github.com/fastapi-users/fastapi-users) for user management (authorization, registration, etc.)
+- [FastCRUD](https://github.com/igorbenav/fastcrud) for reducing boilerplate code
 
 ### Frontend with Vue
-The frontend is built using Vue.js, a progressive JavaScript framework. It includes:
-- [x] Vite
-- [x] Vitest for unit testing
-- [x] Vite-PWA for cross-platform support
-- [ ] Vuexy, CoreUI, or Vue Element Admin for pre-built themes
-- [x] Element Plus support
-- [x] Generation of API client based on the OpenAPI specification from the backend
+The frontend is built using Vue.js, a progressive JavaScript framework. Key features include:
+- Vite for fast development
+- Vitest for unit testing
+- Vite-PWA for cross-platform support
+- API client generation based on the OpenAPI specification from the backend
 
 ### Docker Support
-The project provides full Docker support for both backend and frontend. It includes:
-- [x] A `docker-compose` configuration for easy management of containers. With auto reload for backend and frontend.
-- [ ] The `docker-compose.prod.yml` for deploying all services, including the database, on a VPS. TODO: add auto restart, Certbot service
-- [x] Separate `Dockerfile` for backend and frontend, optimized for production and development environments
-- [x] PostgreSQL service in docker-compose for database
-- [x] Adminer in docker-compose for PostgreSQL. TODO: add auto credentials from .env
+The project provides full Docker support for both backend and frontend:
+- `docker-compose` configuration for easy container management with auto-reload for development
+- Separate `Dockerfile` for backend and frontend, optimized for production and development
+- PostgreSQL service in `docker-compose` for the database
+- Adminer for database management (TODO: add auto credentials from `.env`)
+- TODO: Add `docker-compose.prod.yml` for production deployment with auto-restart and Certbot integration
 
 ### VS Code Support
-- [x] Docker-compose launch option. Extension required: [Docker](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker)
-- [x] Extension support: [Python Test Explorer for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=LittleFoxTeam.vscode-python-test-adapter)
-- [x] Extension support: [Vitest](https://marketplace.visualstudio.com/items?itemName=vitest.explorer)
+- Docker-compose launch option (requires [Docker extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker))
+- Python Test Explorer for running backend tests
+- Vitest Explorer for running frontend tests
 
-### Project Initialization Script
-- [ ] A simple script to initialize a new project based on this template. It will set up the necessary folder structure, configuration files, and install dependencies for both frontend and backend.
-
-
-### Small project inside
-This simple item application includes:
-- [ ] Authorization
-- [ ] Registration
-- [ ] Registration conformation via email
-- [ ] Password recovery
-- [ ] Items create, read, update and delete with permissions control
+### Example Project
+This template includes a simple item management application with the following features:
+- Authorization and registration
+- CRUD operations for items and subitems with ownership control
 
 ## Getting Started
 
 ### Installation
 
-```bash
-git clone https://github.com/Tvorobusheck/fastapi-vue-template.git
-cd fastapi-vue-template
-sudo apt-get install virtualenv
-virtualenv venv
-source venv/bin/activate
-pip install -r backend/requirements.txt
-npm install frontend/
-```
-### Generate client code for frontend
-Run the generation script:
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Tvorobusheck/fastapi-vue-template.git
+   cd fastapi-vue-template
+   ```
+
+2. Set up the backend:
+   ```bash
+   sudo apt-get install virtualenv
+   virtualenv venv
+   source venv/bin/activate
+   pip install -r backend/requirements.txt
+   ```
+
+3. Set up the frontend:
+   ```bash
+   npm install frontend/
+   ```
+
+### Generate API Client for Frontend
+Run the generation script to create the API client:
 ```bash
 cd frontend/
 sh scripts/generate.sh
 ```
 
-Api will be in api/ directory
+The generated API client will be located in the `api/` directory.
+
+### Launching from VSCode
+
+This project includes configurations for running and debugging directly from VSCode. To use these:
+
+1. Install the required VSCode extensions:
+   - [Docker](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker)
+   - [Python Test Explorer for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=LittleFoxTeam.vscode-python-test-adapter)
+   - [Vitest](https://marketplace.visualstudio.com/items?itemName=vitest.explorer)
+
+2. Open the project in VSCode.
+
+3. Use the `Run and Debug` panel to select one of the available configurations:
+   - **Run Dev Compose**: Launches the development environment with Docker Compose.
+   - **Run Backend Server (for frontend tests)**: Starts the backend server for testing the frontend.
+
+4. Press `F5` or click the green play button to start the selected configuration.
+
+## Contributing
+Contributions are welcome! Please open an issue or submit a pull request for any improvements or bug fixes.
