@@ -54,14 +54,23 @@ This template includes a simple item management application with the following f
 2. Set up the backend:
    ```bash
    sudo apt-get install virtualenv
+   cd backend/
    virtualenv venv
    source venv/bin/activate
-   pip install -r backend/requirements.txt
+   pip install -r requirements.txt
+   cp env/.example.dev.env env/.dev.env
+   cp env/.example.debug.env env/.debug.env
+   cp env/.example.test.env env/.test.env
+   cd ..
    ```
 
 3. Set up the frontend:
    ```bash
-   npm install frontend/
+   cd frontend/
+   npm install
+   cp env/.example.dev.env env/.dev.env
+   cp env/.example.test.env env/.test.env
+   cd ..
    ```
 
 ### Generate API Client for Frontend
