@@ -1,3 +1,7 @@
+"""
+The `fixtures` module provides reusable pytest fixtures for testing, including
+an HTTP client and database setup/teardown logic.
+"""
 import pytest
 import uuid
 from httpx import ASGITransport, AsyncClient
@@ -9,9 +13,16 @@ from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine, async_sess
 
 temp_db_url = MOCKDATABASE_URL
 
-# Fixture for dynamically creating a temporary SQLite database
 @pytest.fixture(scope="session")
 async def client() -> AsyncGenerator[AsyncClient, None]:
+    """
+    Fixture to provide an HTTP client for testing.
+
+    This fixture sets up a temporary database, initializes the application,
+    and provides an AsyncClient for making HTTP requests.
+
+    :yield: AsyncClient object.
+    """
     await create_db_and_tables()
 
     # Create the test client

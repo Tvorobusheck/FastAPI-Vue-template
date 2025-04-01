@@ -1,3 +1,7 @@
+"""
+The `test_core` module contains unit tests for core functionalities, including
+fixtures, database configurations, and basic application behavior.
+"""
 from core.fixtures import *
 
 def test_one_plus_one():

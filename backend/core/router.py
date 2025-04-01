@@ -1,3 +1,8 @@
+"""
+The `router` module defines the main FastAPI application instance, its lifespan,
+middleware, and routing configuration. It integrates various feature routers
+and adds pagination support.
+"""
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
 
