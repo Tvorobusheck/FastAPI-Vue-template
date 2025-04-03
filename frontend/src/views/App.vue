@@ -45,6 +45,10 @@ import { clearJwtToken, isLogedIn, setJwtToken } from '@/utils/auth';
 import { AuthApi } from '@/api';
 import { apiConfiguration } from '@/utils/server';
 
+/**
+ * Reactive variable to track if the user is logged in.
+ * @type {import('vue').Ref<boolean>}
+ */
 const logedIn = ref(isLogedIn());
 
 export default {
@@ -53,9 +57,18 @@ export default {
     Loading
   },
   methods: {
+    /**
+     * Handles authentication events and updates the logged-in state.
+     */
     handleAuthEvent() {
-      logedIn.value = isLogedIn()
+      logedIn.value = isLogedIn();
     },
+
+    /**
+     * Refreshes the JWT token if the user is logged in.
+     * Logs an error if the refresh fails.
+     * @async
+     */
     async refreshJwtToken() {
       if (logedIn.value) {
         try {
@@ -68,18 +81,31 @@ export default {
     }
   },
   setup() {
-    const isMenuOpen = ref(false)
-    const toggleMenu = () => {
-      isMenuOpen.value = !isMenuOpen.value
-    }
+    /**
+     * Reactive variable to track if the navigation menu is open.
+     * @type {import('vue').Ref<boolean>}
+     */
+    const isMenuOpen = ref(false);
 
+    /**
+     * Toggles the state of the navigation menu.
+     */
+    const toggleMenu = () => {
+      isMenuOpen.value = !isMenuOpen.value;
+    };
+
+    /**
+     * Lifecycle hook to refresh the JWT token on component mount.
+     * Clears the token if the refresh fails.
+     * @async
+     */
     onMounted(async () => {
       if (logedIn.value) {
         const authApi = new AuthApi(apiConfiguration());
         try {
           setJwtToken(await authApi.refreshJwtUsersJwtRefreshPost());
         } catch (error) {
-          clearJwtToken()
+          clearJwtToken();
           console.error('Error refreshing JWT token on mount:', error);
         }
       }
@@ -88,13 +114,14 @@ export default {
     return {
       isMenuOpen,
       toggleMenu,
-      logedIn: logedIn
-    }
+      logedIn
+    };
   }
-}
+};
 </script>
 
 <style>
+/* Styles for the main app container */
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

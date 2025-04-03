@@ -18,15 +18,27 @@
 
 <script>
 export default {
+  name: 'Counter',
   data() {
     return {
+      /**
+       * The current count value.
+       * @type {number}
+       */
       counter: 0
     };
   },
   methods: {
+    /**
+     * Increments the counter by 1.
+     */
     increment() {
       this.counter++;
     },
+
+    /**
+     * Decrements the counter by 1.
+     */
     decrement() {
       this.counter--;
     }

@@ -9,6 +9,14 @@ import { defineComponent, ref } from 'vue'
 
 const isLoading = ref(false)
 
+/**
+ * A utility function to wrap an asynchronous operation with a loading indicator.
+ * Displays the loading spinner if the operation takes longer than 500ms.
+ *
+ * @template T The type of the result returned by the asynchronous operation.
+ * @param {() => Promise<T>} fn The asynchronous function to execute.
+ * @returns {Promise<T>} The result of the asynchronous operation.
+ */
 export const withLoading = async <T>(fn: () => Promise<T>): Promise<T> => {
   let timeoutId: number | undefined
   try {
@@ -25,6 +33,9 @@ export const withLoading = async <T>(fn: () => Promise<T>): Promise<T> => {
   }
 }
 
+/**
+ * A Vue component that displays a loading spinner when the `isLoading` state is true.
+ */
 export default defineComponent({
   name: 'Loading',
   setup() {

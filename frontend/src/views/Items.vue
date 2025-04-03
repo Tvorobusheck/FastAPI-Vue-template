@@ -39,20 +39,46 @@ import '@/styles.css'
 export default defineComponent({
   name: 'SearchItems',
   setup() {
+    /**
+     * The search query entered by the user.
+     * @type {import('vue').Ref<string>}
+     */
     const searchQuery = ref('')
+
+    /**
+     * The list of items fetched from the API.
+     * @type {import('vue').Ref<api.ItemSchema[]>}
+     */
     const items = ref<api.ItemSchema[]>([])
+
+    /**
+     * Vue Router instance for navigation.
+     * @type {import('vue-router').Router}
+     */
     const router = useRouter()
 
+    /**
+     * Fetches items from the API based on the search query.
+     * @async
+     * @param {string} query - The search query to filter items.
+     */
     const fetchItems = async (query: string) => {
       const apiInstance = new api.ItemsApi(apiConfiguration())
       const response = await apiInstance.searchSearchItemsGet(query)
       items.value = response.items
     }
 
+    /**
+     * Triggers the search functionality with a loading indicator.
+     * @async
+     */
     const searchItems = async () => {
       await withLoading(() => fetchItems(searchQuery.value))
     }
 
+    /**
+     * Navigates to the "Create Item" page.
+     */
     const goToCreatePage = () => {
       router.push({ name: 'CreateItem' })
     }

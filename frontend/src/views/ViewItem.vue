@@ -51,6 +51,10 @@ import '@/styles.css'
 export default defineComponent({
   name: 'ViewItem',
   props: {
+    /**
+     * The ID of the item to be viewed.
+     * @type {number}
+     */
     id: {
       type: Number,
       required: true
@@ -64,6 +68,10 @@ export default defineComponent({
     const newSubitemName = ref('')
     const router = useRouter()
 
+    /**
+     * Fetches the item details by ID.
+     * @param {number} id - The ID of the item to fetch.
+     */
     const fetchItem = async (id: number) => {
       const apiInstance = new api.ItemsApi(apiConfiguration())
       const response = await apiInstance.endpointItemsIdGet(id)
@@ -72,6 +80,10 @@ export default defineComponent({
       editDescription.value = response.description
     }
 
+    /**
+     * Fetches the subitems for the given item ID.
+     * @param {number} itemId - The ID of the parent item.
+     */
     const fetchSubitems = async (itemId: number) => {
       const apiInstance = new api.SubitemsApi(apiConfiguration())
       const response = await apiInstance.endpointSubitemsGet(undefined, undefined, undefined, undefined, undefined, itemId)
@@ -81,6 +93,9 @@ export default defineComponent({
       }))
     }
 
+    /**
+     * Updates the item with the edited name and description.
+     */
     const updateItem = async () => {
       if (item.value) {
         const apiInstance = new api.ItemsApi(apiConfiguration())
@@ -92,6 +107,9 @@ export default defineComponent({
       }
     }
 
+    /**
+     * Deletes the current item.
+     */
     const deleteItem = async () => {
       if (item.value) {
         const apiInstance = new api.ItemsApi(apiConfiguration())
@@ -100,12 +118,18 @@ export default defineComponent({
       }
     }
 
+    /**
+     * Confirms and deletes the current item.
+     */
     const confirmDeleteItem = () => {
       if (confirm('Are you sure you want to delete this item?')) {
         deleteItem()
       }
     }
 
+    /**
+     * Adds a new subitem to the current item.
+     */
     const addSubitem = async () => {
       if (newSubitemName.value.trim() && item.value) {
         const apiInstance = new api.SubitemsApi(apiConfiguration())
@@ -118,6 +142,10 @@ export default defineComponent({
       }
     }
 
+    /**
+     * Updates the given subitem.
+     * @param {api.SubitemSchema} subitem - The subitem to update.
+     */
     const updateSubitem = async (subitem: api.SubitemSchema) => {
       if (subitem.editName.trim()) {
         const apiInstance = new api.SubitemsApi(apiConfiguration())
@@ -129,18 +157,29 @@ export default defineComponent({
       }
     }
 
+    /**
+     * Deletes the given subitem.
+     * @param {api.SubitemSchema} subitem - The subitem to delete.
+     */
     const deleteSubitem = async (subitem: api.SubitemSchema) => {
       const apiInstance = new api.SubitemsApi(apiConfiguration())
       await apiInstance.endpointSubitemsIdDelete(subitem.id)
       await fetchSubitems(subitem.itemId)
     }
 
+    /**
+     * Confirms and deletes the given subitem.
+     * @param {api.SubitemSchema} subitem - The subitem to delete.
+     */
     const confirmDeleteSubitem = (subitem: api.SubitemSchema) => {
       if (confirm(`Are you sure you want to delete the subitem "${subitem.name}"?`)) {
         deleteSubitem(subitem)
       }
     }
 
+    /**
+     * Navigates back to the previous page.
+     */
     const goBack = () => {
       router.go(-1)
     }

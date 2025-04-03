@@ -22,17 +22,32 @@ import { defineComponent, ref, watch } from 'vue'
 
 export default defineComponent({
   name: 'ResponseMessage',
+  /**
+   * Props for the ResponseMessage component.
+   */
   props: {
+    /**
+     * The HTTP response code to display a corresponding message.
+     * @type {number | null}
+     */
     responseCode: {
       type: Number,
       required: false,
       default: null
     },
+    /**
+     * Custom text to display in the message.
+     * @type {string}
+     */
     customText: {
       type: String,
       required: false,
       default: ''
     },
+    /**
+     * URL to redirect to when the message is clicked.
+     * @type {string}
+     */
     redirectRoute: {
       type: String,
       required: false,
@@ -40,10 +55,27 @@ export default defineComponent({
     }
   },
   setup(props, { emit }) {
+    /**
+     * Reactive reference for the response code.
+     * @type {import('vue').Ref<number | null>}
+     */
     const responseCode = ref<number | null>(props.responseCode)
+
+    /**
+     * Reactive reference for the custom text.
+     * @type {import('vue').Ref<string | null>}
+     */
     const customText = ref<string | null>(props.customText)
+
+    /**
+     * Reactive reference for the redirect route.
+     * @type {import('vue').Ref<string | null>}
+     */
     const redirectRoute = ref<string | null>(props.redirectRoute)
 
+    /**
+     * Closes the message and resets the response code and custom text.
+     */
     const closeMessage = () => {
       responseCode.value = null
       emit('update:responseCode', null)
@@ -51,6 +83,7 @@ export default defineComponent({
       emit('update:customText', null)
     }
 
+    // Watchers to update reactive references when props change
     watch(() => props.responseCode, (newVal) => {
       responseCode.value = newVal
     })
@@ -62,6 +95,7 @@ export default defineComponent({
     watch(() => props.redirectRoute, (newVal) => {
       redirectRoute.value = newVal
     })
+
     return {
       responseCode,
       customText,
